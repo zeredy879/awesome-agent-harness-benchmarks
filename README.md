@@ -2,16 +2,17 @@
 
 ![Catalog](https://img.shields.io/badge/catalog-116%20entries-2563eb) ![Audit](https://img.shields.io/badge/source%20audit-2026--09--13-16a34a) [![Validate catalog](https://github.com/zeredy879/awesome-agent-harness-benchmarks/actions/workflows/validate.yml/badge.svg)](https://github.com/zeredy879/awesome-agent-harness-benchmarks/actions/workflows/validate.yml) ![Pages](https://img.shields.io/badge/GitHub%20Pages-live-16a34a)
 
-**Languages:** [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
+> A maintained, evidence-aware map of the benchmarks that reveal how an AI agent actually works: tools, context, memory, permissions, recovery, verification, and delivery.
 
-An evidence-aware catalog of benchmarks, controlled studies, and evaluation infrastructure for AI agent harnesses.
+**Snapshot:** `2026-09-13` · **116 entries** · **13 capability areas** · **99 GitHub sources audited** · **98 benchmark suites**
 
 An agent harness is the execution layer around a model. It constructs context, exposes and routes tools, maintains state and memory, enforces permissions, drives retries and delegation, records traces, and decides when work is complete. This catalog tracks where those responsibilities become measurable.
 
-The inventory contains 116 entries across 13 areas. It is a dated research inventory rather than a claim that every private evaluation has been found. Each entry has a stable ID, scope, source URL, grading method, environment, and known limitation. Scores are not copied unless they come from a reproducible source record.
+This is a dated public-source inventory, not a claim that every private or unindexed evaluation has been found. Each record has a stable ID, scope, source URL, grading method, environment, and known limitation. Scores are not copied unless they come from a reproducible source record.
 
 ## Contents
 
+- [Start here](#start-here)
 - [How to use this list](#how-to-use-this-list)
 - [At a glance](#at-a-glance)
 - [Recent 2025-2026 additions](#recent-2025-2026-additions)
@@ -22,6 +23,18 @@ The inventory contains 116 entries across 13 areas. It is a dated research inven
 - [Automated maintenance](#automated-maintenance)
 - [Research notes](#research-notes)
 - [Data and provenance](#data-and-provenance)
+
+## Start here
+
+**For people:** [Open the searchable GitHub Pages catalog](https://zeredy879.github.io/awesome-agent-harness-benchmarks/).
+
+**For Agents:** [Read the Markdown digest](site/agent.md) or [load the structured catalog](data/catalog.json).
+
+**For research:** [Read the comparison notes](docs/research.md), including evidence tiers, metrics, and threats to validity.
+
+**For contributors:** [Follow AGENTS.md](AGENTS.md) and [the curator profile](.github/agents/benchmark-curator.agent.md).
+
+**Read in your language:** [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
 ## How to use this list
 
@@ -271,13 +284,13 @@ These workload suites measure agents in environments. Their results include the 
 
 ## Website and Agent exports
 
-Browse the [GitHub Pages site](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) for a searchable human view. The same snapshot is exposed as Markdown and JSON in the generated `site/` exports: [agent.md](site/agent.md), [catalog.json](site/catalog.json), [research.md](site/research.md), [source-audit.json](site/source-audit.json), and [llms.txt](site/llms.txt). The site also contains `index.md` as a Markdown-only entry point.
+The Pages site and Agent exports are the shipped interfaces for this repository. The generated `site/` directory contains `index.html` for people, `agent.md` and `index.md` for Agents, `catalog.json` and `source-audit.json` for structured ingestion, `research.md` for methodology, and `llms.txt` for discovery. The primary links are kept together near the top under **Start here**.
 
 ## Automated maintenance
 
 The [Update sources workflow](.github/workflows/update-sources.yml) runs weekly and can be started manually. It refreshes GitHub metadata and README hashes with the audit script, then commits only changed provenance data. The [Deploy GitHub Pages workflow](.github/workflows/deploy-pages.yml) rebuilds the Markdown and HTML exports after source refreshes or normal pushes.
 
-The [Benchmark Curator custom agent](.github/agents/benchmark-curator.agent.md) gives GitHub Copilot a repeatable protocol for adding sources, recording limitations, validating the schema, and rebuilding the Agent exports.
+The `Benchmark Curator` custom agent gives GitHub Copilot a repeatable protocol for adding sources, recording limitations, validating the schema, and rebuilding the Agent exports.
 
 ## Research notes
 
@@ -285,11 +298,11 @@ The useful unit of comparison is a configuration: model endpoint, harness versio
 
 The catalog uses these capability tags: `tools`, `context`, `state`, `memory`, `planning`, `recovery`, `verification`, `permissions`, `multi-agent`, `vision`, `interaction`, `skills`, and `cost`. It records limitations because live websites, model judges, hidden state, stochastic sampling, and mutable datasets can change what a score means.
 
-See [docs/research.md](docs/research.md) for the inventory method, comparison dimensions, recommended benchmark stacks, and threats to validity.
+See `docs/research.md` for the inventory method, comparison dimensions, recommended benchmark stacks, and threats to validity.
 
 ## Data and provenance
 
-The machine-readable inventory is [data/catalog.json](data/catalog.json). Each record has a stable ID, category, type, source URL, measured signals, grading method, environment, and limitation. The GitHub availability audit is [data/source-audit.json](data/source-audit.json); it records repository metadata, default branch, star count, README commit SHA, and SHA-256 at audit time. A `needs-review` record means the URL was not accessible through the GitHub API at audit time; it is retained so the gap is visible.
+The machine-readable inventory is `data/catalog.json`. Each record has a stable ID, category, type, source URL, measured signals, grading method, environment, and limitation. The GitHub availability audit is [data/source-audit.json](data/source-audit.json); it records repository metadata, default branch, star count, README commit SHA, and SHA-256 at audit time. A `needs-review` record means the URL was not accessible through the GitHub API at audit time; it is retained so the gap is visible.
 
 Run the audit locally (requires authenticated `gh`):
 

@@ -88,134 +88,247 @@ def agent_markdown(catalog: dict, audit: dict) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def render_html(catalog: dict) -> str:
+def render_html(catalog: dict, audit: dict) -> str:
     entries = catalog["entries"]
     counts = Counter(entry["category"] for entry in entries)
+    kind_counts = Counter(entry["kind"] for entry in entries)
+    source_records = audit.get("repositories", [])
+    accessible = sum(record.get("status") == "source-accessible" for record in source_records)
     # Escape the JSON before embedding it in a script element.
     entries_json = json.dumps(entries, ensure_ascii=False, separators=(",", ":"))
-    entries_json = entries_json.replace("<", "\\u003c")
+    entries_json = entries_json.replace("<", "\\u003c").replace("</script", "<\\/script")
     category_options = "".join(
         f'<option value="{html.escape(category)}">{html.escape(CATEGORY_LABELS.get(category, category))}</option>'
         for category in sorted(counts)
     )
-    category_rows = "".join(
-        f'<div class="bar-row"><span>{html.escape(CATEGORY_LABELS.get(category, category))}</span>'
-        f'<span class="bar"><i style="width:{max(8, round(count / max(counts.values()) * 100))}%"></i></span>'
-        f'<b>{count}</b></div>'
-        for category, count in sorted(counts.items(), key=lambda item: (-item[1], item[0]))
+    category_filters = "".join(
+        f'<button class="facet{" active" if index == 0 else ""}" type="button" data-category="{html.escape(category)}">'
+        f'<span>{html.escape(CATEGORY_LABELS.get(category, category))}</span><b>{counts[category]}</b></button>'
+        for index, category in enumerate(sorted(counts, key=lambda item: (-counts[item], item)))
     )
+    category_filters = (
+        f'<button class="facet active" type="button" data-category=""><span>All areas</span><b>{len(entries)}</b></button>'
+        + category_filters.replace('class="facet active"', 'class="facet"', 1)
+    )
+    snapshot = html.escape(catalog["as_of"])
+    labels_json = json.dumps(CATEGORY_LABELS, ensure_ascii=False)
 
-    return f"""<!doctype html>
+    template = """<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Evidence-aware catalog of agent harness benchmarks and evaluation infrastructure">
-  <title>Agent Harness Benchmarks</title>
+  <meta name="theme-color" content="#101a3a">
+  <meta name="description" content="A maintained, evidence-aware catalog of agent harness benchmarks and evaluation infrastructure.">
+  <title>Agent Harness Benchmarks — curated evaluation map</title>
   <style>
-    :root {{ --ink:#172033; --muted:#5b6578; --line:#dbe2ee; --accent:#2563eb; --panel:#f7f9fc; }}
-    * {{ box-sizing:border-box; }}
-    body {{ margin:0; color:var(--ink); font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#fff; }}
-    main {{ max-width:1120px; margin:0 auto; padding:42px 22px 72px; }}
-    h1 {{ font-size:clamp(2rem,4vw,3.3rem); letter-spacing:-.04em; margin:0 0 8px; }}
-    h2 {{ margin-top:34px; letter-spacing:-.02em; }}
-    h3 {{ margin:0 0 8px; font-size:1.05rem; }}
-    p {{ color:var(--muted); }}
-    a {{ color:var(--accent); text-decoration:none; }}
-    a:hover {{ text-decoration:underline; }}
-    .lede {{ max-width:820px; font-size:1.08rem; }}
-    .stats {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:26px 0; }}
-    .stat, .card {{ border:1px solid var(--line); border-radius:12px; background:var(--panel); }}
-    .stat {{ padding:16px; }}
-    .stat strong {{ display:block; font-size:1.8rem; }}
-    .stat span {{ color:var(--muted); font-size:.9rem; }}
-    .links {{ display:flex; flex-wrap:wrap; gap:14px; margin:18px 0 30px; }}
-    .links a {{ border:1px solid var(--line); border-radius:999px; padding:7px 12px; background:#fff; }}
-    .bars {{ display:grid; gap:8px; max-width:760px; }}
-    .bar-row {{ display:grid; grid-template-columns:minmax(190px, 1fr) 2fr 40px; gap:10px; align-items:center; color:var(--muted); font-size:.92rem; }}
-    .bar {{ height:9px; border-radius:99px; background:#e8edf6; overflow:hidden; }}
-    .bar i {{ display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,#2563eb,#7c3aed); }}
-    .bar-row b {{ color:var(--ink); text-align:right; }}
-    .controls {{ display:flex; gap:10px; flex-wrap:wrap; margin:18px 0; }}
-    input, select {{ border:1px solid var(--line); border-radius:8px; padding:10px 12px; font:inherit; background:#fff; }}
-    input {{ flex:1 1 300px; }}
-    select {{ flex:0 1 260px; }}
-    #result-count {{ color:var(--muted); margin:10px 0 14px; }}
-    .grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:14px; }}
-    .card {{ padding:17px; }}
-    .card .meta {{ color:var(--muted); font-size:.86rem; margin-bottom:10px; }}
-    .card .signals {{ display:flex; flex-wrap:wrap; gap:6px; margin:12px 0; }}
-    .chip {{ border-radius:999px; background:#eaf1ff; color:#1e4fae; padding:2px 8px; font-size:.78rem; }}
-    footer {{ border-top:1px solid var(--line); margin-top:44px; padding-top:20px; color:var(--muted); font-size:.9rem; }}
-    @media (max-width:560px) {{ .bar-row {{ grid-template-columns:1fr 1fr 32px; }} .bar-row span:first-child {{ grid-column:1 / -1; }} }}
+    :root {
+      --ink: #17213b; --muted: #68738a; --line: #dce3ef; --soft: #f4f7fb;
+      --navy: #101a3a; --navy-2: #18295a; --blue: #4f7cff; --violet: #8b6cff;
+      --mint: #b8f3db; --white: #fff; --shadow: 0 16px 42px rgba(16, 26, 58, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--soft); font: 15.5px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .site-nav { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 16px max(22px, calc((100vw - 1180px) / 2)); background: rgba(255, 255, 255, .88); border-bottom: 1px solid rgba(220, 227, 239, .9); backdrop-filter: blur(16px); }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -.02em; }
+    .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; color: var(--white); background: linear-gradient(135deg, var(--blue), var(--violet)); box-shadow: 0 6px 16px rgba(79, 124, 255, .28); font-size: 13px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); font-size: .9rem; }
+    .nav-links a:hover { color: var(--ink); text-decoration: none; }
+    main { max-width: 1180px; margin: 0 auto; padding: 28px 22px 80px; }
+    .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .75fr); gap: 34px; overflow: hidden; padding: clamp(34px, 6vw, 70px); border-radius: 28px; color: var(--white); background: radial-gradient(circle at 90% 0%, rgba(139,108,255,.48), transparent 38%), linear-gradient(135deg, var(--navy), var(--navy-2)); box-shadow: var(--shadow); }
+    .hero::after { content: ""; position: absolute; width: 330px; height: 330px; right: -125px; bottom: -190px; border: 1px solid rgba(184,243,219,.28); border-radius: 50%; box-shadow: 0 0 0 28px rgba(184,243,219,.06), 0 0 0 56px rgba(184,243,219,.04); }
+    .eyebrow { margin: 0 0 14px; color: var(--mint); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(2.5rem, 6vw, 5rem); line-height: .99; letter-spacing: -.065em; }
+    .hero-copy .lede { max-width: 680px; margin: 22px 0 0; color: rgba(255,255,255,.78); font-size: clamp(1.03rem, 2vw, 1.24rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 43px; padding: 10px 16px; border-radius: 10px; font-weight: 750; font-size: .92rem; }
+    .button.primary { color: var(--navy); background: var(--mint); box-shadow: 0 8px 18px rgba(0,0,0,.16); }
+    .button.secondary { color: var(--white); border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08); }
+    .button:hover { text-decoration: none; transform: translateY(-1px); }
+    .hero-note { display: flex; align-items: center; gap: 8px; margin-top: 19px; color: rgba(255,255,255,.60); font-size: .83rem; }
+    .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 4px rgba(184,243,219,.12); }
+    .hero-panel { position: relative; z-index: 1; align-self: end; padding: 22px; border: 1px solid rgba(255,255,255,.15); border-radius: 18px; background: rgba(255,255,255,.08); }
+    .hero-panel h2 { margin: 0 0 16px; font-size: 1rem; letter-spacing: -.02em; }
+    .signal { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.72); font-size: .88rem; }
+    .signal strong { color: var(--white); font-size: 1.15rem; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0 46px; }
+    .stat { padding: 18px 19px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); box-shadow: 0 4px 14px rgba(16,26,58,.04); }
+    .stat strong { display: block; font-size: 1.72rem; line-height: 1.1; letter-spacing: -.04em; }
+    .stat span { display: block; margin-top: 5px; color: var(--muted); font-size: .82rem; }
+    .section { margin-top: 54px; }
+    .section[id] { scroll-margin-top: 84px; }
+    .section-kicker { margin: 0 0 7px; color: var(--blue); font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 19px; }
+    h2 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.25rem); letter-spacing: -.05em; line-height: 1.1; }
+    .section-heading p { max-width: 580px; margin: 0; color: var(--muted); }
+    .start-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .start-card { display: flex; min-height: 155px; flex-direction: column; justify-content: space-between; padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: var(--white); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .start-card:hover { border-color: rgba(79,124,255,.45); box-shadow: 0 10px 22px rgba(16,26,58,.09); transform: translateY(-2px); text-decoration: none; }
+    .start-icon { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 9px; color: var(--blue); background: #eaf0ff; font-size: .88rem; font-weight: 800; }
+    .start-card h3 { margin: 16px 0 5px; font-size: 1rem; letter-spacing: -.02em; }
+    .start-card p { margin: 0; color: var(--muted); font-size: .85rem; }
+    .start-card .arrow { align-self: end; margin-top: 13px; color: var(--blue); font-weight: 800; }
+    .directory-layout { display: grid; grid-template-columns: 246px minmax(0, 1fr); gap: 25px; align-items: start; }
+    .facet-panel { position: sticky; top: 82px; padding: 16px; border: 1px solid var(--line); border-radius: 15px; background: var(--white); }
+    .facet-title { display: flex; justify-content: space-between; align-items: center; margin: 0 0 11px; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .facet-title span { color: var(--muted); font-weight: 600; letter-spacing: 0; text-transform: none; }
+    .facet-list { display: grid; gap: 4px; }
+    .facet { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 9px 10px; border: 0; border-radius: 9px; color: var(--muted); background: transparent; font: inherit; font-size: .83rem; text-align: left; cursor: pointer; }
+    .facet b { min-width: 24px; padding: 1px 6px; border-radius: 20px; color: var(--muted); background: var(--soft); font-size: .74rem; text-align: center; }
+    .facet:hover { color: var(--ink); background: var(--soft); }
+    .facet.active { color: var(--navy); background: #eaf0ff; font-weight: 750; }
+    .facet.active b { color: var(--blue); background: var(--white); }
+    .facet-divider { height: 1px; margin: 15px 0; background: var(--line); }
+    .data-links { display: grid; gap: 6px; color: var(--blue); font-size: .83rem; }
+    .data-links a { padding: 5px 0; }
+    .directory-main { min-width: 0; }
+    .controls { display: grid; grid-template-columns: minmax(0, 1fr) 120px 120px 145px auto; gap: 9px; margin-bottom: 12px; }
+    input, select { min-height: 43px; width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: var(--white); font: inherit; outline: none; }
+    input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(79,124,255,.13); }
+    .reset { min-height: 43px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--muted); background: var(--white); font: inherit; white-space: nowrap; cursor: pointer; }
+    .reset:hover { color: var(--ink); border-color: var(--blue); }
+    #result-count { margin: 0 0 13px; color: var(--muted); font-size: .84rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .card { display: flex; min-height: 245px; flex-direction: column; padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: var(--white); transition: border-color .18s ease, box-shadow .18s ease; }
+    .card:hover { border-color: rgba(79,124,255,.45); box-shadow: 0 8px 20px rgba(16,26,58,.07); }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .category-pill, .kind-pill { display: inline-flex; align-items: center; min-height: 24px; padding: 3px 8px; border-radius: 99px; font-size: .7rem; font-weight: 800; }
+    .category-pill { color: #3855a8; background: #edf1ff; }
+    .kind-pill { color: var(--muted); background: var(--soft); font-weight: 650; }
+    .card h3 { margin: 0; font-size: 1.08rem; line-height: 1.25; letter-spacing: -.025em; }
+    .card h3 a:hover { color: var(--blue); }
+    .card-summary { margin: 9px 0 0; color: var(--muted); font-size: .88rem; }
+    .signals { display: flex; flex-wrap: wrap; gap: 5px; margin: 13px 0; }
+    .chip { padding: 3px 7px; border-radius: 6px; color: #4b5b76; background: #f0f3f8; font-size: .7rem; }
+    .card-bottom { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
+    .card-bottom small { color: var(--muted); font-size: .72rem; }
+    .source-link { color: var(--blue); font-size: .78rem; font-weight: 750; white-space: nowrap; }
+    .empty { grid-column: 1 / -1; padding: 38px 20px; border: 1px dashed var(--line); border-radius: 14px; color: var(--muted); background: var(--white); text-align: center; }
+    .evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .evidence-card { padding: 20px; border: 1px solid var(--line); border-radius: 15px; background: var(--white); }
+    .evidence-card h3 { margin: 0 0 8px; font-size: 1rem; }
+    .evidence-card p { margin: 0 0 12px; color: var(--muted); font-size: .86rem; }
+    .evidence-card a { color: var(--blue); font-size: .82rem; font-weight: 750; }
+    footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 62px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+    footer a { color: var(--blue); }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .hero-panel { max-width: 430px; } .start-grid { grid-template-columns: repeat(2, 1fr); } .directory-layout { grid-template-columns: 1fr; } .facet-panel { position: static; } .facet-list { grid-template-columns: repeat(2, 1fr); } .facet-divider, .data-links { display: none; } }
+    @media (max-width: 620px) { .site-nav { align-items: flex-start; flex-direction: column; gap: 9px; } .nav-links { gap: 11px; } main { padding: 16px 13px 54px; } .hero { padding: 29px 23px; border-radius: 20px; } h1 { font-size: clamp(2.35rem, 13vw, 3.5rem); } .stats { grid-template-columns: repeat(2, 1fr); margin-bottom: 35px; } .start-grid, .grid, .evidence-grid { grid-template-columns: 1fr; } .controls { grid-template-columns: 1fr 1fr; } .controls input { grid-column: 1 / -1; } .reset { grid-column: 1 / -1; } .facet-list { grid-template-columns: 1fr 1fr; } footer { flex-direction: column; } }
   </style>
 </head>
 <body>
+<nav class="site-nav" aria-label="Primary navigation">
+  <a class="brand" href="./"><span class="brand-mark">AH</span><span>Agent Harness Benchmarks</span></a>
+  <div class="nav-links"><a href="#start">Start here</a><a href="#directory">Directory</a><a href="#method">Method</a><a href="agent.md">For agents</a></div>
+</nav>
 <main>
-  <header>
-    <h1>Agent Harness Benchmarks</h1>
-    <p class="lede">An evidence-aware catalog of benchmark suites, controlled harness studies, and evaluation infrastructure. The same snapshot is available as Markdown and JSON for agents.</p>
-    <div class="links">
-      <a href="agent.md">Agent digest (Markdown)</a>
-      <a href="index.md">Markdown index</a>
-      <a href="catalog.json">Catalog JSON</a>
-      <a href="research.md">Research notes</a>
-      <a href="source-audit.json">Source audit JSON</a>
-      <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks/blob/main/README.zh-CN.md">简体中文</a>
-      <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks/blob/main/README.ja.md">日本語</a>
-      <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks/blob/main/README.ko.md">한국어</a>
-      <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks">GitHub repository</a>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow">Open evaluation map · Snapshot __SNAPSHOT__</p>
+      <h1 id="hero-title">Find the benchmark that explains why your agent failed.</h1>
+      <p class="lede">A maintained, evidence-aware catalog of benchmarks, controlled harness studies, and evaluation infrastructure. Browse it as a person, or consume the same snapshot as Markdown and JSON.</p>
+      <div class="hero-actions"><a class="button primary" href="#directory">Browse the catalog <span aria-hidden="true">↘</span></a><a class="button secondary" href="research.md">Read the research notes</a></div>
+      <div class="hero-note"><span class="live-dot"></span> Public-source inventory · updated __SNAPSHOT__ · no invented scores</div>
     </div>
-  </header>
+    <aside class="hero-panel" aria-label="What this catalog measures">
+      <h2>What becomes measurable?</h2>
+      <div class="signal"><span>Tools & state</span><strong>↗</strong></div>
+      <div class="signal"><span>Memory & context</span><strong>↗</strong></div>
+      <div class="signal"><span>Recovery & verification</span><strong>↗</strong></div>
+      <div class="signal"><span>Permissions & safety</span><strong>↗</strong></div>
+    </aside>
+  </section>
+
   <section class="stats" aria-label="Snapshot statistics">
-    <div class="stat"><strong>{len(entries)}</strong><span>catalog entries</span></div>
-    <div class="stat"><strong>{len(counts)}</strong><span>capability areas</span></div>
-    <div class="stat"><strong>{catalog['as_of']}</strong><span>snapshot date</span></div>
+    <div class="stat"><strong>__ENTRY_COUNT__</strong><span>catalog entries</span></div>
+    <div class="stat"><strong>__BENCHMARK_COUNT__</strong><span>benchmark suites</span></div>
+    <div class="stat"><strong>__AREA_COUNT__</strong><span>capability areas</span></div>
+    <div class="stat"><strong>__ACCESSIBLE__/__SOURCE_COUNT__</strong><span>GitHub sources accessible</span></div>
   </section>
-  <section>
-    <h2>Capability map</h2>
-    <div class="bars">{category_rows}</div>
-  </section>
-  <section>
-    <h2>Browse entries</h2>
-    <div class="controls">
-      <input id="search" type="search" placeholder="Search name, summary, signals, or source" aria-label="Search catalog">
-      <select id="category" aria-label="Filter by category"><option value="">All categories</option>{category_options}</select>
+
+  <section class="section" id="start" aria-labelledby="start-title">
+    <div class="section-heading"><div><p class="section-kicker">Start with a question</p><h2 id="start-title">Choose your evaluation path.</h2></div><p>Each path opens the same directory with a focused filter. Start broad, then pin the model, harness, tools, and environment before comparing results.</p></div>
+    <div class="start-grid">
+      <a class="start-card" href="#directory" data-category="direct"><span class="start-icon">H</span><span><h3>Compare the harness</h3><p>Same model, different control loops, tools, memory, and recovery.</p></span><span class="arrow">Explore ↗</span></a>
+      <a class="start-card" href="#directory" data-category="coding"><span class="start-icon">&lt;/&gt;</span><span><h3>Ship code reliably</h3><p>Repository navigation, editing, tests, terminals, and delivery.</p></span><span class="arrow">Explore ↗</span></a>
+      <a class="start-card" href="#directory" data-category="tools"><span class="start-icon">API</span><span><h3>Use tools safely</h3><p>Stateful APIs, MCP servers, permissions, and final-state grading.</p></span><span class="arrow">Explore ↗</span></a>
+      <a class="start-card" href="#directory" data-category="research"><span class="start-icon">R</span><span><h3>Run research workflows</h3><p>Evidence, reproduction, scientific coding, and long-horizon work.</p></span><span class="arrow">Explore ↗</span></a>
     </div>
-    <div id="result-count" role="status"></div>
-    <div id="entries" class="grid"></div>
   </section>
-  <footer>Snapshot {catalog['as_of']}. This is a dated public-source inventory, not a claim that every private or unindexed benchmark has been found.</footer>
+
+  <section class="section" id="directory" aria-labelledby="directory-title">
+    <div class="section-heading"><div><p class="section-kicker">The catalog</p><h2 id="directory-title">Search the inventory.</h2></div><p>Filter by capability, evidence type, or keyword. Every card keeps the source, grading signal, and limitation visible.</p></div>
+    <div class="directory-layout">
+      <aside class="facet-panel" aria-label="Filter by capability area"><p class="facet-title">Capability areas <span>__AREA_COUNT__</span></p><div class="facet-list">__CATEGORY_FILTERS__</div><div class="facet-divider"></div><div class="data-links"><a href="agent.md">Agent Markdown →</a><a href="catalog.json">Catalog JSON →</a><a href="source-audit.json">Source audit →</a></div></aside>
+      <div class="directory-main">
+        <div class="controls"><input id="search" type="search" placeholder="Search benchmarks, signals, or sources…" aria-label="Search catalog"><select id="category" aria-label="Filter by category"><option value="">All areas</option>__CATEGORY_OPTIONS__</select><select id="kind" aria-label="Filter by evidence type"><option value="">All types</option><option value="benchmark">Benchmark</option><option value="study">Study</option><option value="infrastructure">Infrastructure</option><option value="watchlist">Watchlist</option></select><select id="sort" aria-label="Sort results"><option value="recommended">Recommended</option><option value="name">Name A–Z</option><option value="category">Category</option><option value="kind">Evidence type</option></select><button class="reset" id="reset" type="button">Reset</button></div>
+        <p id="result-count" role="status" aria-live="polite"></p><div id="entries" class="grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method" aria-labelledby="method-title">
+    <div class="section-heading"><div><p class="section-kicker">Evidence first</p><h2 id="method-title">Designed for decisions, not leaderboard theatre.</h2></div><p>The catalog separates workload capability from harness effects, records limitations, and keeps a dated public-source audit.</p></div>
+    <div class="evidence-grid"><article class="evidence-card"><h3>Hold the treatment still</h3><p>Pin model endpoint, prompt, tools, task release, sandbox, budgets, retries, and seeds before comparing harnesses.</p><a href="research.md">Read comparison guidance →</a></article><article class="evidence-card"><h3>Use the right signal</h3><p>Report verified success, pass^k, cost, latency, tool calls, recovery, policy violations, and evidence quality separately.</p><a href="agent.md">Open the Agent digest →</a></article><article class="evidence-card"><h3>Keep the trail auditable</h3><p>Each record exposes its source, grading method, environment, and one concrete limitation.</p><a href="catalog.json">Inspect the JSON →</a></article></div>
+  </section>
+
+  <footer><span>Snapshot __SNAPSHOT__. Public-source inventory, not a claim of universal completeness.</span><span><a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks">GitHub repository</a> · <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks/blob/main/README.zh-CN.md">中文</a> · <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks/blob/main/README.ja.md">日本語</a> · <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks/blob/main/README.ko.md">한국어</a></span></footer>
 </main>
 <script>
-const entries = {entries_json};
-const labels = {json.dumps(CATEGORY_LABELS, ensure_ascii=False)};
+const entries = __ENTRIES_JSON__;
+const labels = __LABELS_JSON__;
 const grid = document.getElementById('entries');
 const count = document.getElementById('result-count');
 const search = document.getElementById('search');
 const category = document.getElementById('category');
-function card(entry) {{
-  const signals = entry.signals.map(s => `<span class="chip">${{s}}</span>`).join('');
-  const paper = entry.paper ? ` · <a href="${{entry.paper}}">paper</a>` : '';
-  return `<article class="card"><h3><a href="${{entry.url}}">${{entry.name}}</a></h3><div class="meta">${{labels[entry.category] || entry.category}} · ${{entry.kind}} · <a href="${{entry.url}}">source</a>${{paper}}</div><div>${{entry.summary}}</div><div class="signals">${{signals}}</div><div class="meta"><strong>Grading:</strong> ${{entry.grading}}<br><strong>Limitation:</strong> ${{entry.limitation}}</div></article>`;
-}}
-function render() {{
+const kind = document.getElementById('kind');
+const sort = document.getElementById('sort');
+const reset = document.getElementById('reset');
+const facets = [...document.querySelectorAll('.facet')];
+function esc(value) { return String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char])); }
+function card(entry) {
+  const signals = entry.signals.map(signal => `<span class="chip">${esc(signal)}</span>`).join('');
+  const paper = entry.paper ? ` · <a href="${esc(entry.paper)}" target="_blank" rel="noreferrer">paper</a>` : '';
+  const categoryLabel = labels[entry.category] || entry.category;
+  return `<article class="card"><div class="card-top"><span class="category-pill">${esc(categoryLabel)}</span><span class="kind-pill">${esc(entry.kind)}</span></div><h3><a href="${esc(entry.url)}" target="_blank" rel="noreferrer">${esc(entry.name)}</a></h3><p class="card-summary">${esc(entry.summary)}</p><div class="signals">${signals}</div><div class="card-bottom"><small>${esc(entry.grading)}${paper}</small><a class="source-link" href="${esc(entry.url)}" target="_blank" rel="noreferrer">View source ↗</a></div></article>`;
+}
+function syncFacets() { facets.forEach(button => button.classList.toggle('active', button.dataset.category === category.value)); }
+function render() {
   const query = search.value.trim().toLowerCase();
-  const selected = category.value;
-  const filtered = entries.filter(entry => {{
-    const haystack = JSON.stringify(entry).toLowerCase();
-    return (!selected || entry.category === selected) && (!query || haystack.includes(query));
-  }});
-  count.textContent = `Showing ${{filtered.length}} of ${{entries.length}} entries`;
-  grid.innerHTML = filtered.map(card).join('') || '<p>No matching entries.</p>';
-}}
-search.addEventListener('input', render);
-category.addEventListener('change', render);
+  const selectedCategory = category.value;
+  const selectedKind = kind.value;
+  const filtered = entries.filter(entry => { const haystack = JSON.stringify(entry).toLowerCase(); return (!selectedCategory || entry.category === selectedCategory) && (!selectedKind || entry.kind === selectedKind) && (!query || haystack.includes(query)); });
+  filtered.sort((a, b) => sort.value === 'name' ? a.name.localeCompare(b.name) : sort.value === 'category' ? `${a.category}${a.name}`.localeCompare(`${b.category}${b.name}`) : sort.value === 'kind' ? `${a.kind}${a.name}`.localeCompare(`${b.kind}${b.name}`) : 0);
+  count.textContent = `Showing ${filtered.length} of ${entries.length} entries`;
+  grid.innerHTML = filtered.map(card).join('') || '<div class="empty">No matching entries. Try a broader search or reset the filters.</div>';
+}
+facets.forEach(button => button.addEventListener('click', () => { category.value = button.dataset.category; syncFacets(); render(); document.getElementById('directory').scrollIntoView({behavior:'smooth', block:'start'}); }));
+document.querySelectorAll('.start-card').forEach(cardLink => cardLink.addEventListener('click', () => { category.value = cardLink.dataset.category; syncFacets(); render(); }));
+[search, category, kind, sort].forEach(control => control.addEventListener('input', () => { if (control === category) syncFacets(); render(); }));
+reset.addEventListener('click', () => { search.value = ''; category.value = ''; kind.value = ''; sort.value = 'recommended'; syncFacets(); render(); });
+syncFacets();
 render();
 </script>
 </body>
 </html>
 """
+    replacements = {
+        "__SNAPSHOT__": snapshot,
+        "__ENTRY_COUNT__": str(len(entries)),
+        "__BENCHMARK_COUNT__": str(kind_counts.get("benchmark", 0)),
+        "__AREA_COUNT__": str(len(counts)),
+        "__ACCESSIBLE__": str(accessible),
+        "__SOURCE_COUNT__": str(len(source_records)),
+        "__CATEGORY_FILTERS__": category_filters,
+        "__CATEGORY_OPTIONS__": category_options,
+        "__ENTRIES_JSON__": entries_json,
+        "__LABELS_JSON__": labels_json,
+    }
+    for key, value in replacements.items():
+        template = template.replace(key, value)
+    return template
 
 
 def build() -> None:
@@ -223,7 +336,7 @@ def build() -> None:
     audit = read_json(AUDIT_PATH)
     OUT.mkdir(exist_ok=True)
 
-    (OUT / "index.html").write_text(render_html(catalog), encoding="utf-8")
+    (OUT / "index.html").write_text(render_html(catalog, audit), encoding="utf-8")
     digest = agent_markdown(catalog, audit)
     (OUT / "agent.md").write_text(digest, encoding="utf-8")
     (OUT / "index.md").write_text(digest, encoding="utf-8")
