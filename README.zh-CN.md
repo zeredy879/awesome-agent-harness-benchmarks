@@ -2,29 +2,29 @@
 
 语言： [English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-面向人类阅读和 Agent 检索的公开 Agent Harness benchmark、受控研究与评测基础设施目录。
+面向人类与 Agent 的公开 Agent Harness 基准、受控研究和评测基础设施目录。
 
-- 快照: `2026-09-13`
+- 快照日期: `2026-09-13`
 - 条目: **116**
 - 能力领域: **13**
-- GitHub 来源记录: **99**
-- 范围: 公开 benchmark、受控研究和与 Agent Harness 相关的评测基础设施；这是有日期的公开资料快照，不宣称覆盖所有私有评测。
+- GitHub 来源审计记录: **99**
+- 收录范围: 公开 benchmark、受控研究以及与 Agent Harness 相关的评测基础设施。这是一份带日期的公开资料快照，不代表覆盖所有私有评测。
 
-## 入口
+## 快速入口
 
-- [人类可读 Pages](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
+- [面向人类的 Pages](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
 - [Agent Markdown](site/agent.md)
 - [机器可读 JSON](data/catalog.json)
 - [研究笔记](docs/research.md)
 - [来源审计](data/source-audit.json)
 
-## 快速开始
+## 如何开始
 
-如果你要比较 Harness 本身，先看直接对比；如果你要测某个子系统，再选择对应能力类别。公平比较时固定模型端点、prompt、工具 schema、任务版本、sandbox、预算、重试策略和随机种子。
+若要比较 Harness 本身，请先看“直接对比”；若要测试某个子系统，再按能力类别选择 benchmark。为保证比较公平，应固定模型端点、系统提示词、工具 schema、任务版本、sandbox 镜像、预算、重试策略和随机种子。
 
 ## 近期新增与复核（2025–2026）
 
-下面列出 2026 年 9 月扫描中新增或重新核验的项目。条目名称与来源链接保持原文，避免社区项目的技术专名被误译；完整字段和局限见 Agent Markdown 与 JSON。
+以下项目是在 2026 年 9 月扫描中新增或重新核验的。项目名称和来源链接保留原文，以免误译技术专名；完整字段和局限请见 Agent Markdown 与 JSON。
 
 - [AgentSearchBench](https://github.com/Bingo-W/AgentSearchBench)
 - [SciAgentArena](https://github.com/HelloWorldLTY/SciAgentArena)
@@ -59,7 +59,7 @@
 - [AOBench (Agent Operations Benchmark)](https://github.com/MSKazemi/aobench)
 - [SWE-InfraBench](https://arxiv.org/abs/2606.05249)
 
-## 完整分类目录
+## 按能力分类的完整目录
 
 ### 直接 Harness 对比
 
@@ -216,6 +216,6 @@
 - [SkillsBench](https://github.com/benchflow-ai/skillsbench)
 - [SWE-Skills-Bench](https://arxiv.org/abs/2603.15401)
 
-## 详细资料
+## 进一步阅读
 
-完整英文说明见 [README.md](README.md)。适合 Agent 直接读取的字段见 [site/agent.md](site/agent.md) 和 [data/catalog.json](data/catalog.json)。
+完整的英文说明见 [README.md](README.md)。适合 Agent 直接读取的字段见 [site/agent.md](site/agent.md) 和 [data/catalog.json](data/catalog.json)。

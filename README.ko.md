@@ -2,29 +2,29 @@
 
 언어: [English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md)
 
-사람과 Agent가 함께 읽을 수 있는 공개 Agent Harness benchmark·비교 연구·평가 인프라 목록입니다.
+사람과 Agent 모두가 읽을 수 있는 공개 Agent Harness benchmark·비교 연구·평가 인프라 카탈로그입니다.
 
-- 스냅샷: `2026-09-13`
+- 기준일: `2026-09-13`
 - 항목 수: **116**
-- 능력 영역: **13**
-- GitHub 소스 기록: **99**
+- 역량 영역: **13**
+- GitHub 출처 감사 기록: **99**
 - 범위: 공개 benchmark, 통제된 비교 연구, Agent Harness 관련 평가 인프라를 다룹니다. 날짜가 있는 공개 자료 인벤토리이며 비공개 평가까지 모두 포함한다는 뜻은 아닙니다.
 
-## 입구
+## 빠른 링크
 
-- [사람용 Pages](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
+- [사람을 위한 Pages](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
 - [Agent Markdown](site/agent.md)
 - [기계 판독 JSON](data/catalog.json)
 - [연구 노트](docs/research.md)
 - [소스 감사](data/source-audit.json)
 
-## 빠른 시작
+## 시작하기
 
-Harness 자체를 비교하려면 직접 비교 섹션부터 보고, 특정 하위 시스템은 능력 카테고리에서 고르세요. 공정한 비교를 위해 모델 endpoint, prompt, tool schema, task 버전, sandbox, 예산, retry 정책, random seed를 고정합니다.
+Harness 자체를 비교하려면 ‘직접 비교’부터 확인하고, 특정 하위 시스템은 역량 카테고리에서 고르세요. 공정한 비교를 위해 모델 endpoint, 시스템 prompt, tool schema, task 버전, sandbox 이미지, 예산, retry 정책, random seed를 고정하세요.
 
 ## 최근 추가·재검증（2025–2026）
 
-2026년 9월 스캔에서 추가하거나 다시 확인한 항목입니다. 프로젝트 고유명과 원문 링크는 오역을 피하기 위해 그대로 두었고, 전체 필드와 한계는 Agent Markdown과 JSON에 기록했습니다.
+2026년 9월 조사에서 추가하거나 다시 확인한 항목입니다. 프로젝트 고유명과 원문 링크는 오역을 피하기 위해 그대로 두었고, 전체 필드와 한계는 Agent Markdown과 JSON에 기록했습니다.
 
 - [AgentSearchBench](https://github.com/Bingo-W/AgentSearchBench)
 - [SciAgentArena](https://github.com/HelloWorldLTY/SciAgentArena)
@@ -59,7 +59,7 @@ Harness 자체를 비교하려면 직접 비교 섹션부터 보고, 특정 하�
 - [AOBench (Agent Operations Benchmark)](https://github.com/MSKazemi/aobench)
 - [SWE-InfraBench](https://arxiv.org/abs/2606.05249)
 
-## 전체 카테고리 목록
+## 전체 역량별 카탈로그
 
 ### Harness 직접 비교
 
@@ -216,6 +216,6 @@ Harness 자체를 비교하려면 직접 비교 섹션부터 보고, 특정 하�
 - [SkillsBench](https://github.com/benchflow-ai/skillsbench)
 - [SWE-Skills-Bench](https://arxiv.org/abs/2603.15401)
 
-## 상세 정보
+## 자세한 정보
 
 전체 영어 설명은 [README.md](README.md)를 참고하세요. Agent가 바로 읽을 안정적인 입구는 [site/agent.md](site/agent.md)와 [data/catalog.json](data/catalog.json)입니다.

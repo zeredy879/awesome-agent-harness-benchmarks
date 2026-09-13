@@ -2,29 +2,29 @@
 
 言語： [English](README.md) · [简体中文](README.zh-CN.md) · [한국어](README.ko.md)
 
-人間と Agent の両方が読める、公開 Agent Harness benchmark・比較研究・評価インフラのカタログです。
+人間と Agent の双方が読める、公開 Agent Harness benchmark・比較研究・評価インフラのカタログです。
 
-- スナップショット: `2026-09-13`
+- スナップショット日: `2026-09-13`
 - エントリ数: **116**
-- 能力領域: **13**
-- GitHub ソース記録: **99**
-- 範囲: 公開 benchmark、比較研究、Agent Harness に関係する評価インフラ。日付付きの公開資料インベントリであり、非公開評価を網羅する主張ではありません。
+- 能力分野: **13**
+- GitHub ソース監査記録: **99**
+- 対象範囲: 公開 benchmark、比較研究、Agent Harness に関係する評価インフラを収録します。日付付きの公開資料インベントリであり、非公開評価を網羅するものではありません。
 
-## 入口
+## クイックリンク
 
-- [人間向け Pages](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
+- [人間向けの Pages](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
 - [Agent Markdown](site/agent.md)
 - [機械可読 JSON](data/catalog.json)
 - [研究ノート](docs/research.md)
 - [ソース監査](data/source-audit.json)
 
-## クイックスタート
+## 始め方
 
-Harness 自体を比較する場合は直接比較から始め、特定のサブシステムを測る場合は能力カテゴリを選びます。公平な比較ではモデル、prompt、tool schema、タスク版、sandbox、予算、retry、seed を固定します。
+Harness 自体を比較する場合は「直接比較」から始め、特定のサブシステムを測る場合は能力カテゴリを選びます。公平な比較のため、モデル、システムプロンプト、tool schema、タスク版、sandbox イメージ、予算、retry 方針、random seed を固定してください。
 
 ## 最近の追加・再確認（2025–2026）
 
-2026 年 9 月のスキャンで追加または再確認した項目です。固有名詞と原典リンクは誤訳を避けるため原文のままです。完全なフィールドと制約は Agent Markdown と JSON を参照してください。
+2026 年 9 月の調査で追加または再確認した項目です。固有名詞と原典リンクは誤訳を避けるため原文のままにしています。完全なフィールドと制約は Agent Markdown と JSON を参照してください。
 
 - [AgentSearchBench](https://github.com/Bingo-W/AgentSearchBench)
 - [SciAgentArena](https://github.com/HelloWorldLTY/SciAgentArena)
@@ -59,7 +59,7 @@ Harness 自体を比較する場合は直接比較から始め、特定のサブ
 - [AOBench (Agent Operations Benchmark)](https://github.com/MSKazemi/aobench)
 - [SWE-InfraBench](https://arxiv.org/abs/2606.05249)
 
-## 完全カテゴリ一覧
+## 全カテゴリ一覧
 
 ### Harness 直接比較
 
@@ -216,6 +216,6 @@ Harness 自体を比較する場合は直接比較から始め、特定のサブ
 - [SkillsBench](https://github.com/benchflow-ai/skillsbench)
 - [SWE-Skills-Bench](https://arxiv.org/abs/2603.15401)
 
-## 詳細
+## 詳しい情報
 
-完全な英語説明は [README.md](README.md) にあります。Agent 向けには [site/agent.md](site/agent.md) と [data/catalog.json](data/catalog.json) が安定した入口です。
+詳しい英語の説明は [README.md](README.md) を参照してください。Agent 向けの安定した入口は [site/agent.md](site/agent.md) と [data/catalog.json](data/catalog.json) です。
