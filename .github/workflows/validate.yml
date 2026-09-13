@@ -1,0 +1,20 @@
+name: Validate catalog
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate JSON and catalog
+        run: |
+          python -m json.tool data/catalog.json >/dev/null
+          python -m json.tool data/catalog.schema.json >/dev/null
+          python -m json.tool data/source-audit.json >/dev/null
+          python scripts/validate_catalog.py
