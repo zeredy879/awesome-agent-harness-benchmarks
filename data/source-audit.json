@@ -3,7 +3,7 @@
   "repositories": [
     {
       "requested_repo": "Accenture/mcp-bench",
-      "checked_at": "2026-09-13T12:27:09.634795+00:00",
+      "checked_at": "2026-09-13T12:52:57.932099+00:00",
       "repo": "Accenture/mcp-bench",
       "url": "https://github.com/Accenture/mcp-bench",
       "archived": false,
@@ -20,7 +20,7 @@
     },
     {
       "requested_repo": "AlibabaResearch/DAMO-ConvAI",
-      "checked_at": "2026-09-13T12:27:09.636451+00:00",
+      "checked_at": "2026-09-13T12:52:57.932191+00:00",
       "repo": "AlibabaResearch/DAMO-ConvAI",
       "url": "https://github.com/AlibabaResearch/DAMO-ConvAI",
       "archived": false,
@@ -37,7 +37,7 @@
     },
     {
       "requested_repo": "apple/ToolSandbox",
-      "checked_at": "2026-09-13T12:27:15.807817+00:00",
+      "checked_at": "2026-09-13T12:53:02.644470+00:00",
       "repo": "apple-aiml-research/ToolSandbox",
       "url": "https://github.com/apple-aiml-research/ToolSandbox",
       "archived": false,
@@ -54,7 +54,7 @@
     },
     {
       "requested_repo": "Baiyajing/HarnessRisk",
-      "checked_at": "2026-09-13T12:24:47.379048+00:00",
+      "checked_at": "2026-09-13T12:52:57.932318+00:00",
       "repo": "Baiyajing/HarnessRisk",
       "url": "https://github.com/Baiyajing/HarnessRisk",
       "archived": false,
@@ -71,7 +71,7 @@
     },
     {
       "requested_repo": "benchflow-ai/skillsbench",
-      "checked_at": "2026-09-13T12:24:48.910557+00:00",
+      "checked_at": "2026-09-13T12:53:02.807787+00:00",
       "repo": "benchflow-ai/skillsbench",
       "url": "https://github.com/benchflow-ai/skillsbench",
       "archived": false,
@@ -88,7 +88,7 @@
     },
     {
       "requested_repo": "Claw-Eval-Live/Claw-Eval-Live",
-      "checked_at": "2026-09-13T12:27:09.637847+00:00",
+      "checked_at": "2026-09-13T12:52:57.932893+00:00",
       "repo": "Claw-Eval-Live/Claw-Eval-Live",
       "url": "https://github.com/Claw-Eval-Live/Claw-Eval-Live",
       "archived": false,
@@ -105,7 +105,7 @@
     },
     {
       "requested_repo": "claw-eval/claw-eval",
-      "checked_at": "2026-09-13T12:27:16.257549+00:00",
+      "checked_at": "2026-09-13T12:53:03.276688+00:00",
       "repo": "claw-eval/claw-eval",
       "url": "https://github.com/claw-eval/claw-eval",
       "archived": false,
@@ -122,7 +122,7 @@
     },
     {
       "requested_repo": "commit-0/commit0",
-      "checked_at": "2026-09-13T12:32:30.543638+00:00",
+      "checked_at": "2026-09-13T12:53:03.320805+00:00",
       "repo": "commit-0/commit0",
       "url": "https://github.com/commit-0/commit0",
       "archived": false,
@@ -139,7 +139,7 @@
     },
     {
       "requested_repo": "d1-m4ss/harness-benchmark",
-      "checked_at": "2026-09-13T12:24:49.106644+00:00",
+      "checked_at": "2026-09-13T12:53:03.360158+00:00",
       "repo": "d1-m4ss/harness-benchmark",
       "url": "https://github.com/d1-m4ss/harness-benchmark",
       "archived": false,
@@ -156,7 +156,7 @@
     },
     {
       "requested_repo": "Eldergenix/Durable-agent-harness",
-      "checked_at": "2026-09-13T12:24:49.026623+00:00",
+      "checked_at": "2026-09-13T12:52:57.933396+00:00",
       "repo": "Eldergenix/Durable-agent-harness",
       "url": "https://github.com/Eldergenix/Durable-agent-harness",
       "archived": false,
@@ -173,7 +173,7 @@
     },
     {
       "requested_repo": "ethz-spylab/agentdojo",
-      "checked_at": "2026-09-13T12:27:17.020716+00:00",
+      "checked_at": "2026-09-13T12:53:03.415011+00:00",
       "repo": "ethz-spylab/agentdojo",
       "url": "https://github.com/ethz-spylab/agentdojo",
       "archived": false,
@@ -190,7 +190,7 @@
     },
     {
       "requested_repo": "eval-sys/mcpmark",
-      "checked_at": "2026-09-13T12:27:17.145333+00:00",
+      "checked_at": "2026-09-13T12:53:03.593415+00:00",
       "repo": "eval-sys/mcpmark",
       "url": "https://github.com/eval-sys/mcpmark",
       "archived": false,
@@ -207,7 +207,7 @@
     },
     {
       "requested_repo": "evolvent-ai/ClawMark",
-      "checked_at": "2026-09-13T12:27:17.220221+00:00",
+      "checked_at": "2026-09-13T12:53:03.669534+00:00",
       "repo": "evolvent-ai/ClawMark",
       "url": "https://github.com/evolvent-ai/ClawMark",
       "archived": false,
@@ -224,7 +224,7 @@
     },
     {
       "requested_repo": "facebookresearch/meta-agents-research-environments",
-      "checked_at": "2026-09-13T12:27:17.336434+00:00",
+      "checked_at": "2026-09-13T12:53:03.995601+00:00",
       "repo": "facebookresearch/meta-agents-research-environments",
       "url": "https://github.com/facebookresearch/meta-agents-research-environments",
       "archived": false,
@@ -241,7 +241,7 @@
     },
     {
       "requested_repo": "facebookresearch/wasp",
-      "checked_at": "2026-09-13T12:32:30.546012+00:00",
+      "checked_at": "2026-09-13T12:53:04.078769+00:00",
       "repo": "facebookresearch/wasp",
       "url": "https://github.com/facebookresearch/wasp",
       "archived": true,
@@ -258,7 +258,7 @@
     },
     {
       "requested_repo": "google-research/android_world",
-      "checked_at": "2026-09-13T12:27:20.730543+00:00",
+      "checked_at": "2026-09-13T12:53:04.180111+00:00",
       "repo": "google-research/android_world",
       "url": "https://github.com/google-research/android_world",
       "archived": false,
@@ -275,7 +275,7 @@
     },
     {
       "requested_repo": "HangYu8123/MiHaCoBench",
-      "checked_at": "2026-09-13T12:24:48.886171+00:00",
+      "checked_at": "2026-09-13T12:52:59.150853+00:00",
       "repo": "HangYu8123/MiHaCoBench",
       "url": "https://github.com/HangYu8123/MiHaCoBench",
       "archived": false,
@@ -292,7 +292,7 @@
     },
     {
       "requested_repo": "harbor-framework/harbor",
-      "checked_at": "2026-09-13T12:27:21.155875+00:00",
+      "checked_at": "2026-09-13T12:53:04.190746+00:00",
       "repo": "harbor-framework/harbor",
       "url": "https://github.com/harbor-framework/harbor",
       "archived": false,
@@ -309,7 +309,7 @@
     },
     {
       "requested_repo": "harbor-framework/terminal-bench",
-      "checked_at": "2026-09-13T12:27:21.185190+00:00",
+      "checked_at": "2026-09-13T12:53:04.315049+00:00",
       "repo": "harbor-framework/terminal-bench",
       "url": "https://github.com/harbor-framework/terminal-bench",
       "archived": false,
@@ -326,12 +326,12 @@
     },
     {
       "requested_repo": "hkust-nlp/Toolathlon",
-      "checked_at": "2026-09-13T12:27:21.259217+00:00",
+      "checked_at": "2026-09-13T12:53:04.479967+00:00",
       "repo": "hkust-nlp/Toolathlon",
       "url": "https://github.com/hkust-nlp/Toolathlon",
       "archived": false,
       "fork": false,
-      "stars": 484,
+      "stars": 485,
       "default_branch": "main",
       "description": "[ICLR 2026] The Tool Decathlon: Benchmarking Language Agents for Diverse, Realistic, and Long-Horizon Task Execution",
       "pushed_at": "2026-08-18T18:27:01Z",
@@ -343,7 +343,7 @@
     },
     {
       "requested_repo": "HUST-AI-HYZ/MemoryAgentBench",
-      "checked_at": "2026-09-13T12:27:09.639266+00:00",
+      "checked_at": "2026-09-13T12:52:57.933894+00:00",
       "repo": "HUST-AI-HYZ/MemoryAgentBench",
       "url": "https://github.com/HUST-AI-HYZ/MemoryAgentBench",
       "archived": false,
@@ -360,7 +360,7 @@
     },
     {
       "requested_repo": "Jott2121/sabot",
-      "checked_at": "2026-09-13T12:27:09.641248+00:00",
+      "checked_at": "2026-09-13T12:52:59.177523+00:00",
       "repo": "Jott2121/sabot",
       "url": "https://github.com/Jott2121/sabot",
       "archived": false,
@@ -377,7 +377,7 @@
     },
     {
       "requested_repo": "LamaSu/harness-bench",
-      "checked_at": "2026-09-13T12:24:47.380326+00:00",
+      "checked_at": "2026-09-13T12:52:59.177622+00:00",
       "repo": "LamaSu/harness-bench",
       "url": "https://github.com/LamaSu/harness-bench",
       "archived": false,
@@ -394,7 +394,7 @@
     },
     {
       "requested_repo": "LiberCoders/Claw-Anything",
-      "checked_at": "2026-09-13T12:27:09.643374+00:00",
+      "checked_at": "2026-09-13T12:52:59.191285+00:00",
       "repo": "LiberCoders/Claw-Anything",
       "url": "https://github.com/LiberCoders/Claw-Anything",
       "archived": false,
@@ -411,7 +411,7 @@
     },
     {
       "requested_repo": "METR/RE-Bench",
-      "checked_at": "2026-09-13T12:27:11.135838+00:00",
+      "checked_at": "2026-09-13T12:52:59.314333+00:00",
       "repo": "METR/RE-Bench",
       "url": "https://github.com/METR/RE-Bench",
       "archived": false,
@@ -428,7 +428,7 @@
     },
     {
       "requested_repo": "microsoft/sentinel_environments",
-      "checked_at": "2026-09-13T12:27:22.346535+00:00",
+      "checked_at": "2026-09-13T12:53:04.946181+00:00",
       "repo": "microsoft/sentinel_environments",
       "url": "https://github.com/microsoft/sentinel_environments",
       "archived": false,
@@ -445,7 +445,7 @@
     },
     {
       "requested_repo": "microsoft/SWE-bench-Live",
-      "checked_at": "2026-09-13T12:27:21.854336+00:00",
+      "checked_at": "2026-09-13T12:53:04.730868+00:00",
       "repo": "microsoft/SWE-bench-Live",
       "url": "https://github.com/microsoft/SWE-bench-Live",
       "archived": false,
@@ -462,7 +462,7 @@
     },
     {
       "requested_repo": "microsoft/WindowsAgentArena",
-      "checked_at": "2026-09-13T12:27:22.112993+00:00",
+      "checked_at": "2026-09-13T12:53:04.883162+00:00",
       "repo": "microsoft/WindowsAgentArena",
       "url": "https://github.com/microsoft/WindowsAgentArena",
       "archived": false,
@@ -479,7 +479,7 @@
     },
     {
       "requested_repo": "MinorJerry/WebVoyager",
-      "checked_at": "2026-09-13T12:27:11.152431+00:00",
+      "checked_at": "2026-09-13T12:52:59.326468+00:00",
       "repo": "MinorJerry/WebVoyager",
       "url": "https://github.com/MinorJerry/WebVoyager",
       "archived": false,
@@ -496,7 +496,7 @@
     },
     {
       "requested_repo": "MultiagentBench/MARBLE",
-      "checked_at": "2026-09-13T12:27:11.223908+00:00",
+      "checked_at": "2026-09-13T12:52:59.970645+00:00",
       "repo": "MultiagentBench/MARBLE",
       "url": "https://github.com/MultiagentBench/MARBLE",
       "archived": false,
@@ -513,7 +513,7 @@
     },
     {
       "requested_repo": "nexus-research-lab/nexus-harness-benchmark",
-      "checked_at": "2026-09-13T12:24:47.375628+00:00",
+      "checked_at": "2026-09-13T12:53:04.987154+00:00",
       "repo": "nexus-research-lab/nexus-harness-benchmark",
       "url": "https://github.com/nexus-research-lab/nexus-harness-benchmark",
       "archived": false,
@@ -530,7 +530,7 @@
     },
     {
       "requested_repo": "NousResearch/hermes-toolperf-evals",
-      "checked_at": "2026-09-13T12:24:50.535408+00:00",
+      "checked_at": "2026-09-13T12:53:00.052089+00:00",
       "repo": "NousResearch/hermes-toolperf-evals",
       "url": "https://github.com/NousResearch/hermes-toolperf-evals",
       "archived": false,
@@ -547,7 +547,7 @@
     },
     {
       "requested_repo": "NVIDIA-NeMo/Gym",
-      "checked_at": "2026-09-13T12:32:30.537073+00:00",
+      "checked_at": "2026-09-13T12:52:59.978281+00:00",
       "repo": "NVIDIA-NeMo/Gym",
       "url": "https://github.com/NVIDIA-NeMo/Gym",
       "archived": false,
@@ -564,7 +564,7 @@
     },
     {
       "requested_repo": "Ondemand-OSS/harness-arena",
-      "checked_at": "2026-09-13T12:24:50.400935+00:00",
+      "checked_at": "2026-09-13T12:53:00.183602+00:00",
       "repo": "Ondemand-OSS/harness-arena",
       "url": "https://github.com/Ondemand-OSS/harness-arena",
       "archived": false,
@@ -581,7 +581,7 @@
     },
     {
       "requested_repo": "openai/mle-bench",
-      "checked_at": "2026-09-13T12:27:22.791394+00:00",
+      "checked_at": "2026-09-13T12:53:05.224029+00:00",
       "repo": "openai/mle-bench",
       "url": "https://github.com/openai/mle-bench",
       "archived": false,
@@ -598,7 +598,7 @@
     },
     {
       "requested_repo": "openai/SWELancer-Benchmark",
-      "checked_at": "2026-09-13T12:27:22.764621+00:00",
+      "checked_at": "2026-09-13T12:53:05.108924+00:00",
       "repo": "openai/SWELancer-Benchmark",
       "url": "https://github.com/openai/SWELancer-Benchmark",
       "archived": true,
@@ -615,7 +615,7 @@
     },
     {
       "requested_repo": "OpenBMB/ToolBench",
-      "checked_at": "2026-09-13T12:27:11.992685+00:00",
+      "checked_at": "2026-09-13T12:53:00.834265+00:00",
       "repo": "OpenBMB/ToolBench",
       "url": "https://github.com/OpenBMB/ToolBench",
       "archived": false,
@@ -632,7 +632,7 @@
     },
     {
       "requested_repo": "openclaw/clawbench",
-      "checked_at": "2026-09-13T12:27:23.486078+00:00",
+      "checked_at": "2026-09-13T12:53:05.523376+00:00",
       "repo": "openclaw/shellbench",
       "url": "https://github.com/openclaw/shellbench",
       "archived": false,
@@ -649,7 +649,7 @@
     },
     {
       "requested_repo": "oriyor/assistantbench",
-      "checked_at": "2026-09-13T12:27:23.633160+00:00",
+      "checked_at": "2026-09-13T12:53:05.688747+00:00",
       "repo": "oriyor/assistantbench",
       "url": "https://github.com/oriyor/assistantbench",
       "archived": false,
@@ -666,7 +666,7 @@
     },
     {
       "requested_repo": "OSU-NLP-Group/Online-Mind2Web",
-      "checked_at": "2026-09-13T12:27:11.292188+00:00",
+      "checked_at": "2026-09-13T12:53:00.069302+00:00",
       "repo": "OSU-NLP-Group/Online-Mind2Web",
       "url": "https://github.com/OSU-NLP-Group/Online-Mind2Web",
       "archived": false,
@@ -683,7 +683,7 @@
     },
     {
       "requested_repo": "OSU-NLP-Group/ScienceAgentBench",
-      "checked_at": "2026-09-13T12:27:11.711524+00:00",
+      "checked_at": "2026-09-13T12:53:00.071303+00:00",
       "repo": "OSU-NLP-Group/ScienceAgentBench",
       "url": "https://github.com/OSU-NLP-Group/ScienceAgentBench",
       "archived": false,
@@ -700,7 +700,7 @@
     },
     {
       "requested_repo": "pinchbench/skill",
-      "checked_at": "2026-09-13T12:27:23.973230+00:00",
+      "checked_at": "2026-09-13T12:53:05.775828+00:00",
       "repo": "pinchbench/skill",
       "url": "https://github.com/pinchbench/skill",
       "archived": false,
@@ -717,7 +717,7 @@
     },
     {
       "requested_repo": "Qihoo360/harness-bench",
-      "checked_at": "2026-09-13T12:24:47.375381+00:00",
+      "checked_at": "2026-09-13T12:53:00.851452+00:00",
       "repo": "Qihoo360/harness-bench",
       "url": "https://github.com/Qihoo360/harness-bench",
       "archived": false,
@@ -734,7 +734,7 @@
     },
     {
       "requested_repo": "rajshah4/harness-benchmark",
-      "checked_at": "2026-09-13T12:24:50.022589+00:00",
+      "checked_at": "2026-09-13T12:53:05.888661+00:00",
       "repo": "rajshah4/harness-benchmark",
       "url": "https://github.com/rajshah4/harness-benchmark",
       "archived": false,
@@ -751,7 +751,7 @@
     },
     {
       "requested_repo": "scaleapi/SWE-bench_Pro-os",
-      "checked_at": "2026-09-13T12:27:24.056297+00:00",
+      "checked_at": "2026-09-13T12:53:06.033357+00:00",
       "repo": "scaleapi/SWE-bench_Pro-os",
       "url": "https://github.com/scaleapi/SWE-bench_Pro-os",
       "archived": false,
@@ -768,7 +768,7 @@
     },
     {
       "requested_repo": "ServiceNow/BrowserGym",
-      "checked_at": "2026-09-13T12:27:12.629130+00:00",
+      "checked_at": "2026-09-13T12:53:00.926733+00:00",
       "repo": "ServiceNow/BrowserGym",
       "url": "https://github.com/ServiceNow/BrowserGym",
       "archived": false,
@@ -785,7 +785,7 @@
     },
     {
       "requested_repo": "ServiceNow/webarena-verified",
-      "checked_at": "2026-09-13T12:27:13.346948+00:00",
+      "checked_at": "2026-09-13T12:53:01.661498+00:00",
       "repo": "ServiceNow/webarena-verified",
       "url": "https://github.com/ServiceNow/webarena-verified",
       "archived": false,
@@ -802,7 +802,7 @@
     },
     {
       "requested_repo": "ServiceNow/WorkArena",
-      "checked_at": "2026-09-13T12:27:12.739106+00:00",
+      "checked_at": "2026-09-13T12:53:01.000214+00:00",
       "repo": "ServiceNow/WorkArena",
       "url": "https://github.com/ServiceNow/WorkArena",
       "archived": false,
@@ -819,7 +819,7 @@
     },
     {
       "requested_repo": "siegelz/core-bench",
-      "checked_at": "2026-09-13T12:27:24.421562+00:00",
+      "checked_at": "2026-09-13T12:53:06.456606+00:00",
       "repo": "siegelz/core-bench",
       "url": "https://github.com/siegelz/core-bench",
       "archived": false,
@@ -836,7 +836,7 @@
     },
     {
       "requested_repo": "sierra-research/hyper-tau-bench",
-      "checked_at": "2026-09-13T12:24:47.382157+00:00",
+      "checked_at": "2026-09-13T12:53:06.488346+00:00",
       "repo": "sierra-research/hyper-tau-bench",
       "url": "https://github.com/sierra-research/hyper-tau-bench",
       "archived": false,
@@ -853,12 +853,12 @@
     },
     {
       "requested_repo": "sierra-research/tau2-bench",
-      "checked_at": "2026-09-13T12:27:24.748360+00:00",
+      "checked_at": "2026-09-13T12:53:06.568996+00:00",
       "repo": "sierra-research/tau2-bench",
       "url": "https://github.com/sierra-research/tau2-bench",
       "archived": false,
       "fork": false,
-      "stars": 2008,
+      "stars": 2010,
       "default_branch": "main",
       "description": "τ-Bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
       "pushed_at": "2026-09-11T23:05:24Z",
@@ -870,7 +870,7 @@
     },
     {
       "requested_repo": "snap-research/locomo",
-      "checked_at": "2026-09-13T12:27:25.641981+00:00",
+      "checked_at": "2026-09-13T12:53:06.629806+00:00",
       "repo": "snap-research/locomo",
       "url": "https://github.com/snap-research/locomo",
       "archived": false,
@@ -887,7 +887,7 @@
     },
     {
       "requested_repo": "StonyBrookNLP/appworld",
-      "checked_at": "2026-09-13T12:27:13.490964+00:00",
+      "checked_at": "2026-09-13T12:53:01.689969+00:00",
       "repo": "StonyBrookNLP/appworld",
       "url": "https://github.com/StonyBrookNLP/appworld",
       "archived": false,
@@ -904,7 +904,7 @@
     },
     {
       "requested_repo": "SWE-bench/SWE-bench",
-      "checked_at": "2026-09-13T12:27:12.591376+00:00",
+      "checked_at": "2026-09-13T12:53:00.883875+00:00",
       "repo": "SWE-bench/SWE-bench",
       "url": "https://github.com/SWE-bench/SWE-bench",
       "archived": false,
@@ -921,7 +921,7 @@
     },
     {
       "requested_repo": "SWE-rebench/SWE-rebench-V2",
-      "checked_at": "2026-09-13T12:32:30.540396+00:00",
+      "checked_at": "2026-09-13T12:53:00.899389+00:00",
       "repo": "SWE-rebench/SWE-rebench-V2",
       "url": "https://github.com/SWE-rebench/SWE-rebench-V2",
       "archived": false,
@@ -938,7 +938,7 @@
     },
     {
       "requested_repo": "TheAgentCompany/TheAgentCompany",
-      "checked_at": "2026-09-13T12:27:14.762075+00:00",
+      "checked_at": "2026-09-13T12:53:02.410069+00:00",
       "repo": "TheAgentCompany/TheAgentCompany",
       "url": "https://github.com/TheAgentCompany/TheAgentCompany",
       "archived": false,
@@ -955,7 +955,7 @@
     },
     {
       "requested_repo": "thu-coai/Agent-SafetyBench",
-      "checked_at": "2026-09-13T12:27:25.702716+00:00",
+      "checked_at": "2026-09-13T12:53:06.755661+00:00",
       "repo": "thu-coai/Agent-SafetyBench",
       "url": "https://github.com/thu-coai/Agent-SafetyBench",
       "archived": false,
@@ -972,7 +972,7 @@
     },
     {
       "requested_repo": "THUDM/AgentBench",
-      "checked_at": "2026-09-13T12:27:13.492624+00:00",
+      "checked_at": "2026-09-13T12:53:01.707489+00:00",
       "repo": "THUDM/AgentBench",
       "url": "https://github.com/THUDM/AgentBench",
       "archived": false,
@@ -989,7 +989,7 @@
     },
     {
       "requested_repo": "THUDM/Android-Lab",
-      "checked_at": "2026-09-13T12:32:50.112403+00:00",
+      "checked_at": "2026-09-13T12:53:01.734750+00:00",
       "repo": "THUDM/Android-Lab",
       "url": "https://github.com/THUDM/Android-Lab",
       "archived": false,
@@ -1006,7 +1006,7 @@
     },
     {
       "requested_repo": "THUNLP-MT/StableToolBench",
-      "checked_at": "2026-09-13T12:27:14.213055+00:00",
+      "checked_at": "2026-09-13T12:53:01.783542+00:00",
       "repo": "THUNLP-MT/StableToolBench",
       "url": "https://github.com/THUNLP-MT/StableToolBench",
       "archived": false,
@@ -1023,15 +1023,15 @@
     },
     {
       "requested_repo": "TIGER-AI-Lab/ClawBench",
-      "checked_at": "2026-09-13T12:27:14.233039+00:00",
+      "checked_at": "2026-09-13T12:53:01.926570+00:00",
       "repo": "TIGER-AI-Lab/ClawBench",
       "url": "https://github.com/TIGER-AI-Lab/ClawBench",
       "archived": false,
       "fork": false,
-      "stars": 729,
+      "stars": 730,
       "default_branch": "main",
       "description": "Open-source benchmark for browser AI agents on daily tasks.",
-      "pushed_at": "2026-09-10T11:49:07Z",
+      "pushed_at": "2026-09-13T12:50:28Z",
       "license": "Apache-2.0",
       "status": "source-accessible",
       "readme_url": "https://github.com/TIGER-AI-Lab/ClawBench/blob/main/README.md",
@@ -1040,7 +1040,7 @@
     },
     {
       "requested_repo": "tufantunc/harness-benchmark",
-      "checked_at": "2026-09-13T12:24:49.556200+00:00",
+      "checked_at": "2026-09-13T12:53:06.784812+00:00",
       "repo": "tufantunc/harness-benchmark",
       "url": "https://github.com/tufantunc/harness-benchmark",
       "archived": false,
@@ -1057,7 +1057,7 @@
     },
     {
       "requested_repo": "uiuc-kang-lab/InjecAgent",
-      "checked_at": "2026-09-13T12:27:25.766035+00:00",
+      "checked_at": "2026-09-13T12:53:07.170429+00:00",
       "repo": "uiuc-kang-lab/InjecAgent",
       "url": "https://github.com/uiuc-kang-lab/InjecAgent",
       "archived": false,
@@ -1074,7 +1074,7 @@
     },
     {
       "requested_repo": "UKGovernmentBEIS/inspect_evals",
-      "checked_at": "2026-09-13T12:27:15.006085+00:00",
+      "checked_at": "2026-09-13T12:53:02.509242+00:00",
       "repo": "UKGovernmentBEIS/inspect_evals",
       "url": "https://github.com/UKGovernmentBEIS/inspect_evals",
       "archived": false,
@@ -1091,7 +1091,7 @@
     },
     {
       "requested_repo": "web-arena-x/visualwebarena",
-      "checked_at": "2026-09-13T12:27:26.159038+00:00",
+      "checked_at": "2026-09-13T12:53:07.321579+00:00",
       "repo": "web-arena-x/visualwebarena",
       "url": "https://github.com/web-arena-x/visualwebarena",
       "archived": false,
@@ -1108,7 +1108,7 @@
     },
     {
       "requested_repo": "web-arena-x/webarena",
-      "checked_at": "2026-09-13T12:27:26.450980+00:00",
+      "checked_at": "2026-09-13T12:53:07.355441+00:00",
       "repo": "web-arena-x/webarena",
       "url": "https://github.com/web-arena-x/webarena",
       "archived": false,
@@ -1125,7 +1125,7 @@
     },
     {
       "requested_repo": "WebChoreArena/WebChoreArena",
-      "checked_at": "2026-09-13T12:27:15.024813+00:00",
+      "checked_at": "2026-09-13T12:53:02.560623+00:00",
       "repo": "WebChoreArena/WebChoreArena",
       "url": "https://github.com/WebChoreArena/WebChoreArena",
       "archived": false,
@@ -1142,7 +1142,7 @@
     },
     {
       "requested_repo": "xiaowu0162/LongMemEval",
-      "checked_at": "2026-09-13T12:27:26.881670+00:00",
+      "checked_at": "2026-09-13T12:53:07.370978+00:00",
       "repo": "xiaowu0162/LongMemEval",
       "url": "https://github.com/xiaowu0162/LongMemEval",
       "archived": false,
@@ -1159,7 +1159,7 @@
     },
     {
       "requested_repo": "xiaowu0162/LongMemEval-V2",
-      "checked_at": "2026-09-13T12:27:27.139530+00:00",
+      "checked_at": "2026-09-13T12:53:07.521271+00:00",
       "repo": "xiaowu0162/LongMemEval-V2",
       "url": "https://github.com/xiaowu0162/LongMemEval-V2",
       "archived": false,
@@ -1176,7 +1176,7 @@
     },
     {
       "requested_repo": "xlang-ai/OSWorld",
-      "checked_at": "2026-09-13T12:27:27.256697+00:00",
+      "checked_at": "2026-09-13T12:53:07.530125+00:00",
       "repo": "xlang-ai/OSWorld",
       "url": "https://github.com/xlang-ai/OSWorld",
       "archived": false,
@@ -1193,7 +1193,7 @@
     },
     {
       "requested_repo": "zenixos/harness-bench",
-      "checked_at": "2026-09-13T12:24:47.375570+00:00",
+      "checked_at": "2026-09-13T12:53:08.044047+00:00",
       "repo": "zenixos/harness-bench",
       "url": "https://github.com/zenixos/harness-bench",
       "archived": false,
@@ -1210,7 +1210,7 @@
     },
     {
       "requested_repo": "ZexueHe/MemoryArena",
-      "checked_at": "2026-09-13T12:27:15.211199+00:00",
+      "checked_at": "2026-09-13T12:53:02.624228+00:00",
       "repo": "ZexueHe/MemoryArena",
       "url": "https://github.com/ZexueHe/MemoryArena",
       "archived": false,
