@@ -38,6 +38,8 @@ The source audit requires an authenticated GitHub CLI (`GH_TOKEN` in Actions). I
 
 The Pages workflow builds a static searchable `site/index.html` plus Markdown/JSON endpoints: `site/agent.md`, `site/index.md`, `site/catalog.json`, `site/research.md`, `site/source-audit.json`, and `site/llms.txt`. Agents should prefer `site/agent.md` or `data/catalog.json` over scraping the HTML page.
 
+The repository's weekly `.github/workflows/update-sources.yml` workflow is the canonical unattended source refresh. GitHub's repository Agents page can be used for Copilot cloud-agent automations when the account has an eligible Copilot license; keep workflow approval and the write-access-only automation policy enabled. Do not treat a missing cloud-agent license as a reason to weaken those controls or to replace the Actions refresh.
+
 ## Evaluation hygiene
 
 When comparing harnesses, pin the model endpoint, prompt, tool schemas, task release/commit, sandbox image, timeout, step/token budget, retry policy, network mode, scorer version, and random seeds. Report verified completion, variance or pass^k, cost, latency, tool calls, recovery, policy violations, and evidence quality separately. Preserve raw traces, workspace diffs, environment versions, and verifier output.
