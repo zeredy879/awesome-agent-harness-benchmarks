@@ -18,3 +18,11 @@ jobs:
           python -m json.tool data/catalog.schema.json >/dev/null
           python -m json.tool data/source-audit.json >/dev/null
           python scripts/validate_catalog.py
+      - name: Check generated localized READMEs
+        run: |
+          python scripts/build_localized_readmes.py
+          git diff --exit-code -- README.zh-CN.md README.ja.md README.ko.md
+      - name: Lint the human-facing README
+        run: npx --yes awesome-lint README.md
+      - name: Check whitespace
+        run: git diff --check

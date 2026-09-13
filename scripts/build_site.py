@@ -161,6 +161,9 @@ def render_html(catalog: dict) -> str:
       <a href="catalog.json">Catalog JSON</a>
       <a href="research.md">Research notes</a>
       <a href="source-audit.json">Source audit JSON</a>
+      <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks/blob/main/README.zh-CN.md">简体中文</a>
+      <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks/blob/main/README.ja.md">日本語</a>
+      <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks/blob/main/README.ko.md">한국어</a>
       <a href="https://github.com/zeredy879/awesome-agent-harness-benchmarks">GitHub repository</a>
     </div>
   </header>
@@ -234,6 +237,7 @@ def build() -> None:
         "- Structured catalog: ./catalog.json\n"
         "- Research method: ./research.md\n"
         "- Source audit: ./source-audit.json\n"
+        "- Localized READMEs: https://github.com/zeredy879/awesome-agent-harness-benchmarks#readme\n"
         "- Human interface: ./index.html\n",
         encoding="utf-8",
     )

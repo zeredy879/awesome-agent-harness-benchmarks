@@ -6,4 +6,5 @@ Evidence-aware public inventory of agent harness benchmarks.
 - Structured catalog: ./catalog.json
 - Research method: ./research.md
 - Source audit: ./source-audit.json
+- Localized READMEs: https://github.com/zeredy879/awesome-agent-harness-benchmarks#readme
 - Human interface: ./index.html
