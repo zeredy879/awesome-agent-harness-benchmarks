@@ -1,0 +1,9 @@
+# Agent Harness Benchmarks
+
+Evidence-aware public inventory of agent harness benchmarks.
+
+- Markdown digest: ./agent.md
+- Structured catalog: ./catalog.json
+- Research method: ./research.md
+- Source audit: ./source-audit.json
+- Human interface: ./index.html

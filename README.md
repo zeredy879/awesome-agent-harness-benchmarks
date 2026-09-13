@@ -1,6 +1,6 @@
 # Awesome Agent Harness Benchmarks [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-![Catalog](https://img.shields.io/badge/catalog-84%20entries-2563eb) ![Audit](https://img.shields.io/badge/source%20audit-2026--09--13-16a34a)
+![Catalog](https://img.shields.io/badge/catalog-84%20entries-2563eb) ![Audit](https://img.shields.io/badge/source%20audit-2026--09--13-16a34a) [![Validate catalog](https://github.com/zeredy879/awesome-agent-harness-benchmarks/actions/workflows/validate.yml/badge.svg)](https://github.com/zeredy879/awesome-agent-harness-benchmarks/actions/workflows/validate.yml) ![Pages](https://img.shields.io/badge/GitHub%20Pages-live-16a34a)
 
 An evidence-aware catalog of benchmarks, controlled studies, and evaluation infrastructure for AI agent harnesses.
 
@@ -14,6 +14,8 @@ The inventory contains 84 entries across 13 areas. It is a dated research invent
 - [Direct harness benchmarks and controlled comparisons](#direct-harness-benchmarks-and-controlled-comparisons)
 - [Capability benchmark map](#capability-benchmark-map)
 - [Evaluation infrastructure](#evaluation-infrastructure)
+- [Website and Agent exports](#website-and-agent-exports)
+- [Automated maintenance](#automated-maintenance)
 - [Research notes](#research-notes)
 - [Data and provenance](#data-and-provenance)
 
@@ -132,6 +134,16 @@ These workload suites measure agents in environments. Their results include the 
 - [Inspect Evals](https://github.com/UKGovernmentBEIS/inspect_evals) - Reproducible evaluation implementations for Inspect AI.
 - [BrowserGym](https://github.com/ServiceNow/BrowserGym) - Shared browser-agent environment interfaces.
 - [Holistic Agent Leaderboard](https://hal.cs.princeton.edu/) - Cost-aware comparisons across agents, models, and task suites.
+
+## Website and Agent exports
+
+Browse the [GitHub Pages site](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) for a searchable human view. The same snapshot is exposed as Markdown and JSON in the generated `site/` exports: [agent.md](site/agent.md), [catalog.json](site/catalog.json), [research.md](site/research.md), [source-audit.json](site/source-audit.json), and [llms.txt](site/llms.txt). The site also contains `index.md` as a Markdown-only entry point.
+
+## Automated maintenance
+
+The [Update sources workflow](.github/workflows/update-sources.yml) runs weekly and can be started manually. It refreshes GitHub metadata and README hashes with the audit script, then commits only changed provenance data. The [Deploy GitHub Pages workflow](.github/workflows/deploy-pages.yml) rebuilds the Markdown and HTML exports after source refreshes or normal pushes.
+
+The [Benchmark Curator custom agent](.github/agents/benchmark-curator.agent.md) gives GitHub Copilot a repeatable protocol for adding sources, recording limitations, validating the schema, and rebuilding the Agent exports.
 
 ## Research notes
 

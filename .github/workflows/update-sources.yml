@@ -1,0 +1,45 @@
+name: Update sources
+
+on:
+  schedule:
+    # Weekly refresh; choose a non-round minute to reduce scheduler contention.
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: source-refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Refresh GitHub source metadata and README hashes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/research_sources.py --catalog --audit
+
+      - name: Commit refreshed audit when it changes
+        run: |
+          if git diff --quiet -- data/source-audit.json; then
+            echo "Source audit is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/source-audit.json
+          git commit -m "chore: refresh benchmark source audit"
+          git push
