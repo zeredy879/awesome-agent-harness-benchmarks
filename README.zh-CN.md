@@ -1,221 +1,74 @@
-# Agent Harness Benchmark 中文目录
+# Awesome Agent Harness Benchmarks
 
-语言： [English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
+为你的 Agent 选对评测：先看任务、判分方式和局限，再比较分数。
 
-面向人类与 Agent 的公开 Agent Harness 基准、受控研究和评测基础设施目录。
+## [打开可搜索的评测目录 →](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
 
-- 快照日期: `2026-09-13`
-- 条目: **116**
-- 能力领域: **13**
-- GitHub 来源审计记录: **99**
-- 收录范围: 公开 benchmark、受控研究以及与 Agent Harness 相关的评测基础设施。这是一份带日期的公开资料快照，不代表覆盖所有私有评测。
+按能力筛选，查看每项评测的原始来源、运行环境和适用边界。
 
-## 快速入口
+[English](README.md) · 简体中文 · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-- [面向人类的 Pages](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
-- [Agent Markdown](site/agent.md)
-- [机器可读 JSON](data/catalog.json)
-- [研究笔记](docs/research.md)
-- [来源审计](data/source-audit.json)
+资料快照：2026-09-13 · 115 条记录 · 97 个评测套件 · 13 类能力
 
-## 如何开始
+这里的 **harness** 指模型之外负责工具调用、上下文、记忆、权限与执行控制的系统。本目录帮你找到适合测试这些环节的公开评测，并说明结果能支持什么结论。
 
-若要比较 Harness 本身，请先看“直接对比”；若要测试某个子系统，再按能力类别选择 benchmark。为保证比较公平，应固定模型端点、系统提示词、工具 schema、任务版本、sandbox 镜像、预算、重试策略和随机种子。
+## 你想验证什么？
 
-## 近期新增与复核（2025–2026）
+下面是按用途挑选的起点，不是排名。完整目录还收录了其他任务、版本和研究。
 
-以下项目是在 2026 年 9 月扫描中新增或重新核验的。项目名称和来源链接保留原文，以免误译技术专名；完整字段和局限请见 Agent Markdown 与 JSON。
+| 评测目标 | 从这里开始 | 怎么衡量 | 比较前要注意 |
+| --- | --- | --- | --- |
+| 修复真实代码仓库中的问题 | [SWE-bench family](https://github.com/SWE-bench/SWE-bench) | 通过修复测试和回归测试 | 不同赛道的任务、语言和判分方式不同，分数不能直接互换。 |
+| 完成复杂终端任务 | [Terminal-Bench](https://github.com/harbor-framework/terminal-bench) | 运行任务专用验证器 | 固定数据集版本；成绩同时受模型与 harness 影响。 |
+| 调用工具并维护状态 | [ToolSandbox](https://github.com/apple-aiml-research/ToolSandbox) | 检查中间里程碑与最终状态 | 用户模拟器和工具接口都会影响结果。 |
+| 操作网站完成任务 | [WebArena](https://github.com/web-arena-x/webarena) | 检查网页应用的功能状态 | 固定环境配置、任务版本和评测器修订。 |
+| 跨桌面应用完成工作 | [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld) | 根据实际执行结果判分 | 虚拟机镜像、步数预算和评测版本必须一致。 |
+| 从长期对话中找到并更新信息 | [LongMemEval](https://github.com/xiaowu0162/LongMemEval) | 衡量历史信息问答准确率 | 需要完整上下文基线；答对问题不等于完成多步任务。 |
+| 抵御工具环境中的提示注入 | [AgentDojo](https://github.com/ethz-spylab/agentdojo) | 同时衡量正常任务表现与攻击成功率 | 固定威胁模型和攻击预算；安全分数要与可用性一起看。 |
+| 借助工具搜集信息并推理 | [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA) | 衡量最终答案准确率 | 最终答案难以反映执行过程中的副作用和安全问题。 |
 
-- [AgentSearchBench](https://github.com/Bingo-W/AgentSearchBench)
-- [SciAgentArena](https://github.com/HelloWorldLTY/SciAgentArena)
-- [InfraBench](https://github.com/kubeply/infra-bench)
-- [APEX-Agents / Archipelago](https://github.com/togethercomputer/archipelago)
-- [DataSpace](https://github.com/HKUSTDial/DataSpace)
-- [Data Agent Benchmark (DAB)](https://github.com/ucbepic/DataAgentBench)
-- [AIRS-Bench](https://github.com/facebookresearch/airs-bench)
-- [AgentIF-OneDay](https://github.com/xbench-ai/AgentIF-OneDay)
-- [OmniaBench](https://github.com/scuuy/OmniaBench)
-- [BrowserUse Agent Bench / LexBench-Browser](https://github.com/lexmount/browseruse-agent-bench)
-- [AgentSuite](https://github.com/Agent-Suite/AgentSuite)
-- [Open AgentBench](https://github.com/the-open-agent/agentbench)
-- [Agent-Diff](https://github.com/agent-diff-bench/agent-diff)
-- [Version Control Bench](https://github.com/gitbutlerapp/version-control-bench)
-- [AgentShield Benchmark](https://github.com/doronp/agentshield-benchmark)
-- [AgentRE-Bench](https://github.com/agentrebench/AgentRE-Bench)
-- [STATE-Bench](https://github.com/microsoft/STATE-Bench)
-- [ShellBench](https://github.com/openclaw/shellbench)
-- [Coder Eval](https://github.com/UiPath/coder_eval)
-- [Lemans](https://github.com/rails/lemans)
-- [AgentRace](https://agent-race.github.io/paper)
-- [AgentActionBench](https://arxiv.org/abs/2609.11117)
-- [PaperBench](https://github.com/openai/preparedness)
-- [Cybench](https://github.com/andyzorigin/cybench)
-- [BrowseComp](https://github.com/openai/simple-evals)
-- [BrowseComp-Plus](https://github.com/texttron/BrowseComp-Plus)
-- [SpreadsheetBench](https://github.com/Reality2byte/spreadsheetbench)
-- [SpreadsheetBench 2](https://spreadsheetbench.github.io/)
-- [GitTaskBench](https://github.com/QuantaAlpha/GitTaskBench)
-- [AgentIF](https://agentif.github.io/)
-- [AOBench (Agent Operations Benchmark)](https://github.com/MSKazemi/aobench)
-- [SWE-InfraBench](https://arxiv.org/abs/2606.05249)
+## 这些分数说明了什么？
 
-## 按能力分类的完整目录
+多数评测衡量的是整个 Agent 的表现。要把差异归因于 harness，就需要在相同模型、任务和预算下做受控比较；收录于本目录不代表某个项目已经做过这样的实验。
 
-### 直接 Harness 对比
+- **benchmark**：带任务和评测器的套件，用来运行测试。
+- **study**：比较研究，用来了解实验设计与已有证据。
+- **infrastructure**：运行或审计评测的工具，本身不是一组测试题。
+- **watchlist**：早期或适用范围较窄的候选项目，需要进一步核实。
 
-- [ClawBench (OpenClaw)](https://github.com/openclaw/clawbench)
-- [Coding harness comparison (tufantunc)](https://github.com/tufantunc/harness-benchmark)
-- [Harness Arena](https://github.com/Ondemand-OSS/harness-arena)
-- [harness-bench (LamaSu)](https://github.com/LamaSu/harness-bench)
-- [Harness-Bench (Qihoo360)](https://github.com/Qihoo360/harness-bench)
-- [harness-bench (zenixos)](https://github.com/zenixos/harness-bench)
-- [HarnessDev](https://arxiv.org/abs/2609.01437)
-- [Hyper-τ / τ^τ-bench](https://github.com/sierra-research/hyper-tau-bench)
-- [Nexus Harness Benchmark](https://github.com/nexus-research-lab/nexus-harness-benchmark)
-- [Same-model harness study (d1-m4ss)](https://github.com/d1-m4ss/harness-benchmark)
-- [Same-model harness study (rajshah4)](https://github.com/rajshah4/harness-benchmark)
-- [ShellBench](https://github.com/openclaw/shellbench)
+比较模板和评测方案只说明实验应该怎样设计，不代表已经运行的结果或榜单。
 
-### 工具、API、MCP 与状态
+## 按问题继续查找
 
-- [Agent-Diff](https://github.com/agent-diff-bench/agent-diff)
-- [API-Bank](https://github.com/AlibabaResearch/DAMO-ConvAI)
-- [AppWorld](https://github.com/StonyBrookNLP/appworld)
-- [Berkeley Function Calling Leaderboard (BFCL)](https://gorilla.cs.berkeley.edu/leaderboard.html)
-- [Data Agent Benchmark (DAB)](https://github.com/ucbepic/DataAgentBench)
-- [DataSpace](https://github.com/HKUSTDial/DataSpace)
-- [Hermes tool-performance evals](https://github.com/NousResearch/hermes-toolperf-evals)
-- [MCP-Bench (Accenture)](https://github.com/Accenture/mcp-bench)
-- [MCPMark](https://github.com/eval-sys/mcpmark)
-- [StableToolBench](https://github.com/THUNLP-MT/StableToolBench)
-- [STATE-Bench](https://github.com/microsoft/STATE-Bench)
-- [Toolathlon / Toolathlon-Verified](https://github.com/hkust-nlp/Toolathlon)
-- [ToolBench / ToolEval](https://github.com/OpenBMB/ToolBench)
-- [ToolSandbox](https://github.com/apple/ToolSandbox)
-- [τ-bench family (τ / τ² / τ³)](https://github.com/sierra-research/tau2-bench)
+[完整目录](docs/catalog.md)保留所有条目的说明和来源。也可以直接跳到相关类别：
 
-### 编码与终端
+[Harness 直接对比](docs/catalog.md#direct) · [代码与终端](docs/catalog.md#coding) · [工具与状态](docs/catalog.md#tools)
 
-- [Aider Polyglot](https://aider.chat/docs/leaderboards/)
-- [Commit0](https://github.com/commit-0/commit0)
-- [GitTaskBench](https://github.com/QuantaAlpha/GitTaskBench)
-- [MiHaCoBench](https://github.com/HangYu8123/MiHaCoBench)
-- [SWE-bench family](https://github.com/SWE-bench/SWE-bench)
-- [SWE-bench Live](https://github.com/microsoft/SWE-bench-Live)
-- [SWE-bench Pro](https://github.com/scaleapi/SWE-bench_Pro-os)
-- [SWE-InfraBench](https://arxiv.org/abs/2606.05249)
-- [SWE-Lancer](https://github.com/openai/SWELancer-Benchmark)
-- [SWE-rebench](https://github.com/SWE-rebench/SWE-rebench-V2)
-- [Terminal-Bench](https://github.com/harbor-framework/terminal-bench)
-- [Version Control Bench](https://github.com/gitbutlerapp/version-control-bench)
+[浏览器](docs/catalog.md#browser) · [桌面与移动端](docs/catalog.md#computer) · [通用任务](docs/catalog.md#general)
 
-### 浏览器与 Web
+[记忆与上下文](docs/catalog.md#memory) · [长时间任务](docs/catalog.md#long-horizon) · [安全](docs/catalog.md#safety)
 
-- [BrowseComp](https://github.com/openai/simple-evals)
-- [BrowseComp-Plus](https://github.com/texttron/BrowseComp-Plus)
-- [BrowserUse Agent Bench / LexBench-Browser](https://github.com/lexmount/browseruse-agent-bench)
-- [ClawBench (TIGER-AI-Lab)](https://github.com/TIGER-AI-Lab/ClawBench)
-- [Online-Mind2Web](https://github.com/OSU-NLP-Group/Online-Mind2Web)
-- [VisualWebArena](https://github.com/web-arena-x/visualwebarena)
-- [WebArena](https://github.com/web-arena-x/webarena)
-- [WebArena-Verified](https://github.com/ServiceNow/webarena-verified)
-- [WebChoreArena](https://github.com/WebChoreArena/WebChoreArena)
-- [WebVoyager](https://github.com/MinorJerry/WebVoyager)
-- [WorkArena / WorkArena++](https://github.com/ServiceNow/WorkArena)
+[多 Agent 协作](docs/catalog.md#multi-agent) · [研究任务](docs/catalog.md#research) · [技能与指令](docs/catalog.md#skills) · [评测基础设施](docs/catalog.md#infrastructure)
 
-### 通用 Agent
+## 准备做一次比较？
 
-- [AgentBench](https://github.com/THUDM/AgentBench)
-- [AgentIF](https://agentif.github.io/)
-- [AgentSearchBench](https://github.com/Bingo-W/AgentSearchBench)
-- [APEX-Agents / Archipelago](https://github.com/togethercomputer/archipelago)
-- [AssistantBench](https://github.com/oriyor/assistantbench)
-- [Claw-Eval](https://github.com/claw-eval/claw-eval)
-- [Claw-Eval-Live](https://github.com/Claw-Eval-Live/Claw-Eval-Live)
-- [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA)
-- [OmniaBench](https://github.com/scuuy/OmniaBench)
-- [PinchBench](https://github.com/pinchbench/skill)
-- [TheAgentCompany](https://github.com/TheAgentCompany/TheAgentCompany)
+从[比较记录模板](docs/comparison-template.md)开始，把实验条件和结果放在一起记录：
 
-### 记忆与上下文
+1. 固定模型、提示词、工具接口、任务版本、环境、预算和重试策略。
+2. 分别报告任务完成率、波动、成本、延迟与安全问题，保留执行轨迹和验证输出。
+3. 用[研究说明](docs/research.md)检查证据强度与可比性，再解释差异。
 
-- [Context-Bench (Letta, V2)](https://www.letta.com/blog/evaluating-memory-in-production-agents/)
-- [ContextBench (coding retrieval)](https://arxiv.org/abs/2602.05892)
-- [LoCoMo](https://github.com/snap-research/locomo)
-- [LongMemEval](https://github.com/xiaowu0162/LongMemEval)
-- [LongMemEval-V2](https://github.com/xiaowu0162/LongMemEval-V2)
-- [MemoryAgentBench](https://github.com/HUST-AI-HYZ/MemoryAgentBench)
-- [MemoryArena](https://github.com/ZexueHe/MemoryArena)
+## 供 Agent 读取
 
-### 安全与故障注入
+自动检索和整理时，可直接读取以下入口：
 
-- [Agent-SafetyBench](https://github.com/thu-coai/Agent-SafetyBench)
-- [AgentDojo](https://github.com/ethz-spylab/agentdojo)
-- [AgentHarm](https://github.com/UKGovernmentBEIS/inspect_evals)
-- [AgentShield Benchmark](https://github.com/doronp/agentshield-benchmark)
-- [Cybench](https://github.com/andyzorigin/cybench)
-- [HarnessRisk](https://github.com/Baiyajing/HarnessRisk)
-- [InjecAgent](https://github.com/uiuc-kang-lab/InjecAgent)
-- [WASP](https://github.com/facebookresearch/wasp)
+- [带说明的 Markdown 目录](site/agent.md)
+- [结构化数据](data/catalog.json)
+- [字段定义](data/catalog.schema.json)
+- [仓库维护约定](AGENTS.md)
 
-### 长时程与常驻 Agent
+## 来源与贡献
 
-- [AgentIF-OneDay](https://github.com/xbench-ai/AgentIF-OneDay)
-- [AOBench (Agent Operations Benchmark)](https://github.com/MSKazemi/aobench)
-- [Claw-Anything](https://github.com/LiberCoders/Claw-Anything)
-- [ClawMark](https://github.com/evolvent-ai/ClawMark)
-- [Durable-agent-harness](https://github.com/Eldergenix/Durable-agent-harness)
-- [Gaia2 / Gaia2-CLI](https://github.com/facebookresearch/meta-agents-research-environments)
-- [METR Task-Completion Time Horizons](https://metr.org/time-horizons/)
-- [SentinelBench](https://github.com/microsoft/sentinel_environments)
+优先引用官方仓库、论文和项目页面。[来源检查记录](data/source-audit.json)反映特定时间的链接可用性与元数据，不代表独立复现。收录也不等于推荐；本目录不承诺覆盖所有公开或私有评测。
 
-### 评测基础设施
-
-- [AgentRace](https://agent-race.github.io/paper)
-- [AgentSuite](https://github.com/Agent-Suite/AgentSuite)
-- [BrowserGym](https://github.com/ServiceNow/BrowserGym)
-- [Coder Eval](https://github.com/UiPath/coder_eval)
-- [Harbor](https://github.com/harbor-framework/harbor)
-- [Holistic Agent Leaderboard (HAL)](https://hal.cs.princeton.edu/)
-- [InfraBench](https://github.com/kubeply/infra-bench)
-- [Inspect Evals](https://github.com/UKGovernmentBEIS/inspect_evals)
-- [Lemans](https://github.com/rails/lemans)
-- [NeMo Gym](https://github.com/NVIDIA-NeMo/Gym)
-- [Open AgentBench](https://github.com/the-open-agent/agentbench)
-
-### 电脑与移动端
-
-- [AndroidLab](https://github.com/THUDM/Android-Lab)
-- [AndroidWorld](https://github.com/google-research/android_world)
-- [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld)
-- [SpreadsheetBench](https://github.com/Reality2byte/spreadsheetbench)
-- [SpreadsheetBench 2](https://spreadsheetbench.github.io/)
-- [Windows Agent Arena](https://github.com/microsoft/WindowsAgentArena)
-
-### 多 Agent
-
-- [MAS-FIRE](https://arxiv.org/abs/2602.19843)
-- [MultiAgentBench](https://github.com/MultiagentBench/MARBLE)
-- [OrchestraBench](https://arxiv.org/abs/2608.05263)
-- [SABOT](https://github.com/Jott2121/sabot)
-
-### 科研工程
-
-- [AgentActionBench](https://arxiv.org/abs/2609.11117)
-- [AgentRE-Bench](https://github.com/agentrebench/AgentRE-Bench)
-- [AIRS-Bench](https://github.com/facebookresearch/airs-bench)
-- [CORE-Bench](https://github.com/siegelz/core-bench)
-- [MLE-bench](https://github.com/openai/mle-bench)
-- [PaperBench](https://github.com/openai/preparedness)
-- [RE-Bench](https://github.com/METR/RE-Bench)
-- [SciAgentArena](https://github.com/HelloWorldLTY/SciAgentArena)
-- [ScienceAgentBench](https://github.com/OSU-NLP-Group/ScienceAgentBench)
-
-### Skills 与指令
-
-- [SkillsBench](https://github.com/benchflow-ai/skillsbench)
-- [SWE-Skills-Bench](https://arxiv.org/abs/2603.15401)
-
-## 进一步阅读
-
-完整的英文说明见 [README.md](README.md)。适合 Agent 直接读取的字段见 [site/agent.md](site/agent.md) 和 [data/catalog.json](data/catalog.json)。
+发现遗漏、失效链接或不准确的描述？欢迎按[贡献指南](CONTRIBUTING.md)提交 issue 或 PR，并附上原始来源及一项具体局限。

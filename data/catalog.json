@@ -430,7 +430,7 @@
       "name": "ToolSandbox",
       "category": "tools",
       "kind": "benchmark",
-      "url": "https://github.com/apple/ToolSandbox",
+      "url": "https://github.com/apple-aiml-research/ToolSandbox",
       "summary": "Tests conversational tool use with implicit state dependencies and missing information.",
       "signals": [
         "tools",
@@ -887,11 +887,12 @@
     },
     {
       "id": "clawbench-openclaw",
-      "name": "ClawBench (OpenClaw)",
+      "aliases": ["shellbench"],
+      "name": "ShellBench (formerly ClawBench)",
       "category": "direct",
       "kind": "benchmark",
-      "url": "https://github.com/openclaw/clawbench",
-      "summary": "Scores full-stack configurations using traces and reliability diagnostics.",
+      "url": "https://github.com/openclaw/shellbench",
+      "summary": "Scores full agent configurations, including the harness and model, using traces and reliability diagnostics.",
       "signals": [
         "tools",
         "state",
@@ -900,7 +901,7 @@
       ],
       "grading": "Trace scoring and repeated-run diagnostics",
       "environment": "OpenClaw-oriented task runner",
-      "limitation": "Small curated task set; distinct from the TIGER-AI-Lab live-web benchmark."
+      "limitation": "Full-stack scores include model and configuration effects. Formerly OpenClaw ClawBench; distinct from TIGER-AI-Lab ClawBench."
     },
     {
       "id": "pinchbench",
@@ -995,7 +996,7 @@
         "memory",
         "context"
       ],
-      "grading": "Question-answering accuracy",
+      "grading": "LLM-judged question-answering accuracy",
       "environment": "Stored conversational histories",
       "limitation": "Full-context baselines are essential; QA retrieval is not closed-loop task execution."
     },
@@ -1129,7 +1130,7 @@
       "name": "AgentHarm",
       "category": "safety",
       "kind": "benchmark",
-      "url": "https://github.com/UKGovernmentBEIS/inspect_evals",
+      "url": "https://huggingface.co/datasets/ai-safety-institute/AgentHarm",
       "summary": "Tests whether agents execute harmful multi-step requests.",
       "signals": [
         "permissions",
@@ -1597,18 +1598,6 @@
       "grading": "Task completion pass@1, pass^5, UX, and cost per task",
       "environment": "Task-local enterprise databases, policy tools, and simulated users",
       "limitation": "Synthetic data and LLM-judged UX require careful interpretation alongside deterministic state checks."
-    },
-    {
-      "id": "shellbench",
-      "name": "ShellBench",
-      "category": "direct",
-      "kind": "benchmark",
-      "url": "https://github.com/openclaw/shellbench",
-      "summary": "Scores the full agent stack—harness, configuration, and model—with trace-based reliability diagnostics.",
-      "signals": ["tools", "verification", "recovery", "cost", "state"],
-      "grading": "Trace-aware task outcomes, reliability metrics, and configuration diagnostics",
-      "environment": "Containerized coding and agent workflow tasks",
-      "limitation": "A fast-moving project; benchmark versions and model/harness coupling must be recorded."
     },
     {
       "id": "coder-eval",

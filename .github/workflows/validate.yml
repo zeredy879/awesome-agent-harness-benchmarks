@@ -18,6 +18,11 @@ jobs:
           python -m json.tool data/catalog.schema.json >/dev/null
           python -m json.tool data/source-audit.json >/dev/null
           python scripts/validate_catalog.py
+          python -m unittest discover -s tests
+      - name: Check generated full catalog
+        run: |
+          python scripts/build_catalog_docs.py
+          git diff --exit-code -- docs/catalog.md
       - name: Check generated localized READMEs
         run: |
           python scripts/build_localized_readmes.py

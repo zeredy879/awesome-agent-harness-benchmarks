@@ -1,0 +1,18 @@
+name: Report a correction
+description: Fix a misleading claim, duplicate entry, broken link, or translation.
+title: "[Correction]: "
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Affected entry or page
+      description: Give the entry name, stable ID, or page URL.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should change?
+      description: Describe the problem and include a primary source when it concerns a factual claim.
+    validations:
+      required: true

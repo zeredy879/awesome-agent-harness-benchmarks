@@ -83,6 +83,8 @@ def agent_markdown(catalog: dict, audit: dict) -> str:
         )
         if entry.get("paper"):
             lines.append(f"- Paper: {entry['paper']}")
+        if entry.get("aliases"):
+            lines.append(f"- Aliases: {', '.join(entry['aliases'])}")
         lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
@@ -119,8 +121,17 @@ def render_html(catalog: dict, audit: dict) -> str:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101a3a">
-  <meta name="description" content="A maintained, evidence-aware catalog of agent harness benchmarks and evaluation infrastructure.">
-  <title>Agent Harness Benchmarks — curated evaluation map</title>
+  <meta name="description" content="Choose AI agent benchmarks by workload, scoring method, environment, and limitations. Explore coding, browser, tool-use, memory, safety, and harness evaluations.">
+  <link rel="canonical" href="https://zeredy879.github.io/awesome-agent-harness-benchmarks/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Agent Harness Benchmarks — choose your evaluation">
+  <meta property="og:description" content="Compare what AI agent benchmarks test, how they score results, and what their scores miss. A searchable catalog with source links and practical limitations.">
+  <meta property="og:url" content="https://zeredy879.github.io/awesome-agent-harness-benchmarks/">
+  <meta property="og:site_name" content="Agent Harness Benchmarks">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Agent Harness Benchmarks — choose your evaluation">
+  <meta name="twitter:description" content="Find AI agent benchmarks by workload, scoring method, environment, and limitations. Read the catalog or consume its Markdown and JSON exports.">
+  <title>Agent Harness Benchmarks — choose your evaluation</title>
   <style>
     :root {
       --ink: #17213b; --muted: #68738a; --line: #dce3ef; --soft: #f4f7fb;
@@ -132,6 +143,10 @@ def render_html(catalog: dict, audit: dict) -> str:
     body { margin: 0; color: var(--ink); background: var(--soft); font: 15.5px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
     a { color: inherit; text-decoration: none; }
     a:hover { text-decoration: underline; }
+    :focus-visible { outline: 3px solid #7851d1; outline-offset: 4px; }
+    .hero :focus-visible { outline-color: var(--mint); }
+    .skip-link { position: fixed; top: 8px; left: 8px; z-index: 20; padding: 10px 16px; border-radius: 8px; color: var(--navy); background: var(--mint); transform: translateY(-160%); }
+    .skip-link:focus { transform: translateY(0); }
     .site-nav { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 16px max(22px, calc((100vw - 1180px) / 2)); background: rgba(255, 255, 255, .88); border-bottom: 1px solid rgba(220, 227, 239, .9); backdrop-filter: blur(16px); }
     .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -.02em; }
     .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; color: var(--white); background: linear-gradient(135deg, var(--blue), var(--violet)); box-shadow: 0 6px 16px rgba(79, 124, 255, .28); font-size: 13px; }
@@ -185,7 +200,8 @@ def render_html(catalog: dict, audit: dict) -> str:
     .data-links { display: grid; gap: 6px; color: var(--blue); font-size: .83rem; }
     .data-links a { padding: 5px 0; }
     .directory-main { min-width: 0; }
-    .controls { display: grid; grid-template-columns: minmax(0, 1fr) 120px 120px 145px auto; gap: 9px; margin-bottom: 12px; }
+    .controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 9px; margin-bottom: 12px; }
+    .controls input { grid-column: 1 / -1; }
     input, select { min-height: 43px; width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: var(--white); font: inherit; outline: none; }
     input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(79,124,255,.13); }
     .reset { min-height: 43px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--muted); background: var(--white); font: inherit; white-space: nowrap; cursor: pointer; }
@@ -203,6 +219,11 @@ def render_html(catalog: dict, audit: dict) -> str:
     .card-summary { margin: 9px 0 0; color: var(--muted); font-size: .88rem; }
     .signals { display: flex; flex-wrap: wrap; gap: 5px; margin: 13px 0; }
     .chip { padding: 3px 7px; border-radius: 6px; color: #4b5b76; background: #f0f3f8; font-size: .7rem; }
+    .card-details { margin-bottom: 14px; color: var(--muted); font-size: .83rem; }
+    .card-details summary { padding: 4px 0; color: #3855a8; font-weight: 650; cursor: pointer; }
+    .card-details dl { margin: 9px 0 0; }
+    .card-details dt { margin-top: 9px; color: var(--ink); font-weight: 700; }
+    .card-details dd { margin: 3px 0 0; }
     .card-bottom { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
     .card-bottom small { color: var(--muted); font-size: .72rem; }
     .source-link { color: var(--blue); font-size: .78rem; font-weight: 750; white-space: nowrap; }
@@ -214,11 +235,13 @@ def render_html(catalog: dict, audit: dict) -> str:
     .evidence-card a { color: var(--blue); font-size: .82rem; font-weight: 750; }
     footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 62px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
     footer a { color: var(--blue); }
-    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .hero-panel { max-width: 430px; } .start-grid { grid-template-columns: repeat(2, 1fr); } .directory-layout { grid-template-columns: 1fr; } .facet-panel { position: static; } .facet-list { grid-template-columns: repeat(2, 1fr); } .facet-divider, .data-links { display: none; } }
-    @media (max-width: 620px) { .site-nav { align-items: flex-start; flex-direction: column; gap: 9px; } .nav-links { gap: 11px; } main { padding: 16px 13px 54px; } .hero { padding: 29px 23px; border-radius: 20px; } h1 { font-size: clamp(2.35rem, 13vw, 3.5rem); } .stats { grid-template-columns: repeat(2, 1fr); margin-bottom: 35px; } .start-grid, .grid, .evidence-grid { grid-template-columns: 1fr; } .controls { grid-template-columns: 1fr 1fr; } .controls input { grid-column: 1 / -1; } .reset { grid-column: 1 / -1; } .facet-list { grid-template-columns: 1fr 1fr; } footer { flex-direction: column; } }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .hero-panel { max-width: 430px; } .start-grid { grid-template-columns: repeat(2, 1fr); } .directory-layout { grid-template-columns: 1fr; } .facet-panel { display: none; } .section-heading { align-items: flex-start; flex-direction: column; gap: 12px; } }
+    @media (max-width: 620px) { .site-nav { align-items: flex-start; flex-direction: column; gap: 9px; } .nav-links { gap: 11px; } main { padding: 16px 13px 54px; } .hero { padding: 29px 23px; border-radius: 20px; } h1 { font-size: clamp(2.35rem, 13vw, 3.5rem); } .stats { grid-template-columns: repeat(2, 1fr); margin-bottom: 35px; } .start-grid, .grid, .evidence-grid { grid-template-columns: 1fr; } .controls { grid-template-columns: 1fr 1fr; } .section[id] { scroll-margin-top: 122px; } footer { flex-direction: column; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } .button:hover, .start-card:hover { transform: none; } }
   </style>
 </head>
 <body>
+<a class="skip-link" href="#directory">Skip to benchmark catalog</a>
 <nav class="site-nav" aria-label="Primary navigation">
   <a class="brand" href="./"><span class="brand-mark">AH</span><span>Agent Harness Benchmarks</span></a>
   <div class="nav-links"><a href="#start">Start here</a><a href="#directory">Directory</a><a href="#method">Method</a><a href="agent.md">For agents</a></div>
@@ -227,10 +250,10 @@ def render_html(catalog: dict, audit: dict) -> str:
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-copy">
       <p class="eyebrow">Open evaluation map · Snapshot __SNAPSHOT__</p>
-      <h1 id="hero-title">Find the benchmark that explains why your agent failed.</h1>
-      <p class="lede">A maintained, evidence-aware catalog of benchmarks, controlled harness studies, and evaluation infrastructure. Browse it as a person, or consume the same snapshot as Markdown and JSON.</p>
+      <h1 id="hero-title">Choose benchmarks for your AI agent.</h1>
+      <p class="lede">See what each benchmark tests, how it scores results, and what those scores miss. Find a workload for your coding, browser, tool-use, or research agent.</p>
       <div class="hero-actions"><a class="button primary" href="#directory">Browse the catalog <span aria-hidden="true">↘</span></a><a class="button secondary" href="research.md">Read the research notes</a></div>
-      <div class="hero-note"><span class="live-dot"></span> Public-source inventory · updated __SNAPSHOT__ · no invented scores</div>
+      <div class="hero-note"><span class="live-dot" aria-hidden="true"></span> Public-source catalog · research snapshot __SNAPSHOT__</div>
     </div>
     <aside class="hero-panel" aria-label="What this catalog measures">
       <h2>What becomes measurable?</h2>
@@ -251,19 +274,20 @@ def render_html(catalog: dict, audit: dict) -> str:
   <section class="section" id="start" aria-labelledby="start-title">
     <div class="section-heading"><div><p class="section-kicker">Start with a question</p><h2 id="start-title">Choose your evaluation path.</h2></div><p>Each path opens the same directory with a focused filter. Start broad, then pin the model, harness, tools, and environment before comparing results.</p></div>
     <div class="start-grid">
-      <a class="start-card" href="#directory" data-category="direct"><span class="start-icon">H</span><span><h3>Compare the harness</h3><p>Same model, different control loops, tools, memory, and recovery.</p></span><span class="arrow">Explore ↗</span></a>
-      <a class="start-card" href="#directory" data-category="coding"><span class="start-icon">&lt;/&gt;</span><span><h3>Ship code reliably</h3><p>Repository navigation, editing, tests, terminals, and delivery.</p></span><span class="arrow">Explore ↗</span></a>
-      <a class="start-card" href="#directory" data-category="tools"><span class="start-icon">API</span><span><h3>Use tools safely</h3><p>Stateful APIs, MCP servers, permissions, and final-state grading.</p></span><span class="arrow">Explore ↗</span></a>
-      <a class="start-card" href="#directory" data-category="research"><span class="start-icon">R</span><span><h3>Run research workflows</h3><p>Evidence, reproduction, scientific coding, and long-horizon work.</p></span><span class="arrow">Explore ↗</span></a>
+      <a class="start-card" href="?category=direct#directory" data-category="direct"><span class="start-icon">H</span><span><h3>Compare the harness</h3><p>Same model, different control loops, tools, memory, and recovery.</p></span><span class="arrow">Explore ↗</span></a>
+      <a class="start-card" href="?category=coding#directory" data-category="coding"><span class="start-icon">&lt;/&gt;</span><span><h3>Ship code reliably</h3><p>Repository navigation, editing, tests, terminals, and delivery.</p></span><span class="arrow">Explore ↗</span></a>
+      <a class="start-card" href="?category=tools#directory" data-category="tools"><span class="start-icon">API</span><span><h3>Evaluate tool use</h3><p>Stateful APIs, MCP servers, tool selection, and final-state grading.</p></span><span class="arrow">Explore ↗</span></a>
+      <a class="start-card" href="?category=research#directory" data-category="research"><span class="start-icon">R</span><span><h3>Run research workflows</h3><p>Evidence, reproduction, scientific coding, and long-horizon work.</p></span><span class="arrow">Explore ↗</span></a>
     </div>
   </section>
 
   <section class="section" id="directory" aria-labelledby="directory-title">
-    <div class="section-heading"><div><p class="section-kicker">The catalog</p><h2 id="directory-title">Search the inventory.</h2></div><p>Filter by capability, evidence type, or keyword. Every card keeps the source, grading signal, and limitation visible.</p></div>
+    <div class="section-heading"><div><p class="section-kicker">The catalog</p><h2 id="directory-title">Search the inventory.</h2></div><p>Filter by capability, entry type, or keyword. Open a card’s details for its environment and limitations. Copy the URL to share your selection.</p></div>
+    <noscript><p>Search requires JavaScript. <a href="agent.md">Read the complete Markdown catalog</a> with all sources, scoring methods, environments, and limitations.</p></noscript>
     <div class="directory-layout">
       <aside class="facet-panel" aria-label="Filter by capability area"><p class="facet-title">Capability areas <span>__AREA_COUNT__</span></p><div class="facet-list">__CATEGORY_FILTERS__</div><div class="facet-divider"></div><div class="data-links"><a href="agent.md">Agent Markdown →</a><a href="catalog.json">Catalog JSON →</a><a href="source-audit.json">Source audit →</a></div></aside>
       <div class="directory-main">
-        <div class="controls"><input id="search" type="search" placeholder="Search benchmarks, signals, or sources…" aria-label="Search catalog"><select id="category" aria-label="Filter by category"><option value="">All areas</option>__CATEGORY_OPTIONS__</select><select id="kind" aria-label="Filter by evidence type"><option value="">All types</option><option value="benchmark">Benchmark</option><option value="study">Study</option><option value="infrastructure">Infrastructure</option><option value="watchlist">Watchlist</option></select><select id="sort" aria-label="Sort results"><option value="recommended">Recommended</option><option value="name">Name A–Z</option><option value="category">Category</option><option value="kind">Evidence type</option></select><button class="reset" id="reset" type="button">Reset</button></div>
+        <div class="controls"><input id="search" type="search" maxlength="500" placeholder="Search benchmarks, signals, or sources…" aria-label="Search catalog"><select id="category" aria-label="Filter by category"><option value="">All areas</option>__CATEGORY_OPTIONS__</select><select id="kind" aria-label="Filter by entry type"><option value="">All types</option><option value="benchmark">Benchmark</option><option value="study">Study</option><option value="infrastructure">Infrastructure</option><option value="watchlist">Watchlist</option></select><select id="sort" aria-label="Sort results"><option value="recommended">Catalog order</option><option value="name">Name A–Z</option><option value="category">Category</option><option value="kind">Entry type</option></select><button class="reset" id="reset" type="button">Reset</button></div>
         <p id="result-count" role="status" aria-live="polite"></p><div id="entries" class="grid"></div>
       </div>
     </div>
@@ -287,14 +311,50 @@ const kind = document.getElementById('kind');
 const sort = document.getElementById('sort');
 const reset = document.getElementById('reset');
 const facets = [...document.querySelectorAll('.facet')];
+let searchTimer;
 function esc(value) { return String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char])); }
 function card(entry) {
   const signals = entry.signals.map(signal => `<span class="chip">${esc(signal)}</span>`).join('');
   const paper = entry.paper ? ` · <a href="${esc(entry.paper)}" target="_blank" rel="noreferrer">paper</a>` : '';
   const categoryLabel = labels[entry.category] || entry.category;
-  return `<article class="card"><div class="card-top"><span class="category-pill">${esc(categoryLabel)}</span><span class="kind-pill">${esc(entry.kind)}</span></div><h3><a href="${esc(entry.url)}" target="_blank" rel="noreferrer">${esc(entry.name)}</a></h3><p class="card-summary">${esc(entry.summary)}</p><div class="signals">${signals}</div><div class="card-bottom"><small>${esc(entry.grading)}${paper}</small><a class="source-link" href="${esc(entry.url)}" target="_blank" rel="noreferrer">View source ↗</a></div></article>`;
+  return `<article class="card"><div class="card-top"><span class="category-pill">${esc(categoryLabel)}</span><span class="kind-pill">${esc(entry.kind)}</span></div><h3><a href="${esc(entry.url)}" target="_blank" rel="noreferrer">${esc(entry.name)}</a></h3><p class="card-summary">${esc(entry.summary)}</p><div class="signals">${signals}</div><details class="card-details"><summary>Environment & limitations</summary><dl><dt>Environment</dt><dd>${esc(entry.environment)}</dd><dt>Limitation</dt><dd>${esc(entry.limitation)}</dd></dl></details><div class="card-bottom"><small>${esc(entry.grading)}${paper}</small><a class="source-link" href="${esc(entry.url)}" target="_blank" rel="noreferrer">View source ↗</a></div></article>`;
 }
-function syncFacets() { facets.forEach(button => button.classList.toggle('active', button.dataset.category === category.value)); }
+function syncFacets() {
+  facets.forEach(button => {
+    const active = button.dataset.category === category.value;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+}
+function hydrate() {
+  const params = new URLSearchParams(window.location.search);
+  search.value = (params.get('q') || '').slice(0, 500);
+  for (const [control, fallback] of [[category, ''], [kind, ''], [sort, 'recommended']]) {
+    const value = params.get(control.id);
+    control.value = [...control.options].some(option => option.value === value) ? value : fallback;
+  }
+}
+function syncURL(mode = 'push', anchor = null) {
+  const url = new URL(window.location.href);
+  url.search = '';
+  if (search.value.trim()) url.searchParams.set('q', search.value.trim());
+  if (category.value) url.searchParams.set('category', category.value);
+  if (kind.value) url.searchParams.set('kind', kind.value);
+  if (sort.value !== 'recommended') url.searchParams.set('sort', sort.value);
+  if (anchor !== null) url.hash = anchor;
+  if (url.href !== window.location.href) window.history[mode === 'replace' ? 'replaceState' : 'pushState'](null, '', url);
+}
+function scrollToDirectory() {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('directory').scrollIntoView({behavior: reducedMotion ? 'instant' : 'smooth', block: 'start'});
+}
+function update({scroll = false} = {}) {
+  window.clearTimeout(searchTimer);
+  syncFacets();
+  render();
+  syncURL('push', scroll ? 'directory' : null);
+  if (scroll) scrollToDirectory();
+}
 function render() {
   const query = search.value.trim().toLowerCase();
   const selectedCategory = category.value;
@@ -304,10 +364,32 @@ function render() {
   count.textContent = `Showing ${filtered.length} of ${entries.length} entries`;
   grid.innerHTML = filtered.map(card).join('') || '<div class="empty">No matching entries. Try a broader search or reset the filters.</div>';
 }
-facets.forEach(button => button.addEventListener('click', () => { category.value = button.dataset.category; syncFacets(); render(); document.getElementById('directory').scrollIntoView({behavior:'smooth', block:'start'}); }));
-document.querySelectorAll('.start-card').forEach(cardLink => cardLink.addEventListener('click', () => { category.value = cardLink.dataset.category; syncFacets(); render(); }));
-[search, category, kind, sort].forEach(control => control.addEventListener('input', () => { if (control === category) syncFacets(); render(); }));
-reset.addEventListener('click', () => { search.value = ''; category.value = ''; kind.value = ''; sort.value = 'recommended'; syncFacets(); render(); });
+facets.forEach(button => button.addEventListener('click', () => { category.value = button.dataset.category; update({scroll: true}); }));
+document.querySelectorAll('.start-card').forEach(cardLink => cardLink.addEventListener('click', event => {
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  search.value = '';
+  category.value = cardLink.dataset.category;
+  kind.value = '';
+  sort.value = 'recommended';
+  update({scroll: true});
+}));
+search.addEventListener('input', () => {
+  window.clearTimeout(searchTimer);
+  render();
+  searchTimer = window.setTimeout(() => syncURL(), 250);
+});
+search.addEventListener('change', () => update());
+[category, kind, sort].forEach(control => control.addEventListener('change', () => update()));
+reset.addEventListener('click', () => { search.value = ''; category.value = ''; kind.value = ''; sort.value = 'recommended'; update(); });
+window.addEventListener('popstate', () => {
+  window.clearTimeout(searchTimer);
+  hydrate();
+  syncFacets();
+  render();
+});
+hydrate();
+syncURL('replace');
 syncFacets();
 render();
 </script>

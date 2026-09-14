@@ -14,7 +14,7 @@ The audit script checks the public GitHub API and stores repository metadata plu
 
 | Area | Entries | What it exposes |
 |---|---:|---|
-| Direct harness comparisons | 12 | The harness is the treatment, or the benchmark is explicitly designed around model–harness configurations. |
+| Direct harness comparisons | 11 | Comparisons or benchmarks designed around harnesses, native configurations, or agent construction. |
 | Tools and APIs | 15 | Tool choice, schema use, state dependencies, multi-step API execution and MCP integration. |
 | Coding and terminal | 12 | Workspace exploration, patching, test feedback, long trajectories and artifact verification. |
 | Browser | 11 | Web navigation, live-site drift, visual grounding and multi-site workflows. |
@@ -30,11 +30,11 @@ The audit script checks the public GitHub API and stores repository metadata plu
 
 The count is an inventory count, not a quality ranking. One entry can be relevant to several harness responsibilities, but it has one primary category so that totals remain auditable.
 
-This refresh raises the inventory from 84 to **116 entries**. The new edge is concentrated in enterprise workflows, data agents, research reproduction, infrastructure operations, full-stack runtime diagnostics, and browser/deep-search evaluation. The [machine-readable catalog](../data/catalog.json) is the countable source of truth; this table is a human-oriented aggregation.
+The corrected inventory contains **115 entries**. On September 14, the renamed OpenClaw ClawBench/ShellBench duplicate was merged while preserving its identifiers; see the [correction log](updates.md). The [machine-readable catalog](../data/catalog.json) is the countable source of truth; this table groups each resource once.
 
-## Recent scan and evidence tiers
+## Recent scan and resource types
 
-The scan intentionally separates evidence levels. A benchmark with a public task/evaluator and a paper or maintained repository is included as a measured `benchmark`. A reusable runner or auditing layer is `infrastructure`. A controlled framework comparison without a fixed public task corpus is `study`. A public but early or narrow project can be kept as `watchlist` when it is useful for discovery, but this snapshot does not promote it to a leaderboard claim.
+The catalog separates resource types. A task suite described with an evaluator is a `benchmark`; a reusable runner or auditing layer is `infrastructure`; a comparison is a `study`; an early candidate may be a `watchlist` item. These labels do not certify maturity, experimental control, or independent reproduction. Assess task access, executable scoring, versioned run artifacts, and external replication separately when deciding which evidence supports a claim.
 
 Recent high-signal additions include [AgentSearchBench](https://github.com/Bingo-W/AgentSearchBench) (execution-grounded agent retrieval), [SciAgentArena](https://github.com/HelloWorldLTY/SciAgentArena) (scientific workflows), [InfraBench](https://github.com/kubeply/infra-bench) and [AOBench](https://github.com/MSKazemi/aobench) (infrastructure operations), [APEX-Agents/Archipelago](https://github.com/togethercomputer/archipelago) and [STATE-Bench](https://github.com/microsoft/STATE-Bench) (enterprise stateful work), [AIRS-Bench](https://github.com/facebookresearch/airs-bench) and [PaperBench](https://github.com/openai/preparedness) (research execution), [BrowseComp-Plus](https://github.com/texttron/BrowseComp-Plus) (retriever/agent disentanglement), [SpreadsheetBench 2](https://spreadsheetbench.github.io/) (business spreadsheet workflows), [AgentActionBench](https://arxiv.org/abs/2609.11117) (trace-scored reproduction), [AgentRE-Bench](https://github.com/agentrebench/AgentRE-Bench) and [Cybench](https://github.com/andyzorigin/cybench) (specialized security capability), and [ShellBench](https://github.com/openclaw/shellbench)/[Coder Eval](https://github.com/UiPath/coder_eval)/[Lemans](https://github.com/rails/lemans) (harness and regression infrastructure). Each entry records its primary source and a limitation rather than merging incompatible scores.
 
@@ -42,7 +42,9 @@ The scan also checked active GitHub search results for emerging projects. Low-ev
 
 ## What the strongest evidence looks like
 
-The best direct comparisons hold the model endpoint, prompt, tools, task fixture, sandbox image, timeout, token budget and sampling policy fixed. They run the same instances multiple times, preserve raw traces and workspace diffs, use deterministic checks for correctness, and report variance and cost alongside the headline success rate. Harness-Bench (Qihoo360) is the broadest public example in this snapshot: its public description reports 106 sandboxed offline tasks with trace and artifact capture. HarnessRisk applies the same model–harness framing to adversarial safety across the lifecycle. Hyper-τ measures a different boundary: whether a developer agent can construct a working agent from evidence and pass a sealed downstream workload. HarnessDev extends that question to creation and iterative evolution of runnable infrastructure.
+Define the intervention before fixing variables. A native harness comparison may intentionally include each harness's prompts, tools, and defaults. A component ablation changes one feature while holding the surrounding configuration fixed. In either design, align tasks, model access where possible, budgets, environment, and scoring outside the intervention. Repeat matched tasks, preserve traces and verifier output, and report uncertainty and cost.
+
+The [Harness-Bench paper](https://arxiv.org/abs/2605.27922) describes 106 offline tasks while preserving native harness behavior. Its results therefore compare configurations; they do not isolate every harness component. ShellBench likewise scores a full agent stack. HarnessRisk addresses adversarial safety across the lifecycle. Hyper-τ measures whether a developer agent can construct an agent that passes a held-out downstream workload. HarnessDev addresses construction and evolution of runnable infrastructure. These are related but distinct experimental questions.
 
 Mature workload suites remain valuable because they expose real failure surfaces. Terminal-Bench and SWE-bench reveal whether a loop can explore, edit, test and recover. τ³-bench and ToolSandbox reveal stateful tool coordination and policy adherence. Toolathlon, MCPMark and MCP-Bench stretch heterogeneous tools and MCP plumbing. WebArena and OSWorld expose browser and desktop interaction. LongMemEval-V2 and MemoryArena test whether state survives beyond one context window. AgentDojo and HarnessRisk test whether the same access that enables usefulness can be constrained safely. OrchestraBench and MAS-FIRE make routing and failure propagation observable in multi-agent pipelines.
 
@@ -62,7 +64,18 @@ Do not collapse all dimensions into one score without publishing the component s
 
 ## Recommended evaluation plans
 
-For a general-purpose harness, use Harness-Bench or ShellBench as the direct comparison, then add Terminal-Bench, τ³-bench, STATE-Bench, OSWorld-Verified, AgentDojo, LongMemEval-V2 and OrchestraBench when the corresponding surfaces are in scope. For a coding harness, use a fixed split of SWE-bench plus Terminal-Bench, GitTaskBench, Version Control Bench, ContextBench, and a multi-run cost/reliability report. For an MCP or enterprise-data harness, use MCPMark, Toolathlon-Verified, ToolSandbox, Agent-Diff, DataSpace, DAB and τ³-bench with server versions pinned. For long-running memory and daily workflows, pair LongMemEval-V2 or MemoryArena with AgentIF-OneDay, ClawMark, SentinelBench or Gaia2. For research automation, use PaperBench, AIRS-Bench, SciAgentArena or AgentActionBench and keep any train-side gate separate from the held-out score. For a self-evolving harness, use HarnessDev or RSIBench and keep the train-side gate separate from the held-out score.
+Start with one suite matching your actual workload. Add a second only when it measures a failure surface the first does not cover. These are evaluation-design suggestions based on the recorded task scope, not results from running the suites ourselves.
+
+| Workload | Initial evaluation | Optional extension and reason |
+| --- | --- | --- |
+| Repository coding | A fixed SWE-bench split | Terminal-Bench for terminal workflows beyond patching. |
+| Stateful API assistance | ToolSandbox | MCPMark when real MCP service integration is in scope. |
+| Browser automation | WebArena | OSWorld when workflows cross browser and desktop applications. |
+| Conversational memory | LongMemEval | MemoryArena when memory must support interdependent action tasks. |
+| Research reproduction | CORE-Bench | PaperBench for broader paper implementation from scratch. |
+| Agent construction | Hyper-τ or HarnessDev, depending on the construction task | A held-out workload for the resulting agent; keep development feedback separate. |
+
+For each plan, include repeated runs and cost, environment, and failure reporting. The [comparison template](comparison-template.md) gives a reusable reporting structure. The [full catalog](catalog.md) provides primary sources and limitations for these resources.
 
 ## Threats to validity
 

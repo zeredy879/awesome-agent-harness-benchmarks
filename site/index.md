@@ -3,17 +3,17 @@
 > Machine-readable Markdown snapshot. Use `catalog.json` for structured ingestion and `research.md` for methodology.
 
 - Snapshot date: `2026-09-13`
-- Entries: `116`
+- Entries: `115`
 - Categories: `13`
-- GitHub source records: `99` (`99` accessible at audit time)
+- GitHub source records: `98` (`98` accessible at audit time)
 - Scope: public benchmarks, controlled studies, and evaluation infrastructure relevant to agent harnesses
 
 ## Category counts
 
 - `tools` - Tools, APIs, MCP, and state: **15**
 - `coding` - Coding and terminal: **12**
-- `direct` - Direct harness comparisons: **12**
 - `browser` - Browser and web: **11**
+- `direct` - Direct harness comparisons: **11**
 - `general` - General agents: **11**
 - `infrastructure` - Evaluation infrastructure: **11**
 - `research` - Research engineering: **9**
@@ -350,17 +350,6 @@
 - Environment: Windows virtual machines
 - Limitation: Windows licensing and infrastructure requirements affect deployment cost.
 
-### ClawBench (OpenClaw)
-
-- ID: `clawbench-openclaw`
-- Category: `direct`; kind: `benchmark`
-- Source: https://github.com/openclaw/clawbench
-- Summary: Scores full-stack configurations using traces and reliability diagnostics.
-- Signals: `tools`, `state`, `recovery`, `cost`
-- Grading: Trace scoring and repeated-run diagnostics
-- Environment: OpenClaw-oriented task runner
-- Limitation: Small curated task set; distinct from the TIGER-AI-Lab live-web benchmark.
-
 ### Coding harness comparison (tufantunc)
 
 - ID: `tufantunc-harness`
@@ -472,16 +461,17 @@
 - Environment: CLI agents
 - Limitation: Model-bound control must be separated from same-model comparisons.
 
-### ShellBench
+### ShellBench (formerly ClawBench)
 
-- ID: `shellbench`
+- ID: `clawbench-openclaw`
 - Category: `direct`; kind: `benchmark`
 - Source: https://github.com/openclaw/shellbench
-- Summary: Scores the full agent stack—harness, configuration, and model—with trace-based reliability diagnostics.
-- Signals: `tools`, `verification`, `recovery`, `cost`, `state`
-- Grading: Trace-aware task outcomes, reliability metrics, and configuration diagnostics
-- Environment: Containerized coding and agent workflow tasks
-- Limitation: A fast-moving project; benchmark versions and model/harness coupling must be recorded.
+- Summary: Scores full agent configurations, including the harness and model, using traces and reliability diagnostics.
+- Signals: `tools`, `state`, `recovery`, `cost`
+- Grading: Trace scoring and repeated-run diagnostics
+- Environment: OpenClaw-oriented task runner
+- Limitation: Full-stack scores include model and configuration effects. Formerly OpenClaw ClawBench; distinct from TIGER-AI-Lab ClawBench.
+- Aliases: shellbench
 
 ### AgentBench
 
@@ -863,7 +853,7 @@
 - Source: https://github.com/xiaowu0162/LongMemEval
 - Summary: Tests information extraction, temporal reasoning and updates across long histories.
 - Signals: `memory`, `context`
-- Grading: Question-answering accuracy
+- Grading: LLM-judged question-answering accuracy
 - Environment: Stored conversational histories
 - Limitation: Full-context baselines are essential; QA retrieval is not closed-loop task execution.
 
@@ -1072,7 +1062,7 @@
 
 - ID: `agentharm`
 - Category: `safety`; kind: `benchmark`
-- Source: https://github.com/UKGovernmentBEIS/inspect_evals
+- Source: https://huggingface.co/datasets/ai-safety-institute/AgentHarm
 - Summary: Tests whether agents execute harmful multi-step requests.
 - Signals: `permissions`, `tools`
 - Grading: Harmful task completion and refusal evaluation
@@ -1309,7 +1299,7 @@
 
 - ID: `toolsandbox`
 - Category: `tools`; kind: `benchmark`
-- Source: https://github.com/apple/ToolSandbox
+- Source: https://github.com/apple-aiml-research/ToolSandbox
 - Summary: Tests conversational tool use with implicit state dependencies and missing information.
 - Signals: `tools`, `state`, `interaction`, `recovery`
 - Grading: Intermediate milestones and final state

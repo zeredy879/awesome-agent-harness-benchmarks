@@ -1,221 +1,74 @@
-# Agent Harness Benchmark 한국어 카탈로그
+# Awesome Agent Harness Benchmarks
 
-언어: [English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md)
+내 에이전트에 맞는 평가를 찾으세요. 점수를 비교하기 전에 과제, 채점 방식, 한계를 살펴볼 수 있습니다.
 
-사람과 Agent 모두가 읽을 수 있는 공개 Agent Harness benchmark·비교 연구·평가 인프라 카탈로그입니다.
+## [검색 가능한 평가 카탈로그 열기 →](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
 
-- 기준일: `2026-09-13`
-- 항목 수: **116**
-- 역량 영역: **13**
-- GitHub 출처 감사 기록: **99**
-- 범위: 공개 benchmark, 통제된 비교 연구, Agent Harness 관련 평가 인프라를 다룹니다. 날짜가 있는 공개 자료 인벤토리이며 비공개 평가까지 모두 포함한다는 뜻은 아닙니다.
+평가할 역량으로 범위를 좁히고, 원문 출처와 실행 환경, 평가의 한계를 확인하세요.
 
-## 빠른 링크
+[English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · 한국어
 
-- [사람을 위한 Pages](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
-- [Agent Markdown](site/agent.md)
-- [기계 판독 JSON](data/catalog.json)
-- [연구 노트](docs/research.md)
-- [소스 감사](data/source-audit.json)
+자료 기준일: 2026-09-13 · 전체 115개 항목 · 평가 모음 97개 · 13개 분야
 
-## 시작하기
+여기서 **harness**는 모델 주변에서 도구 호출, 컨텍스트, 메모리, 권한, 실행 흐름을 관리하는 시스템을 뜻합니다. 이 카탈로그는 각 기능을 시험할 공개 평가를 찾고, 결과가 뒷받침하는 결론의 범위를 파악하도록 돕습니다.
 
-Harness 자체를 비교하려면 ‘직접 비교’부터 확인하고, 특정 하위 시스템은 역량 카테고리에서 고르세요. 공정한 비교를 위해 모델 endpoint, 시스템 prompt, tool schema, task 버전, sandbox 이미지, 예산, retry 정책, random seed를 고정하세요.
+## 무엇을 확인하고 싶나요?
 
-## 최근 추가·재검증（2025–2026）
+목적에 따라 먼저 살펴볼 평가를 골랐습니다. 순위표는 아닙니다. 전체 카탈로그에서 다른 과제, 버전, 비교 연구도 확인할 수 있습니다.
 
-2026년 9월 조사에서 추가하거나 다시 확인한 항목입니다. 프로젝트 고유명과 원문 링크는 오역을 피하기 위해 그대로 두었고, 전체 필드와 한계는 Agent Markdown과 JSON에 기록했습니다.
+| 평가할 작업 | 먼저 살펴볼 평가 | 채점 방식 | 비교할 때 주의할 점 |
+| --- | --- | --- | --- |
+| 실제 코드 저장소의 문제 수정 | [SWE-bench family](https://github.com/SWE-bench/SWE-bench) | 수정 검증 테스트와 회귀 테스트 | 트랙마다 과제, 언어, 평가 방식이 달라 점수를 그대로 비교할 수 없습니다. |
+| 복잡한 터미널 작업 완료 | [Terminal-Bench](https://github.com/harbor-framework/terminal-bench) | 과제별 검증 프로그램 실행 | 데이터셋 버전을 고정해야 합니다. 점수에는 모델과 harness가 모두 영향을 줍니다. |
+| 상태를 유지하며 도구 사용 | [ToolSandbox](https://github.com/apple-aiml-research/ToolSandbox) | 중간 단계와 최종 상태 확인 | 사용자 시뮬레이터와 도구 인터페이스도 결과에 영향을 줍니다. |
+| 웹사이트에서 작업 완료 | [WebArena](https://github.com/web-arena-x/webarena) | 웹 앱의 기능과 상태 확인 | 환경 설정, 과제, 평가기의 수정 사항까지 버전을 맞춰야 합니다. |
+| 여러 데스크톱 앱을 오가며 작업 | [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld) | 실행 결과에 따른 검증 | 가상 머신 이미지, 최대 행동 횟수, 평가 버전이 같아야 합니다. |
+| 긴 대화 기록에서 정보 찾기 | [LongMemEval](https://github.com/xiaowu0162/LongMemEval) | 과거 기록에 대한 질의응답 정확도 | 전체 컨텍스트를 제공한 기준선이 필요합니다. 정답을 찾는 것과 여러 단계의 작업을 끝내는 것은 다릅니다. |
+| 도구 환경의 프롬프트 인젝션 방어 | [AgentDojo](https://github.com/ethz-spylab/agentdojo) | 정상 작업 성능과 공격 성공률 | 위협 모델과 공격 예산을 고정하고, 안전성과 유용성을 함께 봐야 합니다. |
+| 도구로 정보를 수집하고 추론 | [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA) | 최종 답변 정확도 | 최종 답변만으로는 실행 중의 부작용과 안전 문제를 파악하기 어렵습니다. |
 
-- [AgentSearchBench](https://github.com/Bingo-W/AgentSearchBench)
-- [SciAgentArena](https://github.com/HelloWorldLTY/SciAgentArena)
-- [InfraBench](https://github.com/kubeply/infra-bench)
-- [APEX-Agents / Archipelago](https://github.com/togethercomputer/archipelago)
-- [DataSpace](https://github.com/HKUSTDial/DataSpace)
-- [Data Agent Benchmark (DAB)](https://github.com/ucbepic/DataAgentBench)
-- [AIRS-Bench](https://github.com/facebookresearch/airs-bench)
-- [AgentIF-OneDay](https://github.com/xbench-ai/AgentIF-OneDay)
-- [OmniaBench](https://github.com/scuuy/OmniaBench)
-- [BrowserUse Agent Bench / LexBench-Browser](https://github.com/lexmount/browseruse-agent-bench)
-- [AgentSuite](https://github.com/Agent-Suite/AgentSuite)
-- [Open AgentBench](https://github.com/the-open-agent/agentbench)
-- [Agent-Diff](https://github.com/agent-diff-bench/agent-diff)
-- [Version Control Bench](https://github.com/gitbutlerapp/version-control-bench)
-- [AgentShield Benchmark](https://github.com/doronp/agentshield-benchmark)
-- [AgentRE-Bench](https://github.com/agentrebench/AgentRE-Bench)
-- [STATE-Bench](https://github.com/microsoft/STATE-Bench)
-- [ShellBench](https://github.com/openclaw/shellbench)
-- [Coder Eval](https://github.com/UiPath/coder_eval)
-- [Lemans](https://github.com/rails/lemans)
-- [AgentRace](https://agent-race.github.io/paper)
-- [AgentActionBench](https://arxiv.org/abs/2609.11117)
-- [PaperBench](https://github.com/openai/preparedness)
-- [Cybench](https://github.com/andyzorigin/cybench)
-- [BrowseComp](https://github.com/openai/simple-evals)
-- [BrowseComp-Plus](https://github.com/texttron/BrowseComp-Plus)
-- [SpreadsheetBench](https://github.com/Reality2byte/spreadsheetbench)
-- [SpreadsheetBench 2](https://spreadsheetbench.github.io/)
-- [GitTaskBench](https://github.com/QuantaAlpha/GitTaskBench)
-- [AgentIF](https://agentif.github.io/)
-- [AOBench (Agent Operations Benchmark)](https://github.com/MSKazemi/aobench)
-- [SWE-InfraBench](https://arxiv.org/abs/2606.05249)
+## 점수가 말해 주는 것
 
-## 전체 역량별 카탈로그
+대부분의 평가는 에이전트 전체의 성능을 측정합니다. 차이의 원인을 harness에서 찾으려면 모델, 과제, 예산을 동일하게 두고 비교해야 합니다. 이 카탈로그에 실렸다고 해서 해당 프로젝트가 이런 실험을 수행했다는 뜻은 아닙니다.
 
-### Harness 직접 비교
+- **benchmark**: 과제와 평가기를 갖춘 평가 모음으로, 테스트를 실행할 때 사용합니다.
+- **study**: 실험 설계와 기존 근거를 살펴볼 수 있는 비교 연구입니다.
+- **infrastructure**: 평가 실행이나 감사를 돕는 도구이며, 그 자체가 과제 모음은 아닙니다.
+- **watchlist**: 초기 단계이거나 범위가 좁은 후보로, 추가 확인이 필요합니다.
 
-- [ClawBench (OpenClaw)](https://github.com/openclaw/clawbench)
-- [Coding harness comparison (tufantunc)](https://github.com/tufantunc/harness-benchmark)
-- [Harness Arena](https://github.com/Ondemand-OSS/harness-arena)
-- [harness-bench (LamaSu)](https://github.com/LamaSu/harness-bench)
-- [Harness-Bench (Qihoo360)](https://github.com/Qihoo360/harness-bench)
-- [harness-bench (zenixos)](https://github.com/zenixos/harness-bench)
-- [HarnessDev](https://arxiv.org/abs/2609.01437)
-- [Hyper-τ / τ^τ-bench](https://github.com/sierra-research/hyper-tau-bench)
-- [Nexus Harness Benchmark](https://github.com/nexus-research-lab/nexus-harness-benchmark)
-- [Same-model harness study (d1-m4ss)](https://github.com/d1-m4ss/harness-benchmark)
-- [Same-model harness study (rajshah4)](https://github.com/rajshah4/harness-benchmark)
-- [ShellBench](https://github.com/openclaw/shellbench)
+비교 템플릿과 평가 제안은 실험 설계를 돕는 자료이며, 실제 측정 결과나 순위표가 아닙니다.
 
-### 도구·API·MCP·상태
+## 분야별로 더 찾아보기
 
-- [Agent-Diff](https://github.com/agent-diff-bench/agent-diff)
-- [API-Bank](https://github.com/AlibabaResearch/DAMO-ConvAI)
-- [AppWorld](https://github.com/StonyBrookNLP/appworld)
-- [Berkeley Function Calling Leaderboard (BFCL)](https://gorilla.cs.berkeley.edu/leaderboard.html)
-- [Data Agent Benchmark (DAB)](https://github.com/ucbepic/DataAgentBench)
-- [DataSpace](https://github.com/HKUSTDial/DataSpace)
-- [Hermes tool-performance evals](https://github.com/NousResearch/hermes-toolperf-evals)
-- [MCP-Bench (Accenture)](https://github.com/Accenture/mcp-bench)
-- [MCPMark](https://github.com/eval-sys/mcpmark)
-- [StableToolBench](https://github.com/THUNLP-MT/StableToolBench)
-- [STATE-Bench](https://github.com/microsoft/STATE-Bench)
-- [Toolathlon / Toolathlon-Verified](https://github.com/hkust-nlp/Toolathlon)
-- [ToolBench / ToolEval](https://github.com/OpenBMB/ToolBench)
-- [ToolSandbox](https://github.com/apple/ToolSandbox)
-- [τ-bench family (τ / τ² / τ³)](https://github.com/sierra-research/tau2-bench)
+[전체 카탈로그](docs/catalog.md)에 각 항목의 설명과 출처를 모았습니다. 관심 있는 분야로 바로 이동할 수도 있습니다:
 
-### 코딩·터미널
+[Harness 직접 비교](docs/catalog.md#direct) · [코드·터미널](docs/catalog.md#coding) · [도구·상태 관리](docs/catalog.md#tools)
 
-- [Aider Polyglot](https://aider.chat/docs/leaderboards/)
-- [Commit0](https://github.com/commit-0/commit0)
-- [GitTaskBench](https://github.com/QuantaAlpha/GitTaskBench)
-- [MiHaCoBench](https://github.com/HangYu8123/MiHaCoBench)
-- [SWE-bench family](https://github.com/SWE-bench/SWE-bench)
-- [SWE-bench Live](https://github.com/microsoft/SWE-bench-Live)
-- [SWE-bench Pro](https://github.com/scaleapi/SWE-bench_Pro-os)
-- [SWE-InfraBench](https://arxiv.org/abs/2606.05249)
-- [SWE-Lancer](https://github.com/openai/SWELancer-Benchmark)
-- [SWE-rebench](https://github.com/SWE-rebench/SWE-rebench-V2)
-- [Terminal-Bench](https://github.com/harbor-framework/terminal-bench)
-- [Version Control Bench](https://github.com/gitbutlerapp/version-control-bench)
+[브라우저](docs/catalog.md#browser) · [데스크톱·모바일](docs/catalog.md#computer) · [범용 작업](docs/catalog.md#general)
 
-### 브라우저·Web
+[메모리·컨텍스트](docs/catalog.md#memory) · [장시간 작업](docs/catalog.md#long-horizon) · [안전성](docs/catalog.md#safety)
 
-- [BrowseComp](https://github.com/openai/simple-evals)
-- [BrowseComp-Plus](https://github.com/texttron/BrowseComp-Plus)
-- [BrowserUse Agent Bench / LexBench-Browser](https://github.com/lexmount/browseruse-agent-bench)
-- [ClawBench (TIGER-AI-Lab)](https://github.com/TIGER-AI-Lab/ClawBench)
-- [Online-Mind2Web](https://github.com/OSU-NLP-Group/Online-Mind2Web)
-- [VisualWebArena](https://github.com/web-arena-x/visualwebarena)
-- [WebArena](https://github.com/web-arena-x/webarena)
-- [WebArena-Verified](https://github.com/ServiceNow/webarena-verified)
-- [WebChoreArena](https://github.com/WebChoreArena/WebChoreArena)
-- [WebVoyager](https://github.com/MinorJerry/WebVoyager)
-- [WorkArena / WorkArena++](https://github.com/ServiceNow/WorkArena)
+[여러 에이전트의 협업](docs/catalog.md#multi-agent) · [연구 작업](docs/catalog.md#research) · [스킬·지시 이행](docs/catalog.md#skills) · [평가 기반 도구](docs/catalog.md#infrastructure)
 
-### 범용 에이전트
+## 직접 비교하려면
 
-- [AgentBench](https://github.com/THUDM/AgentBench)
-- [AgentIF](https://agentif.github.io/)
-- [AgentSearchBench](https://github.com/Bingo-W/AgentSearchBench)
-- [APEX-Agents / Archipelago](https://github.com/togethercomputer/archipelago)
-- [AssistantBench](https://github.com/oriyor/assistantbench)
-- [Claw-Eval](https://github.com/claw-eval/claw-eval)
-- [Claw-Eval-Live](https://github.com/Claw-Eval-Live/Claw-Eval-Live)
-- [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA)
-- [OmniaBench](https://github.com/scuuy/OmniaBench)
-- [PinchBench](https://github.com/pinchbench/skill)
-- [TheAgentCompany](https://github.com/TheAgentCompany/TheAgentCompany)
+[비교 기록 템플릿](docs/comparison-template.md)을 사용해 실험 조건과 결과를 함께 기록하세요:
 
-### 메모리·컨텍스트
+1. 모델, 프롬프트, 도구 명세, 과제 버전, 환경, 예산, 재시도 정책을 고정합니다.
+2. 완료율, 편차, 비용, 지연 시간, 안전 문제를 따로 보고하고 실행 기록과 검증 출력을 보관합니다.
+3. [조사 노트](docs/research.md)에서 근거의 수준과 비교 조건을 확인한 뒤 차이를 해석합니다.
 
-- [Context-Bench (Letta, V2)](https://www.letta.com/blog/evaluating-memory-in-production-agents/)
-- [ContextBench (coding retrieval)](https://arxiv.org/abs/2602.05892)
-- [LoCoMo](https://github.com/snap-research/locomo)
-- [LongMemEval](https://github.com/xiaowu0162/LongMemEval)
-- [LongMemEval-V2](https://github.com/xiaowu0162/LongMemEval-V2)
-- [MemoryAgentBench](https://github.com/HUST-AI-HYZ/MemoryAgentBench)
-- [MemoryArena](https://github.com/ZexueHe/MemoryArena)
+## 에이전트에서 읽기
 
-### 안전·장애 주입
+자동으로 검색하거나 정리할 때는 다음 자료를 바로 읽을 수 있습니다:
 
-- [Agent-SafetyBench](https://github.com/thu-coai/Agent-SafetyBench)
-- [AgentDojo](https://github.com/ethz-spylab/agentdojo)
-- [AgentHarm](https://github.com/UKGovernmentBEIS/inspect_evals)
-- [AgentShield Benchmark](https://github.com/doronp/agentshield-benchmark)
-- [Cybench](https://github.com/andyzorigin/cybench)
-- [HarnessRisk](https://github.com/Baiyajing/HarnessRisk)
-- [InjecAgent](https://github.com/uiuc-kang-lab/InjecAgent)
-- [WASP](https://github.com/facebookresearch/wasp)
+- [설명이 포함된 Markdown 카탈로그](site/agent.md)
+- [구조화된 데이터](data/catalog.json)
+- [필드 정의](data/catalog.schema.json)
+- [저장소 유지보수 규칙](AGENTS.md)
 
-### 장기·상시 에이전트
+## 출처와 기여
 
-- [AgentIF-OneDay](https://github.com/xbench-ai/AgentIF-OneDay)
-- [AOBench (Agent Operations Benchmark)](https://github.com/MSKazemi/aobench)
-- [Claw-Anything](https://github.com/LiberCoders/Claw-Anything)
-- [ClawMark](https://github.com/evolvent-ai/ClawMark)
-- [Durable-agent-harness](https://github.com/Eldergenix/Durable-agent-harness)
-- [Gaia2 / Gaia2-CLI](https://github.com/facebookresearch/meta-agents-research-environments)
-- [METR Task-Completion Time Horizons](https://metr.org/time-horizons/)
-- [SentinelBench](https://github.com/microsoft/sentinel_environments)
+공식 저장소, 논문, 프로젝트 페이지를 우선합니다. [출처 확인 기록](data/source-audit.json)은 특정 시점의 접근 가능 여부와 메타데이터를 담으며, 독립적인 재현 실험을 뜻하지 않습니다. 수록 자체가 추천을 의미하지 않으며, 모든 공개·비공개 평가를 망라하지는 않습니다.
 
-### 평가 인프라
-
-- [AgentRace](https://agent-race.github.io/paper)
-- [AgentSuite](https://github.com/Agent-Suite/AgentSuite)
-- [BrowserGym](https://github.com/ServiceNow/BrowserGym)
-- [Coder Eval](https://github.com/UiPath/coder_eval)
-- [Harbor](https://github.com/harbor-framework/harbor)
-- [Holistic Agent Leaderboard (HAL)](https://hal.cs.princeton.edu/)
-- [InfraBench](https://github.com/kubeply/infra-bench)
-- [Inspect Evals](https://github.com/UKGovernmentBEIS/inspect_evals)
-- [Lemans](https://github.com/rails/lemans)
-- [NeMo Gym](https://github.com/NVIDIA-NeMo/Gym)
-- [Open AgentBench](https://github.com/the-open-agent/agentbench)
-
-### 컴퓨터·모바일
-
-- [AndroidLab](https://github.com/THUDM/Android-Lab)
-- [AndroidWorld](https://github.com/google-research/android_world)
-- [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld)
-- [SpreadsheetBench](https://github.com/Reality2byte/spreadsheetbench)
-- [SpreadsheetBench 2](https://spreadsheetbench.github.io/)
-- [Windows Agent Arena](https://github.com/microsoft/WindowsAgentArena)
-
-### 멀티 에이전트
-
-- [MAS-FIRE](https://arxiv.org/abs/2602.19843)
-- [MultiAgentBench](https://github.com/MultiagentBench/MARBLE)
-- [OrchestraBench](https://arxiv.org/abs/2608.05263)
-- [SABOT](https://github.com/Jott2121/sabot)
-
-### 연구 엔지니어링
-
-- [AgentActionBench](https://arxiv.org/abs/2609.11117)
-- [AgentRE-Bench](https://github.com/agentrebench/AgentRE-Bench)
-- [AIRS-Bench](https://github.com/facebookresearch/airs-bench)
-- [CORE-Bench](https://github.com/siegelz/core-bench)
-- [MLE-bench](https://github.com/openai/mle-bench)
-- [PaperBench](https://github.com/openai/preparedness)
-- [RE-Bench](https://github.com/METR/RE-Bench)
-- [SciAgentArena](https://github.com/HelloWorldLTY/SciAgentArena)
-- [ScienceAgentBench](https://github.com/OSU-NLP-Group/ScienceAgentBench)
-
-### Skills·지시
-
-- [SkillsBench](https://github.com/benchflow-ai/skillsbench)
-- [SWE-Skills-Bench](https://arxiv.org/abs/2603.15401)
-
-## 자세한 정보
-
-전체 영어 설명은 [README.md](README.md)를 참고하세요. Agent가 바로 읽을 안정적인 입구는 [site/agent.md](site/agent.md)와 [data/catalog.json](data/catalog.json)입니다.
+빠진 평가, 깨진 링크, 잘못된 설명을 발견했다면 [기여 안내](CONTRIBUTING.md)에 따라 issue나 PR을 보내 주세요. 원문 출처와 평가의 구체적인 한계도 함께 알려 주시면 좋습니다.

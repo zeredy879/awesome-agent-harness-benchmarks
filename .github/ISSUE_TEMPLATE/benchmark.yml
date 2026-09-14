@@ -1,0 +1,24 @@
+name: Suggest a benchmark
+description: Share a source and explain which agent capability it evaluates.
+title: "[Source]: "
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Canonical source
+      description: Link to the official repository, paper, dataset, or project page.
+      placeholder: https://...
+    validations:
+      required: true
+  - type: textarea
+    id: usefulness
+    attributes:
+      label: What does it evaluate?
+      description: A few sentences about the tasks, scoring method, and why the source belongs here. You do not need to prepare a JSON record.
+    validations:
+      required: true
+  - type: textarea
+    id: caveat
+    attributes:
+      label: Limitations or related entries
+      description: Optional. Mention setup requirements, known limitations, renamed projects, or overlap with an existing entry.

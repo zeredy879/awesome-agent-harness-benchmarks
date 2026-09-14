@@ -104,8 +104,8 @@
       "readme_sha256": "c0a861e4d4c10c24d29598353f093f5dcc460742ab9aaa924b32dad9f10e0202"
     },
     {
-      "requested_repo": "apple/ToolSandbox",
-      "checked_at": "2026-09-13T12:27:15.807817+00:00",
+      "requested_repo": "apple-aiml-research/ToolSandbox",
+      "checked_at": "2026-09-14T02:42:00.290658+00:00",
       "repo": "apple-aiml-research/ToolSandbox",
       "url": "https://github.com/apple-aiml-research/ToolSandbox",
       "archived": false,
@@ -901,23 +901,6 @@
       "readme_url": "https://github.com/OpenBMB/ToolBench/blob/master/README.md",
       "readme_blob_sha": "da8ea02d145628b4eff3c19c8a16513a49828627",
       "readme_sha256": "bb3ec8d8ab48fa998b0b6eea440f3e799cd0f06f242be7e1b383850ad2cc41f0"
-    },
-    {
-      "requested_repo": "openclaw/clawbench",
-      "checked_at": "2026-09-13T12:27:23.486078+00:00",
-      "repo": "openclaw/shellbench",
-      "url": "https://github.com/openclaw/shellbench",
-      "archived": false,
-      "fork": false,
-      "stars": 139,
-      "default_branch": "main",
-      "description": "The agent benchmark that scores the full stack — harness, config, and model — not just the LLM. Trace-based scoring, reliability metrics, configuration diagnostics.",
-      "pushed_at": "2026-09-08T18:23:13Z",
-      "license": "MIT",
-      "status": "source-accessible",
-      "readme_url": "https://github.com/openclaw/shellbench/blob/main/README.md",
-      "readme_blob_sha": "04cdb616e6ab1d73b31b675aeb92e9700565af38",
-      "readme_sha256": "13d1f5f41a3b50304e427bd658cf229a572818da18781dafa5731fcac2535166"
     },
     {
       "requested_repo": "openclaw/shellbench",
