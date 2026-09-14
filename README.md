@@ -1,4 +1,4 @@
-# Awesome Agent Harness Benchmarks [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+# Awesome Agent Harness Benchmarks [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) [![Validate catalog](https://github.com/zeredy879/awesome-agent-harness-benchmarks/actions/workflows/validate.yml/badge.svg)](https://github.com/zeredy879/awesome-agent-harness-benchmarks/actions/workflows/validate.yml) [![Pages](https://github.com/zeredy879/awesome-agent-harness-benchmarks/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/zeredy879/awesome-agent-harness-benchmarks/actions/workflows/deploy-pages.yml) [![License: CC0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
 
 Choose benchmarks for AI agents: **what they test, how they score, and what their scores leave out.** Unlike a leaderboard, this catalog does not treat scores from incompatible tasks as interchangeable. Every record names the grader, environment, and a concrete limitation.
 
