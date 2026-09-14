@@ -82,4 +82,4 @@ GitHub source checks run weekly. They check availability and record provenance; 
 
 Found a missing benchmark? [Suggest a source](https://github.com/zeredy879/awesome-agent-harness-benchmarks/issues/new?template=benchmark.yml). Found a misleading claim, duplicate, or broken link? [Report a correction](https://github.com/zeredy879/awesome-agent-harness-benchmarks/issues/new?template=correction.yml).
 
-Source links and a short explanation are enough to start. For a pull request, follow the [contribution guide](CONTRIBUTING.md); coding agents should read [AGENTS.md](AGENTS.md).
+Source links and a short explanation are enough to start. For methodology questions or benchmark comparisons, use [Discussions](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions). For a pull request, follow the [contribution guide](CONTRIBUTING.md); coding agents should read [AGENTS.md](AGENTS.md).

@@ -73,7 +73,7 @@ LOCALES = {
         ],
         "evidence": "来源与贡献",
         "evidence_text": "优先引用官方仓库、论文和项目页面。[来源检查记录](data/source-audit.json)反映特定时间的链接可用性与元数据，不代表独立复现。收录也不等于推荐；本目录不承诺覆盖所有公开或私有评测。",
-        "contribute": "发现遗漏、失效链接或不准确的描述？欢迎按[贡献指南](CONTRIBUTING.md)提交 issue 或 PR，并附上原始来源及一项具体局限。",
+        "contribute": "发现遗漏、失效链接或不准确的描述？欢迎按[贡献指南](CONTRIBUTING.md)提交 issue 或 PR，并附上原始来源及一项具体局限。评测方法或 benchmark 比较问题，也欢迎在[讨论区](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)交流。",
     },
     "ja": {
         "file": "README.ja.md",
@@ -131,7 +131,7 @@ LOCALES = {
         ],
         "evidence": "出典と改善への参加",
         "evidence_text": "公式リポジトリ、論文、プロジェクトページを優先しています。[出典の確認記録](data/source-audit.json)は、ある時点のアクセス可否とメタデータを記録したもので、独立した追試ではありません。掲載は推奨を意味せず、公開・非公開の全評価を網羅するものでもありません。",
-        "contribute": "掲載漏れ、リンク切れ、説明の誤りを見つけたら、[コントリビューションガイド](CONTRIBUTING.md)に沿って issue や PR をお寄せください。原典と、評価の具体的な限界も添えていただけると助かります。",
+        "contribute": "掲載漏れ、リンク切れ、説明の誤りを見つけたら、[コントリビューションガイド](CONTRIBUTING.md)に沿って issue や PR をお寄せください。原典と、評価の具体的な限界も添えていただけると助かります。評価方法やベンチマーク比較の相談は、[ディスカッション](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)へどうぞ。",
     },
     "ko": {
         "file": "README.ko.md",
@@ -189,7 +189,7 @@ LOCALES = {
         ],
         "evidence": "출처와 기여",
         "evidence_text": "공식 저장소, 논문, 프로젝트 페이지를 우선합니다. [출처 확인 기록](data/source-audit.json)은 특정 시점의 접근 가능 여부와 메타데이터를 담으며, 독립적인 재현 실험을 뜻하지 않습니다. 수록 자체가 추천을 의미하지 않으며, 모든 공개·비공개 평가를 망라하지는 않습니다.",
-        "contribute": "빠진 평가, 깨진 링크, 잘못된 설명을 발견했다면 [기여 안내](CONTRIBUTING.md)에 따라 issue나 PR을 보내 주세요. 원문 출처와 평가의 구체적인 한계도 함께 알려 주시면 좋습니다.",
+        "contribute": "빠진 평가, 깨진 링크, 잘못된 설명을 발견했다면 [기여 안내](CONTRIBUTING.md)에 따라 issue나 PR을 보내 주세요. 원문 출처와 평가의 구체적인 한계도 함께 알려 주시면 좋습니다. 평가 방법이나 벤치마크 비교에 대한 질문은 [Discussions](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)에서 함께 이야기할 수 있습니다.",
     },
 }
 

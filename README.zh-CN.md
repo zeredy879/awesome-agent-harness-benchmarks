@@ -71,4 +71,4 @@
 
 优先引用官方仓库、论文和项目页面。[来源检查记录](data/source-audit.json)反映特定时间的链接可用性与元数据，不代表独立复现。收录也不等于推荐；本目录不承诺覆盖所有公开或私有评测。
 
-发现遗漏、失效链接或不准确的描述？欢迎按[贡献指南](CONTRIBUTING.md)提交 issue 或 PR，并附上原始来源及一项具体局限。
+发现遗漏、失效链接或不准确的描述？欢迎按[贡献指南](CONTRIBUTING.md)提交 issue 或 PR，并附上原始来源及一项具体局限。评测方法或 benchmark 比较问题，也欢迎在[讨论区](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)交流。
