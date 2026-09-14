@@ -381,7 +381,7 @@ def render_html(catalog: dict, audit: dict) -> str:
 
   <section class="stats" aria-label="Snapshot statistics">
     <div class="stat"><strong>__ENTRY_COUNT__</strong><span>catalog entries</span></div>
-    <div class="stat"><strong>__BENCHMARK_COUNT__</strong><span>benchmark suites</span></div>
+    <div class="stat"><strong>__BENCHMARK_COUNT__</strong><span>benchmark suites</span><em>__INFRASTRUCTURE_COUNT__ infra · __STUDY_COUNT__ studies · __WATCHLIST_COUNT__ watchlist</em></div>
     <div class="stat"><strong>__AREA_COUNT__</strong><span>capability areas</span></div>
     <div class="stat"><strong>__ACCESSIBLE__/__SOURCE_COUNT__</strong><span>GitHub sources checked</span><em>reachability only</em></div>
   </section>
@@ -600,6 +600,9 @@ render();
         "__SNAPSHOT__": snapshot,
         "__ENTRY_COUNT__": str(len(entries)),
         "__BENCHMARK_COUNT__": str(kind_counts.get("benchmark", 0)),
+        "__INFRASTRUCTURE_COUNT__": str(kind_counts.get("infrastructure", 0)),
+        "__STUDY_COUNT__": str(kind_counts.get("study", 0)),
+        "__WATCHLIST_COUNT__": str(kind_counts.get("watchlist", 0)),
         "__AREA_COUNT__": str(len(counts)),
         "__ACCESSIBLE__": str(accessible),
         "__SOURCE_COUNT__": str(len(source_records)),
