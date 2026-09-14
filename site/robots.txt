@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zeredy879.github.io/awesome-agent-harness-benchmarks/sitemap.xml

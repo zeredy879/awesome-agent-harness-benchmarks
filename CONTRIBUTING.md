@@ -19,7 +19,6 @@ Run the local checks before submitting:
 ```bash
 python3 scripts/validate_catalog.py
 python3 scripts/research_sources.py --catalog --audit
-python3 scripts/validate_catalog.py
 python3 scripts/build_catalog_docs.py
 python3 scripts/build_localized_readmes.py
 python3 scripts/build_site.py

@@ -23,8 +23,9 @@ LOCALES = {
         "site": "打开可搜索的评测目录 →",
         "site_hint": "按能力筛选，查看每项评测的原始来源、运行环境和适用边界。",
         "nav": "[English](README.md) · 简体中文 · [日本語](README.ja.md) · [한국어](README.ko.md)",
-        "stats": "资料快照：{date} · {entries} 条记录 · {benchmarks} 个评测套件 · {categories} 类能力",
+        "stats": "资料快照：{date} · {entries} 条记录（{benchmarks} 个评测套件、{infrastructure} 个基础设施、{studies} 项研究、{watchlist} 项观察项）· {categories} 类能力 · 每周检查来源可用性",
         "intro": "这里的 **harness** 指模型之外负责工具调用、上下文、记忆、权限与执行控制的系统。本目录帮你找到适合测试这些环节的公开评测，并说明结果能支持什么结论。",
+        "insight": "SWE-bench 的补丁通过现有测试，不等于 harness 更便宜、更安全或更会恢复；要回答这些问题，必须固定模型、任务版本和预算。",
         "choose": "你想验证什么？",
         "choose_intro": "下面是按用途挑选的起点，不是排名。完整目录还收录了其他任务、版本和研究。",
         "columns": ("评测目标", "从这里开始", "怎么衡量", "比较前要注意"),
@@ -81,8 +82,9 @@ LOCALES = {
         "site": "検索できる評価カタログを開く →",
         "site_hint": "能力別に絞り込み、原典・実行環境・評価の限界を確認できます。",
         "nav": "[English](README.md) · [简体中文](README.zh-CN.md) · 日本語 · [한국어](README.ko.md)",
-        "stats": "資料の基準日：{date} · 収録 {entries} 件 · 評価スイート {benchmarks} 件 · {categories} 分野",
+        "stats": "資料の基準日：{date} · 収録 {entries} 件（評価スイート {benchmarks}、基盤 {infrastructure}、研究 {studies}、ウォッチリスト {watchlist}）· {categories} 分野 · 出典の可用性を毎週確認",
         "intro": "ここでいう **harness** は、モデルの周りでツール呼び出し、コンテキスト、メモリ、権限、実行の制御を担う仕組みです。このカタログでは、それぞれを試すための公開評価を探し、結果から何が言えるのかを確認できます。",
+        "insight": "SWE-bench のテストを通ったパッチだけでは、harness の費用・安全性・復旧性能はわかりません。モデル、タスクの版、予算を揃えた比較が必要です。",
         "choose": "何を確かめたいですか？",
         "choose_intro": "用途に応じた出発点をまとめました。ランキングではありません。全件カタログには、ほかのタスクやバージョン、比較研究も収録しています。",
         "columns": ("確かめたいこと", "最初に見る評価", "採点方法", "比較する際の注意点"),
@@ -139,8 +141,9 @@ LOCALES = {
         "site": "검색 가능한 평가 카탈로그 열기 →",
         "site_hint": "평가할 역량으로 범위를 좁히고, 원문 출처와 실행 환경, 평가의 한계를 확인하세요.",
         "nav": "[English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · 한국어",
-        "stats": "자료 기준일: {date} · 전체 {entries}개 항목 · 평가 모음 {benchmarks}개 · {categories}개 분야",
+        "stats": "자료 기준일: {date} · 전체 {entries}개 항목(평가 모음 {benchmarks}개·인프라 {infrastructure}개·연구 {studies}개·관찰 목록 {watchlist}개) · {categories}개 분야 · 매주 출처 접근성 확인",
         "intro": "여기서 **harness**는 모델 주변에서 도구 호출, 컨텍스트, 메모리, 권한, 실행 흐름을 관리하는 시스템을 뜻합니다. 이 카탈로그는 각 기능을 시험할 공개 평가를 찾고, 결과가 뒷받침하는 결론의 범위를 파악하도록 돕습니다.",
+        "insight": "SWE-bench 테스트를 통과한 패치만으로 harness가 더 싸거나 안전하고 복구를 잘한다고 말할 수는 없습니다. 모델·과제 버전·예산을 고정한 비교가 필요합니다.",
         "choose": "무엇을 확인하고 싶나요?",
         "choose_intro": "목적에 따라 먼저 살펴볼 평가를 골랐습니다. 순위표는 아닙니다. 전체 카탈로그에서 다른 과제, 버전, 비교 연구도 확인할 수 있습니다.",
         "columns": ("평가할 작업", "먼저 살펴볼 평가", "채점 방식", "비교할 때 주의할 점"),
@@ -208,21 +211,22 @@ def render(text: dict) -> str:
         "",
         text["stats"].format(
             date=CATALOG["as_of"], entries=len(ENTRIES),
-            benchmarks=KINDS["benchmark"], categories=CATEGORY_COUNT,
+            benchmarks=KINDS["benchmark"], infrastructure=KINDS["infrastructure"],
+            studies=KINDS["study"], watchlist=KINDS["watchlist"], categories=CATEGORY_COUNT,
         ),
         "",
         text["intro"],
+        "",
+        f"> {text['insight']}",
         "",
         f"## {text['choose']}",
         "",
         text["choose_intro"],
         "",
-        "| " + " | ".join(text["columns"]) + " |",
-        "| --- | --- | --- | --- |",
     ]
     for scenario, entry_id, grading, caveat in text["rows"]:
         entry = BY_ID[entry_id]
-        lines.append(f"| {scenario} | [{entry['name']}]({entry['url']}) | {grading} | {caveat} |")
+        lines.append(f"- **{scenario}** → [{entry['name']}]({entry['url']}) — {grading}; {caveat}")
     lines.extend(["", f"## {text['interpret']}", "", text["interpret_intro"], ""])
     lines.extend(f"- {kind}" for kind in text["kinds"])
     lines.extend(["", text["proposal"]])

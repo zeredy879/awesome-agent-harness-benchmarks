@@ -8,24 +8,24 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · 한국어
 
-자료 기준일: 2026-09-13 · 전체 115개 항목 · 평가 모음 97개 · 13개 분야
+자료 기준일: 2026-09-13 · 전체 115개 항목(평가 모음 97개·인프라 9개·연구 7개·관찰 목록 2개) · 13개 분야 · 매주 출처 접근성 확인
 
 여기서 **harness**는 모델 주변에서 도구 호출, 컨텍스트, 메모리, 권한, 실행 흐름을 관리하는 시스템을 뜻합니다. 이 카탈로그는 각 기능을 시험할 공개 평가를 찾고, 결과가 뒷받침하는 결론의 범위를 파악하도록 돕습니다.
+
+> SWE-bench 테스트를 통과한 패치만으로 harness가 더 싸거나 안전하고 복구를 잘한다고 말할 수는 없습니다. 모델·과제 버전·예산을 고정한 비교가 필요합니다.
 
 ## 무엇을 확인하고 싶나요?
 
 목적에 따라 먼저 살펴볼 평가를 골랐습니다. 순위표는 아닙니다. 전체 카탈로그에서 다른 과제, 버전, 비교 연구도 확인할 수 있습니다.
 
-| 평가할 작업 | 먼저 살펴볼 평가 | 채점 방식 | 비교할 때 주의할 점 |
-| --- | --- | --- | --- |
-| 실제 코드 저장소의 문제 수정 | [SWE-bench family](https://github.com/SWE-bench/SWE-bench) | 수정 검증 테스트와 회귀 테스트 | 트랙마다 과제, 언어, 평가 방식이 달라 점수를 그대로 비교할 수 없습니다. |
-| 복잡한 터미널 작업 완료 | [Terminal-Bench](https://github.com/harbor-framework/terminal-bench) | 과제별 검증 프로그램 실행 | 데이터셋 버전을 고정해야 합니다. 점수에는 모델과 harness가 모두 영향을 줍니다. |
-| 상태를 유지하며 도구 사용 | [ToolSandbox](https://github.com/apple-aiml-research/ToolSandbox) | 중간 단계와 최종 상태 확인 | 사용자 시뮬레이터와 도구 인터페이스도 결과에 영향을 줍니다. |
-| 웹사이트에서 작업 완료 | [WebArena](https://github.com/web-arena-x/webarena) | 웹 앱의 기능과 상태 확인 | 환경 설정, 과제, 평가기의 수정 사항까지 버전을 맞춰야 합니다. |
-| 여러 데스크톱 앱을 오가며 작업 | [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld) | 실행 결과에 따른 검증 | 가상 머신 이미지, 최대 행동 횟수, 평가 버전이 같아야 합니다. |
-| 긴 대화 기록에서 정보 찾기 | [LongMemEval](https://github.com/xiaowu0162/LongMemEval) | 과거 기록에 대한 질의응답 정확도 | 전체 컨텍스트를 제공한 기준선이 필요합니다. 정답을 찾는 것과 여러 단계의 작업을 끝내는 것은 다릅니다. |
-| 도구 환경의 프롬프트 인젝션 방어 | [AgentDojo](https://github.com/ethz-spylab/agentdojo) | 정상 작업 성능과 공격 성공률 | 위협 모델과 공격 예산을 고정하고, 안전성과 유용성을 함께 봐야 합니다. |
-| 도구로 정보를 수집하고 추론 | [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA) | 최종 답변 정확도 | 최종 답변만으로는 실행 중의 부작용과 안전 문제를 파악하기 어렵습니다. |
+- **실제 코드 저장소의 문제 수정** → [SWE-bench family](https://github.com/SWE-bench/SWE-bench) — 수정 검증 테스트와 회귀 테스트; 트랙마다 과제, 언어, 평가 방식이 달라 점수를 그대로 비교할 수 없습니다.
+- **복잡한 터미널 작업 완료** → [Terminal-Bench](https://github.com/harbor-framework/terminal-bench) — 과제별 검증 프로그램 실행; 데이터셋 버전을 고정해야 합니다. 점수에는 모델과 harness가 모두 영향을 줍니다.
+- **상태를 유지하며 도구 사용** → [ToolSandbox](https://github.com/apple-aiml-research/ToolSandbox) — 중간 단계와 최종 상태 확인; 사용자 시뮬레이터와 도구 인터페이스도 결과에 영향을 줍니다.
+- **웹사이트에서 작업 완료** → [WebArena](https://github.com/web-arena-x/webarena) — 웹 앱의 기능과 상태 확인; 환경 설정, 과제, 평가기의 수정 사항까지 버전을 맞춰야 합니다.
+- **여러 데스크톱 앱을 오가며 작업** → [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld) — 실행 결과에 따른 검증; 가상 머신 이미지, 최대 행동 횟수, 평가 버전이 같아야 합니다.
+- **긴 대화 기록에서 정보 찾기** → [LongMemEval](https://github.com/xiaowu0162/LongMemEval) — 과거 기록에 대한 질의응답 정확도; 전체 컨텍스트를 제공한 기준선이 필요합니다. 정답을 찾는 것과 여러 단계의 작업을 끝내는 것은 다릅니다.
+- **도구 환경의 프롬프트 인젝션 방어** → [AgentDojo](https://github.com/ethz-spylab/agentdojo) — 정상 작업 성능과 공격 성공률; 위협 모델과 공격 예산을 고정하고, 안전성과 유용성을 함께 봐야 합니다.
+- **도구로 정보를 수집하고 추론** → [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA) — 최종 답변 정확도; 최종 답변만으로는 실행 중의 부작용과 안전 문제를 파악하기 어렵습니다.
 
 ## 점수가 말해 주는 것
 

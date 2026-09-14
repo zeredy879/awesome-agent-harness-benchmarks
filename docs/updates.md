@@ -9,6 +9,8 @@ This log records material changes to selection guidance and source records. Auto
 - Clarified that benchmark, study, infrastructure, and watchlist are resource types, not evidence grades.
 - Updated ToolSandbox's canonical repository owner and made LongMemEval's LLM judge explicit.
 - Replaced the repeated homepage inventory with a selection guide, a complete generated Markdown catalog, and a reusable comparison report template. The website supports shareable filters and expandable environment/limitation details.
+- Refined the public entry point after a zero-shot review: README selection tables became mobile-friendly lists, the Pages directory now opens with an editorial set of starting points, and readers can compare up to three records with a shareable URL.
+- Added generated sitemap/robots metadata, social preview metadata, a citation file, a pull-request checklist, and CI checks that fail when Pages or localized exports drift from their generators.
 
 These are corrections to the September 13 source snapshot, not a new comprehensive literature scan.
 

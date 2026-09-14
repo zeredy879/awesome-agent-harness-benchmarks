@@ -8,24 +8,24 @@
 
 [English](README.md) · 简体中文 · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-资料快照：2026-09-13 · 115 条记录 · 97 个评测套件 · 13 类能力
+资料快照：2026-09-13 · 115 条记录（97 个评测套件、9 个基础设施、7 项研究、2 项观察项）· 13 类能力 · 每周检查来源可用性
 
 这里的 **harness** 指模型之外负责工具调用、上下文、记忆、权限与执行控制的系统。本目录帮你找到适合测试这些环节的公开评测，并说明结果能支持什么结论。
+
+> SWE-bench 的补丁通过现有测试，不等于 harness 更便宜、更安全或更会恢复；要回答这些问题，必须固定模型、任务版本和预算。
 
 ## 你想验证什么？
 
 下面是按用途挑选的起点，不是排名。完整目录还收录了其他任务、版本和研究。
 
-| 评测目标 | 从这里开始 | 怎么衡量 | 比较前要注意 |
-| --- | --- | --- | --- |
-| 修复真实代码仓库中的问题 | [SWE-bench family](https://github.com/SWE-bench/SWE-bench) | 通过修复测试和回归测试 | 不同赛道的任务、语言和判分方式不同，分数不能直接互换。 |
-| 完成复杂终端任务 | [Terminal-Bench](https://github.com/harbor-framework/terminal-bench) | 运行任务专用验证器 | 固定数据集版本；成绩同时受模型与 harness 影响。 |
-| 调用工具并维护状态 | [ToolSandbox](https://github.com/apple-aiml-research/ToolSandbox) | 检查中间里程碑与最终状态 | 用户模拟器和工具接口都会影响结果。 |
-| 操作网站完成任务 | [WebArena](https://github.com/web-arena-x/webarena) | 检查网页应用的功能状态 | 固定环境配置、任务版本和评测器修订。 |
-| 跨桌面应用完成工作 | [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld) | 根据实际执行结果判分 | 虚拟机镜像、步数预算和评测版本必须一致。 |
-| 从长期对话中找到并更新信息 | [LongMemEval](https://github.com/xiaowu0162/LongMemEval) | 衡量历史信息问答准确率 | 需要完整上下文基线；答对问题不等于完成多步任务。 |
-| 抵御工具环境中的提示注入 | [AgentDojo](https://github.com/ethz-spylab/agentdojo) | 同时衡量正常任务表现与攻击成功率 | 固定威胁模型和攻击预算；安全分数要与可用性一起看。 |
-| 借助工具搜集信息并推理 | [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA) | 衡量最终答案准确率 | 最终答案难以反映执行过程中的副作用和安全问题。 |
+- **修复真实代码仓库中的问题** → [SWE-bench family](https://github.com/SWE-bench/SWE-bench) — 通过修复测试和回归测试; 不同赛道的任务、语言和判分方式不同，分数不能直接互换。
+- **完成复杂终端任务** → [Terminal-Bench](https://github.com/harbor-framework/terminal-bench) — 运行任务专用验证器; 固定数据集版本；成绩同时受模型与 harness 影响。
+- **调用工具并维护状态** → [ToolSandbox](https://github.com/apple-aiml-research/ToolSandbox) — 检查中间里程碑与最终状态; 用户模拟器和工具接口都会影响结果。
+- **操作网站完成任务** → [WebArena](https://github.com/web-arena-x/webarena) — 检查网页应用的功能状态; 固定环境配置、任务版本和评测器修订。
+- **跨桌面应用完成工作** → [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld) — 根据实际执行结果判分; 虚拟机镜像、步数预算和评测版本必须一致。
+- **从长期对话中找到并更新信息** → [LongMemEval](https://github.com/xiaowu0162/LongMemEval) — 衡量历史信息问答准确率; 需要完整上下文基线；答对问题不等于完成多步任务。
+- **抵御工具环境中的提示注入** → [AgentDojo](https://github.com/ethz-spylab/agentdojo) — 同时衡量正常任务表现与攻击成功率; 固定威胁模型和攻击预算；安全分数要与可用性一起看。
+- **借助工具搜集信息并推理** → [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA) — 衡量最终答案准确率; 最终答案难以反映执行过程中的副作用和安全问题。
 
 ## 这些分数说明了什么？
 

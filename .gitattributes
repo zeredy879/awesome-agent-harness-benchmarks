@@ -1,0 +1,4 @@
+# Generated Pages output should not dominate GitHub's language breakdown.
+site/* linguist-generated=true
+site/*.json linguist-generated=true
+site/*.md linguist-generated=true

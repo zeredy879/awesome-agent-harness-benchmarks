@@ -8,24 +8,24 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md) · 日本語 · [한국어](README.ko.md)
 
-資料の基準日：2026-09-13 · 収録 115 件 · 評価スイート 97 件 · 13 分野
+資料の基準日：2026-09-13 · 収録 115 件（評価スイート 97、基盤 9、研究 7、ウォッチリスト 2）· 13 分野 · 出典の可用性を毎週確認
 
 ここでいう **harness** は、モデルの周りでツール呼び出し、コンテキスト、メモリ、権限、実行の制御を担う仕組みです。このカタログでは、それぞれを試すための公開評価を探し、結果から何が言えるのかを確認できます。
+
+> SWE-bench のテストを通ったパッチだけでは、harness の費用・安全性・復旧性能はわかりません。モデル、タスクの版、予算を揃えた比較が必要です。
 
 ## 何を確かめたいですか？
 
 用途に応じた出発点をまとめました。ランキングではありません。全件カタログには、ほかのタスクやバージョン、比較研究も収録しています。
 
-| 確かめたいこと | 最初に見る評価 | 採点方法 | 比較する際の注意点 |
-| --- | --- | --- | --- |
-| 実際のリポジトリで不具合を修正する | [SWE-bench family](https://github.com/SWE-bench/SWE-bench) | 修正確認テストと回帰テスト | トラックごとにタスク・言語・評価方法が異なり、スコアは直接比較できません。 |
-| 複雑なターミナル作業を完了する | [Terminal-Bench](https://github.com/harbor-framework/terminal-bench) | タスクごとの検証プログラム | データセットの版を固定してください。成績にはモデルと harness の両方が影響します。 |
-| 状態を保ちながらツールを使う | [ToolSandbox](https://github.com/apple-aiml-research/ToolSandbox) | 途中の到達点と最終状態 | ユーザーシミュレータとツールのインターフェースも結果を左右します。 |
-| Web サイト上で作業を完了する | [WebArena](https://github.com/web-arena-x/webarena) | Web アプリの機能・状態の検査 | 環境設定、タスク、評価器の修正を含め、バージョンを揃える必要があります。 |
-| 複数のデスクトップアプリを操作する | [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld) | 実行結果に基づく検査 | 仮想マシンのイメージ、操作回数の上限、評価の版を揃えてください。 |
-| 長い会話履歴から情報を取り出す | [LongMemEval](https://github.com/xiaowu0162/LongMemEval) | 履歴に関する質問への正答率 | 履歴全体を与えるベースラインが必要です。質問応答は一連の作業の完了とは異なります。 |
-| ツール利用中のプロンプトインジェクションに対処する | [AgentDojo](https://github.com/ethz-spylab/agentdojo) | 通常タスクの成績と攻撃成功率 | 脅威モデルと攻撃の予算を固定し、安全性と実用性を併せて見ます。 |
-| ツールを使って情報を集め、推論する | [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA) | 最終回答の正答率 | 最終回答だけでは、途中の副作用や実行の安全性はわかりません。 |
+- **実際のリポジトリで不具合を修正する** → [SWE-bench family](https://github.com/SWE-bench/SWE-bench) — 修正確認テストと回帰テスト; トラックごとにタスク・言語・評価方法が異なり、スコアは直接比較できません。
+- **複雑なターミナル作業を完了する** → [Terminal-Bench](https://github.com/harbor-framework/terminal-bench) — タスクごとの検証プログラム; データセットの版を固定してください。成績にはモデルと harness の両方が影響します。
+- **状態を保ちながらツールを使う** → [ToolSandbox](https://github.com/apple-aiml-research/ToolSandbox) — 途中の到達点と最終状態; ユーザーシミュレータとツールのインターフェースも結果を左右します。
+- **Web サイト上で作業を完了する** → [WebArena](https://github.com/web-arena-x/webarena) — Web アプリの機能・状態の検査; 環境設定、タスク、評価器の修正を含め、バージョンを揃える必要があります。
+- **複数のデスクトップアプリを操作する** → [OSWorld / OSWorld-Verified](https://github.com/xlang-ai/OSWorld) — 実行結果に基づく検査; 仮想マシンのイメージ、操作回数の上限、評価の版を揃えてください。
+- **長い会話履歴から情報を取り出す** → [LongMemEval](https://github.com/xiaowu0162/LongMemEval) — 履歴に関する質問への正答率; 履歴全体を与えるベースラインが必要です。質問応答は一連の作業の完了とは異なります。
+- **ツール利用中のプロンプトインジェクションに対処する** → [AgentDojo](https://github.com/ethz-spylab/agentdojo) — 通常タスクの成績と攻撃成功率; 脅威モデルと攻撃の予算を固定し、安全性と実用性を併せて見ます。
+- **ツールを使って情報を集め、推論する** → [GAIA](https://huggingface.co/datasets/gaia-benchmark/GAIA) — 最終回答の正答率; 最終回答だけでは、途中の副作用や実行の安全性はわかりません。
 
 ## スコアからわかること
 

@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "Awesome Agent Harness Benchmarks"
+message: "If this catalog helped your evaluation design, please cite the repository snapshot you used."
+type: dataset
+authors:
+  - name: zeredy879
+version: 1.0.0
+date-released: 2026-09-14
+repository-code: "https://github.com/zeredy879/awesome-agent-harness-benchmarks"
+url: "https://zeredy879.github.io/awesome-agent-harness-benchmarks/"
+abstract: >-
+  An evidence-aware, machine-readable catalog of public AI agent and harness
+  benchmarks. Each record describes the workload, grading method, environment,
+  measurable signals, and one concrete limitation.
+keywords:
+  - agent benchmarks
+  - agent harnesses
+  - AI evaluation
+  - LLM evaluation
+  - reproducibility
