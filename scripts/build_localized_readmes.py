@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Generate localized benchmark-selection guides from the canonical inventory."""
+"""Generate concise localized selection guides from the canonical inventory."""
 
 from __future__ import annotations
 
 import json
-from collections import Counter
 from pathlib import Path
 
 
@@ -12,189 +11,129 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG = json.loads((ROOT / "data" / "catalog.json").read_text(encoding="utf-8"))
 ENTRIES = CATALOG["entries"]
 BY_ID = {entry["id"]: entry for entry in ENTRIES}
-KINDS = Counter(entry["kind"] for entry in ENTRIES)
 CATEGORY_COUNT = len({entry["category"] for entry in ENTRIES})
 SITE_URL = "https://zeredy879.github.io/awesome-agent-harness-benchmarks/"
+# Keep first-time-reader labels short; the catalog retains full record names.
+DISPLAY_NAMES = {
+    "swe-bench": "SWE-bench",
+    "osworld": "OSWorld",
+    "harness-bench-qihoo": "Harness-Bench",
+    "clawbench-openclaw": "ShellBench",
+}
 
 LOCALES = {
     "zh": {
         "file": "README.zh-CN.md",
-        "subtitle": "为你的 Agent 选对评测：先看任务、判分方式和局限，再比较分数。",
-        "site": "打开可搜索的评测目录 →",
-        "site_hint": "按能力筛选，查看每项评测的原始来源、运行环境和适用边界。",
+        "subtitle": "按任务挑选 AI Agent 评测，了解它测什么、如何评分，以及结果有哪些局限。",
+        "site": "浏览可搜索的评测目录 →",
         "nav": "[English](README.md) · 简体中文 · [日本語](README.ja.md) · [한국어](README.ko.md)",
-        "stats": "资料快照：{date} · {entries} 条记录（{benchmarks} 个评测套件、{infrastructure} 个基础设施、{studies} 项研究、{watchlist} 项观察项）· {categories} 类能力 · 每周检查来源可用性",
-        "intro": "这里的 **harness** 指模型之外负责工具调用、上下文、记忆、权限与执行控制的系统。本目录帮你找到适合测试这些环节的公开评测，并说明结果能支持什么结论。",
-        "insight": "SWE-bench 的补丁通过现有测试，不等于 harness 更便宜、更安全或更会恢复；要回答这些问题，必须固定模型、任务版本和预算。",
-        "choose": "你想验证什么？",
-        "choose_intro": "下面是按用途挑选的起点，不是排名。完整目录还收录了其他任务、版本和研究。",
-        "columns": ("评测目标", "从这里开始", "怎么衡量", "比较前要注意"),
+        "scope": "收录 {entries} 项公开评测及相关资料，覆盖 {categories} 个领域。",
+        "choose": "按任务选评测",
+        "columns": ("想测试什么", "从这里开始"),
         "rows": [
-            ("修复真实代码仓库中的问题", "swe-bench", "通过修复测试和回归测试", "不同赛道的任务、语言和判分方式不同，分数不能直接互换。"),
-            ("完成复杂终端任务", "terminal-bench", "运行任务专用验证器", "固定数据集版本；成绩同时受模型与 harness 影响。"),
-            ("调用工具并维护状态", "toolsandbox", "检查中间里程碑与最终状态", "用户模拟器和工具接口都会影响结果。"),
-            ("操作网站完成任务", "webarena", "检查网页应用的功能状态", "固定环境配置、任务版本和评测器修订。"),
-            ("跨桌面应用完成工作", "osworld", "根据实际执行结果判分", "虚拟机镜像、步数预算和评测版本必须一致。"),
-            ("从长期对话中找到并更新信息", "longmemeval", "衡量历史信息问答准确率", "需要完整上下文基线；答对问题不等于完成多步任务。"),
-            ("抵御工具环境中的提示注入", "agentdojo", "同时衡量正常任务表现与攻击成功率", "固定威胁模型和攻击预算；安全分数要与可用性一起看。"),
-            ("借助工具搜集信息并推理", "gaia", "衡量最终答案准确率", "最终答案难以反映执行过程中的副作用和安全问题。"),
+            ("修复代码仓库中的问题", "swe-bench"),
+            ("完成终端任务", "terminal-bench"),
+            ("调用工具并维护状态", "toolsandbox"),
+            ("操作网站完成任务", "webarena"),
+            ("使用桌面应用", "osworld"),
+            ("记住并查找历史对话中的信息", "longmemeval"),
+            ("抵御工具输出中的提示注入", "agentdojo"),
+            ("查资料、用工具解决综合问题", "gaia"),
         ],
-        "interpret": "这些分数说明了什么？",
-        "interpret_intro": "多数评测衡量的是整个 Agent 的表现。要把差异归因于 harness，就需要在相同模型、任务和预算下做受控比较；收录于本目录不代表某个项目已经做过这样的实验。",
-        "kinds": [
-            "**benchmark**：带任务和评测器的套件，用来运行测试。",
-            "**study**：比较研究，用来了解实验设计与已有证据。",
-            "**infrastructure**：运行或审计评测的工具，本身不是一组测试题。",
-            "**watchlist**：早期或适用范围较窄的候选项目，需要进一步核实。",
+        "more": "更多选择见[完整目录](docs/catalog.md)，每项均附有评分方式、运行环境和具体局限。",
+        "harness": "比较 Harness",
+        "definition": "**Agent harness** 是模型的配套软件，负责工具调用、上下文管理、记忆、权限控制和故障恢复。想研究这些部分，可以从以下项目入手：",
+        "harness_rows": [
+            ("harness-bench-qihoo", "比较不同模型与 harness 组合在本地工作区中的表现。"),
+            ("clawbench-openclaw", "原名 ClawBench。通过执行记录和多次运行，评估整个 Agent 配置的可靠性。"),
+            ("skillsbench", "对照有无技能包时的任务表现。"),
         ],
-        "proposal": "比较模板和评测方案只说明实验应该怎样设计，不代表已经运行的结果或榜单。",
-        "browse": "按问题继续查找",
-        "browse_intro": "[完整目录](docs/catalog.md)保留所有条目的说明和来源。也可以直接跳到相关类别：",
-        "categories": [
-            ("direct", "Harness 直接对比"), ("coding", "代码与终端"), ("tools", "工具与状态"),
-            ("browser", "浏览器"), ("computer", "桌面与移动端"), ("general", "通用任务"),
-            ("memory", "记忆与上下文"), ("long-horizon", "长时间任务"), ("safety", "安全"),
-            ("multi-agent", "多 Agent 协作"), ("research", "研究任务"), ("skills", "技能与指令"),
-            ("infrastructure", "评测基础设施"),
-        ],
-        "compare": "准备做一次比较？",
-        "compare_intro": "从[比较记录模板](docs/comparison-template.md)开始，把实验条件和结果放在一起记录：",
-        "comparison": [
-            "固定模型、提示词、工具接口、任务版本、环境、预算和重试策略。",
-            "分别报告任务完成率、波动、成本、延迟与安全问题，保留执行轨迹和验证输出。",
-            "用[研究说明](docs/research.md)检查证据强度与可比性，再解释差异。",
-        ],
-        "agent": "供 Agent 读取",
-        "agent_intro": "自动检索和整理时，可直接读取以下入口：",
-        "agent_links": [
-            ("带说明的 Markdown 目录", "site/agent.md"),
-            ("结构化数据", "data/catalog.json"),
-            ("字段定义", "data/catalog.schema.json"),
-            ("仓库维护约定", "AGENTS.md"),
-        ],
-        "evidence": "来源与贡献",
-        "evidence_text": "优先引用官方仓库、论文和项目页面。[来源检查记录](data/source-audit.json)反映特定时间的链接可用性与元数据，不代表独立复现。收录也不等于推荐；本目录不承诺覆盖所有公开或私有评测。",
-        "contribute": "发现遗漏、失效链接或不准确的描述？欢迎按[贡献指南](CONTRIBUTING.md)提交 issue 或 PR，并附上原始来源及一项具体局限。评测方法或 benchmark 比较问题，也欢迎在[讨论区](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)交流。",
+        "separator": "：",
+        "data": "数据与比较方法",
+        "method": "多数评测衡量的是整个 Agent。比较 harness 时，先说明要改变什么：比较整套配置，可以保留各自的提示词、工具和默认设置。测试单个组件，则只改变该组件。除本次比较刻意改变的部分外，其余条件应保持一致，例如模型、任务、环境、预算和评分规则。",
+        "report": "分别记录完成率、重复运行的稳定性、成本、耗时和安全问题，并保留执行记录与验证结果。可直接使用[比较记录模板](docs/comparison-template.md)，或查阅[研究与方法说明](docs/research.md)。",
+        "agent_links": "供 Agent 读取：[Markdown 摘要](site/agent.md) · [JSON 数据](data/catalog.json) · [字段定义](data/catalog.schema.json) · [维护约定](AGENTS.md)",
+        "provenance": "每周检查来源可用性。收录不代表独立复现，详见[数据与来源说明](data/README.md)。",
+        "contribute": "参与完善",
+        "contribution": "发现遗漏、错误或失效链接？欢迎按[贡献指南](CONTRIBUTING.md)提交 issue 或 PR，附上原始来源和简短说明。评测方法与比较问题可在[讨论区](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)交流。",
     },
     "ja": {
         "file": "README.ja.md",
-        "subtitle": "エージェントの目的に合う評価を選ぶために。スコアの前に、タスク・採点方法・限界を確かめる。",
-        "site": "検索できる評価カタログを開く →",
-        "site_hint": "能力別に絞り込み、原典・実行環境・評価の限界を確認できます。",
+        "subtitle": "AI エージェントで試したい作業に合うベンチマークを選び、評価内容・採点方法・限界を確認できます。",
+        "site": "ベンチマークを検索する →",
         "nav": "[English](README.md) · [简体中文](README.zh-CN.md) · 日本語 · [한국어](README.ko.md)",
-        "stats": "資料の基準日：{date} · 収録 {entries} 件（評価スイート {benchmarks}、基盤 {infrastructure}、研究 {studies}、ウォッチリスト {watchlist}）· {categories} 分野 · 出典の可用性を毎週確認",
-        "intro": "ここでいう **harness** は、モデルの周りでツール呼び出し、コンテキスト、メモリ、権限、実行の制御を担う仕組みです。このカタログでは、それぞれを試すための公開評価を探し、結果から何が言えるのかを確認できます。",
-        "insight": "SWE-bench のテストを通ったパッチだけでは、harness の費用・安全性・復旧性能はわかりません。モデル、タスクの版、予算を揃えた比較が必要です。",
-        "choose": "何を確かめたいですか？",
-        "choose_intro": "用途に応じた出発点をまとめました。ランキングではありません。全件カタログには、ほかのタスクやバージョン、比較研究も収録しています。",
-        "columns": ("確かめたいこと", "最初に見る評価", "採点方法", "比較する際の注意点"),
+        "scope": "公開ベンチマークや関連資料を {entries} 件、{categories} 分野にわたって収録しています。",
+        "choose": "試したい作業から選ぶ",
+        "columns": ("試したいこと", "まず見るベンチマーク"),
         "rows": [
-            ("実際のリポジトリで不具合を修正する", "swe-bench", "修正確認テストと回帰テスト", "トラックごとにタスク・言語・評価方法が異なり、スコアは直接比較できません。"),
-            ("複雑なターミナル作業を完了する", "terminal-bench", "タスクごとの検証プログラム", "データセットの版を固定してください。成績にはモデルと harness の両方が影響します。"),
-            ("状態を保ちながらツールを使う", "toolsandbox", "途中の到達点と最終状態", "ユーザーシミュレータとツールのインターフェースも結果を左右します。"),
-            ("Web サイト上で作業を完了する", "webarena", "Web アプリの機能・状態の検査", "環境設定、タスク、評価器の修正を含め、バージョンを揃える必要があります。"),
-            ("複数のデスクトップアプリを操作する", "osworld", "実行結果に基づく検査", "仮想マシンのイメージ、操作回数の上限、評価の版を揃えてください。"),
-            ("長い会話履歴から情報を取り出す", "longmemeval", "履歴に関する質問への正答率", "履歴全体を与えるベースラインが必要です。質問応答は一連の作業の完了とは異なります。"),
-            ("ツール利用中のプロンプトインジェクションに対処する", "agentdojo", "通常タスクの成績と攻撃成功率", "脅威モデルと攻撃の予算を固定し、安全性と実用性を併せて見ます。"),
-            ("ツールを使って情報を集め、推論する", "gaia", "最終回答の正答率", "最終回答だけでは、途中の副作用や実行の安全性はわかりません。"),
+            ("コードの不具合を修正する", "swe-bench"),
+            ("ターミナルで作業を完了する", "terminal-bench"),
+            ("状態を管理しながらツールを使う", "toolsandbox"),
+            ("Web サイト上で作業する", "webarena"),
+            ("デスクトップアプリを使う", "osworld"),
+            ("過去の会話を覚えて情報を取り出す", "longmemeval"),
+            ("ツール出力からのプロンプトインジェクションを防ぐ", "agentdojo"),
+            ("情報を調べ、ツールを使って問題を解く", "gaia"),
         ],
-        "interpret": "スコアからわかること",
-        "interpret_intro": "多くの評価が測るのは、エージェント全体の性能です。harness による差を調べるには、同じモデル・タスク・予算で条件を揃えて比較する必要があります。収録したすべてのプロジェクトが、その実験を行っているわけではありません。",
-        "kinds": [
-            "**benchmark**：タスクと評価器を備えた、テストを実行するためのスイート。",
-            "**study**：比較研究。実験設計や、すでに得られた根拠を確認するための資料。",
-            "**infrastructure**：評価の実行や監査を支えるツール。タスク集そのものではありません。",
-            "**watchlist**：公開初期、または対象が限定的な候補。追加の確認が必要です。",
+        "more": "ほかの候補は[全件カタログ](docs/catalog.md)にまとめています。各項目で採点方法、実行環境、評価の限界を確認できます。",
+        "harness": "Harness を比較する",
+        "definition": "**Agent harness** は、モデルのツール利用、会話の文脈や記憶、権限、エラーからの復旧を管理するソフトウェアです。これらを調べるには、次のプロジェクトが参考になります。",
+        "harness_rows": [
+            ("harness-bench-qihoo", "モデルと harness の組み合わせを、ローカルの作業環境で比較します。"),
+            ("clawbench-openclaw", "旧 ClawBench。実行記録と繰り返しの試行から、エージェント全体の信頼性を評価します。"),
+            ("skillsbench", "スキルパッケージの有無で、タスクの成績がどう変わるかを調べます。"),
         ],
-        "proposal": "比較テンプレートや評価の提案は実験設計のためのもので、実測結果やランキングではありません。",
-        "browse": "分野から探す",
-        "browse_intro": "説明と原典を含む[全件カタログ](docs/catalog.md)も用意しています。各分野へ直接進めます：",
-        "categories": [
-            ("direct", "Harness の直接比較"), ("coding", "コード・ターミナル"), ("tools", "ツール・状態管理"),
-            ("browser", "ブラウザ"), ("computer", "デスクトップ・モバイル"), ("general", "汎用タスク"),
-            ("memory", "メモリ・コンテキスト"), ("long-horizon", "長時間のタスク"), ("safety", "安全性"),
-            ("multi-agent", "複数エージェントの協調"), ("research", "研究タスク"), ("skills", "スキル・指示"),
-            ("infrastructure", "評価基盤"),
-        ],
-        "compare": "自分で比較するには",
-        "compare_intro": "[比較記録テンプレート](docs/comparison-template.md)を使い、実験条件と結果をまとめて残してください：",
-        "comparison": [
-            "モデル、プロンプト、ツールの仕様、タスクの版、環境、予算、再試行方針を固定する。",
-            "完了率、ばらつき、費用、所要時間、安全性の問題を分けて報告し、実行履歴と検証結果を保存する。",
-            "[調査ノート](docs/research.md)で根拠の強さと比較条件を確認してから、差を解釈する。",
-        ],
-        "agent": "エージェントから利用する",
-        "agent_intro": "自動で検索・整理する場合は、次の入口を利用できます：",
-        "agent_links": [
-            ("説明付き Markdown カタログ", "site/agent.md"),
-            ("構造化データ", "data/catalog.json"),
-            ("フィールド定義", "data/catalog.schema.json"),
-            ("リポジトリの保守ルール", "AGENTS.md"),
-        ],
-        "evidence": "出典と改善への参加",
-        "evidence_text": "公式リポジトリ、論文、プロジェクトページを優先しています。[出典の確認記録](data/source-audit.json)は、ある時点のアクセス可否とメタデータを記録したもので、独立した追試ではありません。掲載は推奨を意味せず、公開・非公開の全評価を網羅するものでもありません。",
-        "contribute": "掲載漏れ、リンク切れ、説明の誤りを見つけたら、[コントリビューションガイド](CONTRIBUTING.md)に沿って issue や PR をお寄せください。原典と、評価の具体的な限界も添えていただけると助かります。評価方法やベンチマーク比較の相談は、[ディスカッション](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)へどうぞ。",
+        "separator": "：",
+        "data": "データと比較方法",
+        "method": "多くのベンチマークが測るのは、エージェント全体の性能です。harness を比較する際は、何を変えるかを先に決めます。構成全体の比較なら、各構成のプロンプト、ツール、標準設定を含めて比較できます。一つの機能の効果を調べるなら、その機能だけを変えます。モデル、タスク、環境、予算、採点基準など、比較対象に含めない条件は揃えます。",
+        "report": "完了率、繰り返したときの安定性、費用、所要時間、安全性を分けて記録し、実行履歴と検証結果を残します。[比較記録テンプレート](docs/comparison-template.md)と[調査・方法論ノート](docs/research.md)を利用できます。",
+        "agent_links": "エージェント向け：[Markdown 要約](site/agent.md) · [JSON データ](data/catalog.json) · [フィールド定義](data/catalog.schema.json) · [保守ルール](AGENTS.md)",
+        "provenance": "出典にアクセスできるかを毎週確認しています。掲載は独立した追試を意味しません。詳しくは[データと出典について](data/README.md)をご覧ください。",
+        "contribute": "改善に参加する",
+        "contribution": "掲載漏れ、説明の誤り、リンク切れは、[貢献ガイド](CONTRIBUTING.md)に沿って issue や PR でお知らせください。原典へのリンクと短い説明があれば十分です。評価方法や比較の相談には[ディスカッション](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)をご利用ください。",
     },
     "ko": {
         "file": "README.ko.md",
-        "subtitle": "내 에이전트에 맞는 평가를 찾으세요. 점수를 비교하기 전에 과제, 채점 방식, 한계를 살펴볼 수 있습니다.",
-        "site": "검색 가능한 평가 카탈로그 열기 →",
-        "site_hint": "평가할 역량으로 범위를 좁히고, 원문 출처와 실행 환경, 평가의 한계를 확인하세요.",
+        "subtitle": "AI 에이전트가 수행할 작업에 맞는 벤치마크를 찾고, 평가 내용과 채점 방식, 한계를 확인하세요.",
+        "site": "벤치마크 검색하기 →",
         "nav": "[English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · 한국어",
-        "stats": "자료 기준일: {date} · 전체 {entries}개 항목(평가 모음 {benchmarks}개·인프라 {infrastructure}개·연구 {studies}개·관찰 목록 {watchlist}개) · {categories}개 분야 · 매주 출처 접근성 확인",
-        "intro": "여기서 **harness**는 모델 주변에서 도구 호출, 컨텍스트, 메모리, 권한, 실행 흐름을 관리하는 시스템을 뜻합니다. 이 카탈로그는 각 기능을 시험할 공개 평가를 찾고, 결과가 뒷받침하는 결론의 범위를 파악하도록 돕습니다.",
-        "insight": "SWE-bench 테스트를 통과한 패치만으로 harness가 더 싸거나 안전하고 복구를 잘한다고 말할 수는 없습니다. 모델·과제 버전·예산을 고정한 비교가 필요합니다.",
-        "choose": "무엇을 확인하고 싶나요?",
-        "choose_intro": "목적에 따라 먼저 살펴볼 평가를 골랐습니다. 순위표는 아닙니다. 전체 카탈로그에서 다른 과제, 버전, 비교 연구도 확인할 수 있습니다.",
-        "columns": ("평가할 작업", "먼저 살펴볼 평가", "채점 방식", "비교할 때 주의할 점"),
+        "scope": "공개 벤치마크와 관련 자료 {entries}개를 {categories}개 분야로 정리했습니다.",
+        "choose": "평가할 작업으로 고르기",
+        "columns": ("평가할 작업", "먼저 살펴볼 벤치마크"),
         "rows": [
-            ("실제 코드 저장소의 문제 수정", "swe-bench", "수정 검증 테스트와 회귀 테스트", "트랙마다 과제, 언어, 평가 방식이 달라 점수를 그대로 비교할 수 없습니다."),
-            ("복잡한 터미널 작업 완료", "terminal-bench", "과제별 검증 프로그램 실행", "데이터셋 버전을 고정해야 합니다. 점수에는 모델과 harness가 모두 영향을 줍니다."),
-            ("상태를 유지하며 도구 사용", "toolsandbox", "중간 단계와 최종 상태 확인", "사용자 시뮬레이터와 도구 인터페이스도 결과에 영향을 줍니다."),
-            ("웹사이트에서 작업 완료", "webarena", "웹 앱의 기능과 상태 확인", "환경 설정, 과제, 평가기의 수정 사항까지 버전을 맞춰야 합니다."),
-            ("여러 데스크톱 앱을 오가며 작업", "osworld", "실행 결과에 따른 검증", "가상 머신 이미지, 최대 행동 횟수, 평가 버전이 같아야 합니다."),
-            ("긴 대화 기록에서 정보 찾기", "longmemeval", "과거 기록에 대한 질의응답 정확도", "전체 컨텍스트를 제공한 기준선이 필요합니다. 정답을 찾는 것과 여러 단계의 작업을 끝내는 것은 다릅니다."),
-            ("도구 환경의 프롬프트 인젝션 방어", "agentdojo", "정상 작업 성능과 공격 성공률", "위협 모델과 공격 예산을 고정하고, 안전성과 유용성을 함께 봐야 합니다."),
-            ("도구로 정보를 수집하고 추론", "gaia", "최종 답변 정확도", "최종 답변만으로는 실행 중의 부작용과 안전 문제를 파악하기 어렵습니다."),
+            ("코드 저장소의 문제 수정", "swe-bench"),
+            ("터미널 작업 완료", "terminal-bench"),
+            ("상태를 관리하며 도구 사용", "toolsandbox"),
+            ("웹사이트에서 작업 수행", "webarena"),
+            ("데스크톱 앱 사용", "osworld"),
+            ("지난 대화를 기억하고 정보 찾기", "longmemeval"),
+            ("도구 출력의 프롬프트 인젝션 방어", "agentdojo"),
+            ("정보를 찾고 도구를 써서 문제 해결", "gaia"),
         ],
-        "interpret": "점수가 말해 주는 것",
-        "interpret_intro": "대부분의 평가는 에이전트 전체의 성능을 측정합니다. 차이의 원인을 harness에서 찾으려면 모델, 과제, 예산을 동일하게 두고 비교해야 합니다. 이 카탈로그에 실렸다고 해서 해당 프로젝트가 이런 실험을 수행했다는 뜻은 아닙니다.",
-        "kinds": [
-            "**benchmark**: 과제와 평가기를 갖춘 평가 모음으로, 테스트를 실행할 때 사용합니다.",
-            "**study**: 실험 설계와 기존 근거를 살펴볼 수 있는 비교 연구입니다.",
-            "**infrastructure**: 평가 실행이나 감사를 돕는 도구이며, 그 자체가 과제 모음은 아닙니다.",
-            "**watchlist**: 초기 단계이거나 범위가 좁은 후보로, 추가 확인이 필요합니다.",
+        "more": "다른 후보는 [전체 카탈로그](docs/catalog.md)에서 찾아볼 수 있습니다. 각 항목에 채점 방식, 실행 환경, 구체적인 한계가 정리되어 있습니다.",
+        "harness": "Harness 비교하기",
+        "definition": "**Agent harness**는 모델의 도구 사용, 컨텍스트, 메모리, 권한, 오류 복구를 관리하는 소프트웨어입니다. 이 부분을 평가하려면 다음 프로젝트부터 살펴보세요.",
+        "harness_rows": [
+            ("harness-bench-qihoo", "모델과 harness의 조합을 로컬 작업 환경에서 비교합니다."),
+            ("clawbench-openclaw", "이전 이름은 ClawBench입니다. 실행 기록과 반복 실행을 통해 에이전트 전체 구성의 신뢰성을 평가합니다."),
+            ("skillsbench", "스킬 패키지가 있을 때와 없을 때의 작업 성과를 비교합니다."),
         ],
-        "proposal": "비교 템플릿과 평가 제안은 실험 설계를 돕는 자료이며, 실제 측정 결과나 순위표가 아닙니다.",
-        "browse": "분야별로 더 찾아보기",
-        "browse_intro": "[전체 카탈로그](docs/catalog.md)에 각 항목의 설명과 출처를 모았습니다. 관심 있는 분야로 바로 이동할 수도 있습니다:",
-        "categories": [
-            ("direct", "Harness 직접 비교"), ("coding", "코드·터미널"), ("tools", "도구·상태 관리"),
-            ("browser", "브라우저"), ("computer", "데스크톱·모바일"), ("general", "범용 작업"),
-            ("memory", "메모리·컨텍스트"), ("long-horizon", "장시간 작업"), ("safety", "안전성"),
-            ("multi-agent", "여러 에이전트의 협업"), ("research", "연구 작업"), ("skills", "스킬·지시 이행"),
-            ("infrastructure", "평가 기반 도구"),
-        ],
-        "compare": "직접 비교하려면",
-        "compare_intro": "[비교 기록 템플릿](docs/comparison-template.md)을 사용해 실험 조건과 결과를 함께 기록하세요:",
-        "comparison": [
-            "모델, 프롬프트, 도구 명세, 과제 버전, 환경, 예산, 재시도 정책을 고정합니다.",
-            "완료율, 편차, 비용, 지연 시간, 안전 문제를 따로 보고하고 실행 기록과 검증 출력을 보관합니다.",
-            "[조사 노트](docs/research.md)에서 근거의 수준과 비교 조건을 확인한 뒤 차이를 해석합니다.",
-        ],
-        "agent": "에이전트에서 읽기",
-        "agent_intro": "자동으로 검색하거나 정리할 때는 다음 자료를 바로 읽을 수 있습니다:",
-        "agent_links": [
-            ("설명이 포함된 Markdown 카탈로그", "site/agent.md"),
-            ("구조화된 데이터", "data/catalog.json"),
-            ("필드 정의", "data/catalog.schema.json"),
-            ("저장소 유지보수 규칙", "AGENTS.md"),
-        ],
-        "evidence": "출처와 기여",
-        "evidence_text": "공식 저장소, 논문, 프로젝트 페이지를 우선합니다. [출처 확인 기록](data/source-audit.json)은 특정 시점의 접근 가능 여부와 메타데이터를 담으며, 독립적인 재현 실험을 뜻하지 않습니다. 수록 자체가 추천을 의미하지 않으며, 모든 공개·비공개 평가를 망라하지는 않습니다.",
-        "contribute": "빠진 평가, 깨진 링크, 잘못된 설명을 발견했다면 [기여 안내](CONTRIBUTING.md)에 따라 issue나 PR을 보내 주세요. 원문 출처와 평가의 구체적인 한계도 함께 알려 주시면 좋습니다. 평가 방법이나 벤치마크 비교에 대한 질문은 [Discussions](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)에서 함께 이야기할 수 있습니다.",
+        "separator": ": ",
+        "data": "데이터와 비교 방법",
+        "method": "대부분의 벤치마크는 에이전트 전체의 성능을 측정합니다. harness를 비교하려면 먼저 무엇을 바꿀지 정하세요. 전체 구성을 비교할 때는 각 구성의 프롬프트, 도구, 기본 설정을 포함할 수 있습니다. 특정 기능의 효과를 확인할 때는 그 기능만 바꿉니다. 모델, 과제, 환경, 예산, 채점 기준 등 비교 대상에 포함하지 않은 조건은 동일하게 맞춥니다.",
+        "report": "완료율, 반복 실행의 안정성, 비용, 소요 시간, 안전성을 따로 기록하고 실행 기록과 검증 결과를 보관하세요. [비교 기록 템플릿](docs/comparison-template.md)과 [연구 및 방법론](docs/research.md)을 참고할 수 있습니다.",
+        "agent_links": "에이전트용: [Markdown 요약](site/agent.md) · [JSON 데이터](data/catalog.json) · [필드 정의](data/catalog.schema.json) · [저장소 관리 규칙](AGENTS.md)",
+        "provenance": "출처에 접근할 수 있는지 매주 확인합니다. 카탈로그에 포함되었다고 재현까지 검증된 것은 아닙니다. 자세한 내용은 [데이터와 출처 안내](data/README.md)를 참고하세요.",
+        "contribute": "개선에 참여하기",
+        "contribution": "빠진 항목, 잘못된 설명, 깨진 링크를 발견했다면 [기여 안내](CONTRIBUTING.md)에 따라 issue나 PR을 보내 주세요. 원문 링크와 짧은 설명이면 충분합니다. 평가 방법이나 비교에 관한 질문은 [Discussions](https://github.com/zeredy879/awesome-agent-harness-benchmarks/discussions)에서 나눌 수 있습니다.",
     },
 }
+
+
+def entry_link(entry_id: str) -> str:
+    entry = BY_ID[entry_id]
+    name = DISPLAY_NAMES.get(entry_id, entry["name"])
+    return f"[{name}]({entry['url']})"
 
 
 def render(text: dict) -> str:
@@ -203,43 +142,35 @@ def render(text: dict) -> str:
         "",
         text["subtitle"],
         "",
-        f"## [{text['site']}]({SITE_URL})",
-        "",
-        text["site_hint"],
+        f"**[{text['site']}]({SITE_URL})**",
         "",
         text["nav"],
         "",
-        text["stats"].format(
-            date=CATALOG["as_of"], entries=len(ENTRIES),
-            benchmarks=KINDS["benchmark"], infrastructure=KINDS["infrastructure"],
-            studies=KINDS["study"], watchlist=KINDS["watchlist"], categories=CATEGORY_COUNT,
-        ),
-        "",
-        text["intro"],
-        "",
-        f"> {text['insight']}",
+        text["scope"].format(entries=len(ENTRIES), categories=CATEGORY_COUNT),
         "",
         f"## {text['choose']}",
         "",
-        text["choose_intro"],
-        "",
+        f"| {text['columns'][0]} | {text['columns'][1]} |",
+        "| --- | --- |",
     ]
-    for scenario, entry_id, grading, caveat in text["rows"]:
-        entry = BY_ID[entry_id]
-        lines.append(f"- **{scenario}** → [{entry['name']}]({entry['url']}) — {grading}; {caveat}")
-    lines.extend(["", f"## {text['interpret']}", "", text["interpret_intro"], ""])
-    lines.extend(f"- {kind}" for kind in text["kinds"])
-    lines.extend(["", text["proposal"]])
-    lines.extend(["", f"## {text['browse']}", "", text["browse_intro"], ""])
-    # Group related areas into short lines rather than repeat the full inventory.
-    for start, end in ((0, 3), (3, 6), (6, 9), (9, 13)):
-        links = [f"[{label}](docs/catalog.md#{category})" for category, label in text["categories"][start:end]]
-        lines.extend([" · ".join(links), ""])
-    lines.extend([f"## {text['compare']}", "", text["compare_intro"], ""])
-    lines.extend(f"{number}. {step}" for number, step in enumerate(text["comparison"], 1))
-    lines.extend(["", f"## {text['agent']}", "", text["agent_intro"], ""])
-    lines.extend(f"- [{label}]({url})" for label, url in text["agent_links"])
-    lines.extend(["", f"## {text['evidence']}", "", text["evidence_text"], "", text["contribute"], ""])
+    for scenario, entry_id in text["rows"]:
+        lines.append(f"| {scenario} | {entry_link(entry_id)} |")
+    lines.extend([
+        "", text["more"],
+        "", f"## {text['harness']}",
+        "", text["definition"], "",
+    ])
+    for entry_id, description in text["harness_rows"]:
+        lines.append(f"- {entry_link(entry_id)}{text['separator']}{description}")
+    lines.extend([
+        "", f"## {text['data']}",
+        "", text["method"],
+        "", text["report"],
+        "", text["agent_links"],
+        "", text["provenance"],
+        "", f"## {text['contribute']}",
+        "", text["contribution"], "",
+    ])
     return "\n".join(lines)
 
 

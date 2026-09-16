@@ -2,6 +2,11 @@
 
 This log records material changes to selection guidance and source records. Automated availability checks are recorded separately in the [source audit](../data/source-audit.json).
 
+## September 16, 2026
+
+- Simplified the English, Chinese, Japanese, and Korean entry points: one prominent website link, an eight-task selection table, and three harness-specific starting points. Detailed grading caveats, category browsing, and evidence definitions remain in the full catalog and research notes.
+- Removed overlapping navigation and moved maintenance details below the selection guide. Catalog records and the research snapshot are unchanged.
+
 ## September 14, 2026
 
 - Corrected a duplicate: OpenClaw ClawBench redirects to ShellBench. Both GitHub paths resolve to repository ID `1204210218`. The inventory now contains **115 resources**, including **97 benchmark records**, and **98 unique GitHub source paths**. The original record ID `clawbench-openclaw` remains stable; `shellbench` is retained in its `aliases` field.
