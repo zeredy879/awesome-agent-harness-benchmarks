@@ -1,12 +1,13 @@
 # Awesome Agent Harness Benchmarks [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-Find the right benchmark for your AI agent, and understand what its results can tell you.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme-hero-dark.svg">
+  <img src="assets/readme-hero-light.svg" alt="Choose the benchmark. Understand the evidence." width="1200">
+</picture>
 
-[**Explore the searchable catalog →**](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)
+115 public benchmarks, studies, and evaluation tools for AI agents and harnesses. Compare their tasks, grading methods, environments, and limitations.
 
-[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
-
-115 benchmarks, studies, and evaluation resources across 13 areas. Compare what they test, how they score, and their limitations.
+[**Explore the catalog →**](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
 <details>
 <summary>On this page</summary>
@@ -21,8 +22,6 @@ Find the right benchmark for your AI agent, and understand what its results can 
 </details>
 
 ## Choose a benchmark
-
-Start with the task your agent needs to do:
 
 | I want to evaluate…                            | Start here                                                           |
 | :--------------------------------------------- | :------------------------------------------------------------------- |

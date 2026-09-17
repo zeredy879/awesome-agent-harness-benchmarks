@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="232" viewBox="0 0 1200 232" role="img" aria-labelledby="title description">
+  <title id="title">Choose the benchmark. Understand the evidence.</title>
+  <desc id="description">An editorial field-guide cover with a stack of index cards. No scores or rankings are represented.</desc>
+  <rect x="1" y="1" width="1198" height="230" rx="12" fill="#F3F3EC" stroke="#DBE2D7" stroke-width="2"/>
+  <path d="M32 36V196" stroke="#39775F" stroke-width="4"/>
+  <g font-family="Georgia, 'Times New Roman', serif" font-size="60" letter-spacing="-1.5">
+    <text x="60" y="98" fill="#183D35">Choose the benchmark.</text>
+    <text x="60" y="169" fill="#39775F" font-style="italic">Understand the evidence.</text>
+  </g>
+  <g aria-hidden="true">
+    <rect x="877" y="29" width="182" height="151" rx="8" fill="#E6EBDC" stroke="#B2C8AD" stroke-width="2"/>
+    <rect x="901" y="41" width="182" height="151" rx="8" fill="#D2DFCC" stroke="#B2C8AD" stroke-width="2"/>
+    <rect x="925" y="53" width="182" height="151" rx="8" fill="#224F42"/>
+    <path d="M1050 53H1079V102L1064.5 92L1050 102Z" fill="#D9EEA4"/>
+    <path d="M949 96H1014" stroke="#D9EEA4" stroke-width="5" stroke-linecap="round"/>
+    <path d="M949 127H1038M949 148H1078M949 169H1060" stroke="#B2C8AD" stroke-width="4" stroke-linecap="round"/>
+    <path d="M852 65H837V167H852" stroke="#39775F" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

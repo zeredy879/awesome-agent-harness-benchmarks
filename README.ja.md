@@ -1,12 +1,13 @@
 # Awesome Agent Harness Benchmarks
 
-AI エージェントで試したい作業に合うベンチマークを選び、評価内容・採点方法・限界を確認できます。
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme-hero-dark.svg">
+  <img src="assets/readme-hero-light.svg" alt="ベンチマークを選び、評価の根拠を読み解く。" width="1200">
+</picture>
 
-**[ベンチマークを検索する →](https://zeredy879.github.io/awesome-agent-harness-benchmarks/)**
+公開ベンチマークや関連資料を 115 件、13 分野にわたって収録しています。 AI エージェントで試したい作業に合うベンチマークを選び、評価内容・採点方法・限界を確認できます。
 
-[English](README.md) · [简体中文](README.zh-CN.md) · 日本語 · [한국어](README.ko.md)
-
-公開ベンチマークや関連資料を 115 件、13 分野にわたって収録しています。
+[**ベンチマークを検索する →**](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) · [English](README.md) · [简体中文](README.zh-CN.md) · 日本語 · [한국어](README.ko.md)
 
 ## 試したい作業から選ぶ
 

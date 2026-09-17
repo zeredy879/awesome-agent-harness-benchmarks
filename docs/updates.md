@@ -2,6 +2,11 @@
 
 This log records material changes to selection guidance and source records. Automated availability checks are recorded separately in the [source audit](../data/source-audit.json).
 
+## September 17, 2026
+
+- Added a lightweight, theme-aware SVG cover to all four README entry points, with the slogan “Choose the benchmark. Understand the evidence.” The cover uses an index-card motif rather than scores or leaderboard graphics.
+- Consolidated the introduction and navigation so the website link and task-selection table remain easy to find. The cover has accessible alternative text, no external font or image dependencies, and no counts that can become stale.
+
 ## September 16, 2026
 
 - Simplified the English, Chinese, Japanese, and Korean entry points: one prominent website link, an eight-task selection table, and three harness-specific starting points. Detailed grading caveats, category browsing, and evidence definitions remain in the full catalog and research notes.

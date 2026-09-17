@@ -24,6 +24,7 @@ DISPLAY_NAMES = {
 LOCALES = {
     "zh": {
         "file": "README.zh-CN.md",
+        "hero_alt": "选对评测，看懂结果。",
         "subtitle": "按任务挑选 AI Agent 评测，了解它测什么、如何评分，以及结果有哪些局限。",
         "site": "浏览可搜索的评测目录 →",
         "nav": "[English](README.md) · 简体中文 · [日本語](README.ja.md) · [한국어](README.ko.md)",
@@ -59,6 +60,7 @@ LOCALES = {
     },
     "ja": {
         "file": "README.ja.md",
+        "hero_alt": "ベンチマークを選び、評価の根拠を読み解く。",
         "subtitle": "AI エージェントで試したい作業に合うベンチマークを選び、評価内容・採点方法・限界を確認できます。",
         "site": "ベンチマークを検索する →",
         "nav": "[English](README.md) · [简体中文](README.zh-CN.md) · 日本語 · [한국어](README.ko.md)",
@@ -94,6 +96,7 @@ LOCALES = {
     },
     "ko": {
         "file": "README.ko.md",
+        "hero_alt": "벤치마크를 고르고, 평가 근거를 이해하세요.",
         "subtitle": "AI 에이전트가 수행할 작업에 맞는 벤치마크를 찾고, 평가 내용과 채점 방식, 한계를 확인하세요.",
         "site": "벤치마크 검색하기 →",
         "nav": "[English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · 한국어",
@@ -140,13 +143,14 @@ def render(text: dict) -> str:
     lines = [
         "# Awesome Agent Harness Benchmarks",
         "",
-        text["subtitle"],
+        "<picture>",
+        '  <source media="(prefers-color-scheme: dark)" srcset="assets/readme-hero-dark.svg">',
+        f'  <img src="assets/readme-hero-light.svg" alt="{text["hero_alt"]}" width="1200">',
+        "</picture>",
         "",
-        f"**[{text['site']}]({SITE_URL})**",
+        text["scope"].format(entries=len(ENTRIES), categories=CATEGORY_COUNT) + " " + text["subtitle"],
         "",
-        text["nav"],
-        "",
-        text["scope"].format(entries=len(ENTRIES), categories=CATEGORY_COUNT),
+        f"[**{text['site']}**]({SITE_URL}) · {text['nav']}",
         "",
         f"## {text['choose']}",
         "",
