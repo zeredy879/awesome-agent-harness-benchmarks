@@ -1623,6 +1623,23 @@
       "readme_sha256": "83b8684c2f4ac4f31996b8b4752195fcb6cc5429f89d92398177b9b721d787fc"
     },
     {
+      "requested_repo": "yylo-dev/yylo-benchmark",
+      "checked_at": "2026-10-13T19:59:34.175525+00:00",
+      "repo": "yylo-dev/yylo-benchmark",
+      "url": "https://github.com/yylo-dev/yylo-benchmark",
+      "archived": false,
+      "fork": false,
+      "stars": 1,
+      "default_branch": "main",
+      "description": "YYLO Benchmark: longitudinal evaluation and immutable evidence for agent runs.",
+      "pushed_at": "2026-10-13T10:12:45Z",
+      "license": "MIT",
+      "status": "source-accessible",
+      "readme_url": "https://github.com/yylo-dev/yylo-benchmark/blob/main/README.md",
+      "readme_blob_sha": "5d52c65be2b834320eb99bb4565db273f4113f45",
+      "readme_sha256": "1e72b97ef16a2a7011d4089c1b0bd156d8f0d2e1b3bc407a57f97d5b08766429"
+    },
+    {
       "requested_repo": "zenixos/harness-bench",
       "checked_at": "2026-10-12T13:15:29.231392+00:00",
       "repo": "zenixos/harness-bench",

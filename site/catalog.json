@@ -1939,6 +1939,22 @@
       "grading": "Infrastructure-code test and patch correctness",
       "environment": "AWS CDK repository tasks and cloud-infrastructure code",
       "limitation": "Narrow AWS CDK scope and dataset distribution constraints limit generalization."
+    },
+    {
+      "id": "yylo-benchmark",
+      "name": "YYLO Benchmark",
+      "category": "infrastructure",
+      "kind": "infrastructure",
+      "url": "https://github.com/yylo-dev/yylo-benchmark",
+      "summary": "Evaluates coding-agent attempts on caller-defined task cases in isolated repository workspaces.",
+      "signals": [
+        "tools",
+        "verification",
+        "cost"
+      ],
+      "grading": "Deterministic evaluators plus configurable LLM judges",
+      "environment": "Isolated local git workspaces; Node.js 20.10+",
+      "limitation": "No published task set or leaderboard yet; results depend on caller-defined cases and judge rubrics."
     }
   ]
 }

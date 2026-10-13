@@ -5,7 +5,7 @@
   <img src="assets/readme-hero-light.svg" alt="选对评测，看懂结果。" width="1200">
 </picture>
 
-收录 115 项公开评测及相关资料，覆盖 13 个领域。 按任务挑选 AI Agent 评测，了解它测什么、如何评分，以及结果有哪些局限。
+收录 116 项公开评测及相关资料，覆盖 13 个领域。 按任务挑选 AI Agent 评测，了解它测什么、如何评分，以及结果有哪些局限。
 
 [**浏览可搜索的评测目录 →**](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) · [English](README.md) · 简体中文 · [日本語](README.ja.md) · [한국어](README.ko.md)
 

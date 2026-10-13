@@ -2,7 +2,7 @@
 
 [Selection guide](../README.md) · [Search and filter online](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) · [JSON](../data/catalog.json)
 
-115 resources across 13 areas. Source snapshot: 2026-09-13.
+116 resources across 13 areas. Source snapshot: 2026-09-13.
 
 Generated from the canonical inventory. Resource types describe what a project provides, not its quality or independent verification. Every record includes a limitation.
 
@@ -16,7 +16,7 @@ Generated from the canonical inventory. Resource types describe what a project p
 - [Memory and context](#memory) (7)
 - [Safety and failure injection](#safety) (8)
 - [Long horizon and always-on](#long-horizon) (8)
-- [Evaluation infrastructure](#infrastructure) (11)
+- [Evaluation infrastructure](#infrastructure) (12)
 - [Computer and mobile](#computer) (6)
 - [Multi-agent](#multi-agent) (4)
 - [Research engineering](#research) (9)
@@ -1309,6 +1309,19 @@ Runtime benchmark for agent performance, dialogue, tools, startup, memory, throu
 - Grading: Suite-specific functional, latency, throughput, and consistency metrics
 - Environment: OpenClaw, OpenAgent, Hermes, and compatible agent runtimes
 - Limitation: Runtime-specific adapters and a young leaderboard limit cross-harness comparability.
+
+<a id="yylo-benchmark"></a>
+
+### [YYLO Benchmark](https://github.com/yylo-dev/yylo-benchmark)
+
+**infrastructure** · ID: `yylo-benchmark`
+
+Evaluates coding-agent attempts on caller-defined task cases in isolated repository workspaces.
+
+- Measures: tools, verification, cost.
+- Grading: Deterministic evaluators plus configurable LLM judges
+- Environment: Isolated local git workspaces; Node.js 20.10+
+- Limitation: No published task set or leaderboard yet; results depend on caller-defined cases and judge rubrics.
 
 
 <a id="computer"></a>
