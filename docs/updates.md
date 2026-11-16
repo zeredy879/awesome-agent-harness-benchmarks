@@ -2,6 +2,10 @@
 
 This log records material changes to selection guidance and source records. Automated availability checks are recorded separately in the [source audit](../data/source-audit.json).
 
+## October 13, 2026
+
+- Added YYLO Benchmark, an MIT-licensed TypeScript CLI that runs coding-agent attempts on caller-defined task cases and Workflow Runner YAML in isolated per-attempt repository workspaces, with deterministic evaluators, optional LLM judges, and retained evidence. The inventory now contains **116 resources**, including **97 benchmark records** and **10 evaluation-infrastructure records**.
+
 ## September 17, 2026
 
 - Added a lightweight, theme-aware SVG cover to all four README entry points, with the slogan “Choose the benchmark. Understand the evidence.” The cover uses an index-card motif rather than scores or leaderboard graphics.

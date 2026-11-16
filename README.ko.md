@@ -5,7 +5,7 @@
   <img src="assets/readme-hero-light.svg" alt="벤치마크를 고르고, 평가 근거를 이해하세요." width="1200">
 </picture>
 
-공개 벤치마크와 관련 자료 115개를 13개 분야로 정리했습니다. AI 에이전트가 수행할 작업에 맞는 벤치마크를 찾고, 평가 내용과 채점 방식, 한계를 확인하세요.
+공개 벤치마크와 관련 자료 116개를 13개 분야로 정리했습니다. AI 에이전트가 수행할 작업에 맞는 벤치마크를 찾고, 평가 내용과 채점 방식, 한계를 확인하세요.
 
 [**벤치마크 검색하기 →**](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) · [English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · 한국어
 

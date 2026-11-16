@@ -5,7 +5,7 @@
   <img src="assets/readme-hero-light.svg" alt="ベンチマークを選び、評価の根拠を読み解く。" width="1200">
 </picture>
 
-公開ベンチマークや関連資料を 115 件、13 分野にわたって収録しています。 AI エージェントで試したい作業に合うベンチマークを選び、評価内容・採点方法・限界を確認できます。
+公開ベンチマークや関連資料を 116 件、13 分野にわたって収録しています。 AI エージェントで試したい作業に合うベンチマークを選び、評価内容・採点方法・限界を確認できます。
 
 [**ベンチマークを検索する →**](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) · [English](README.md) · [简体中文](README.zh-CN.md) · 日本語 · [한국어](README.ko.md)
 

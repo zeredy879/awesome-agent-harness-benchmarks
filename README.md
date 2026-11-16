@@ -5,7 +5,7 @@
   <img src="assets/readme-hero-light.svg" alt="Choose the benchmark. Understand the evidence." width="1200">
 </picture>
 
-115 public benchmarks, studies, and evaluation tools for AI agents and harnesses. Compare their tasks, grading methods, environments, and limitations.
+116 public benchmarks, studies, and evaluation tools for AI agents and harnesses. Compare their tasks, grading methods, environments, and limitations.
 
 [**Explore the catalog →**](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 

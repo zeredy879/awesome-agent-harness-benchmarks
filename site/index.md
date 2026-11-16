@@ -3,19 +3,19 @@
 > Machine-readable Markdown snapshot. Use `catalog.json` for structured ingestion and `research.md` for methodology.
 
 - Snapshot date: `2026-09-13`
-- Entries: `115`
+- Entries: `116`
 - Categories: `13`
-- GitHub source records: `98` (`97` accessible at audit time)
+- GitHub source records: `99` (`98` accessible at audit time)
 - Scope: public benchmarks, controlled studies, and evaluation infrastructure relevant to agent harnesses
 
 ## Category counts
 
 - `tools` - Tools, APIs, MCP, and state: **15**
 - `coding` - Coding and terminal: **12**
+- `infrastructure` - Evaluation infrastructure: **12**
 - `browser` - Browser and web: **11**
 - `direct` - Direct harness comparisons: **11**
 - `general` - General agents: **11**
-- `infrastructure` - Evaluation infrastructure: **11**
 - `research` - Research engineering: **9**
 - `long-horizon` - Long horizon and always-on: **8**
 - `safety` - Safety and failure injection: **8**
@@ -722,6 +722,17 @@
 - Grading: Suite-specific functional, latency, throughput, and consistency metrics
 - Environment: OpenClaw, OpenAgent, Hermes, and compatible agent runtimes
 - Limitation: Runtime-specific adapters and a young leaderboard limit cross-harness comparability.
+
+### YYLO Benchmark
+
+- ID: `yylo-benchmark`
+- Category: `infrastructure`; kind: `infrastructure`
+- Source: https://github.com/yylo-dev/yylo-benchmark
+- Summary: Evaluates coding-agent attempts on caller-defined task cases in isolated repository workspaces.
+- Signals: `tools`, `verification`, `cost`
+- Grading: Deterministic evaluators plus configurable LLM judges
+- Environment: Isolated local git workspaces; Node.js 20.10+
+- Limitation: No published task set or leaderboard yet; results depend on caller-defined cases and judge rubrics.
 
 ### AgentIF-OneDay
 
