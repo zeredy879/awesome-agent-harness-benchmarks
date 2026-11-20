@@ -886,6 +886,23 @@
       "readme_sha256": "dd642c1c6b58e458220dc17a452ce932c992a4a98fca8958f2d7ac6167e32dec"
     },
     {
+      "requested_repo": "OpenBMB/EC2-Bench",
+      "checked_at": "2026-11-20T05:28:50.197901+00:00",
+      "repo": "OpenBMB/EC2-Bench",
+      "url": "https://github.com/OpenBMB/EC2-Bench",
+      "archived": false,
+      "fork": false,
+      "stars": 24,
+      "default_branch": "main",
+      "description": "EC2-Bench (EC²-Bench): benchmark for edge-cloud collaboration in long-horizon LLM agents — task performance, resource usage & privacy exposure. arXiv 2610.17816",
+      "pushed_at": "2026-11-19T02:35:40Z",
+      "license": "MIT",
+      "status": "source-accessible",
+      "readme_url": "https://github.com/OpenBMB/EC2-Bench/blob/main/README.md",
+      "readme_blob_sha": "5f276a9f6e2c7a76c878c2e8e399aa8f94e256c6",
+      "readme_sha256": "e676a3fd565d93da2b5bb87de5252b2b7c17273b2bfd18b70123989ae21c8428"
+    },
+    {
       "requested_repo": "OpenBMB/ToolBench",
       "checked_at": "2026-11-16T13:45:13.620283+00:00",
       "repo": "OpenBMB/ToolBench",

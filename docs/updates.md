@@ -2,6 +2,10 @@
 
 This log records material changes to selection guidance and source records. Automated availability checks are recorded separately in the [source audit](../data/source-audit.json).
 
+## November 20, 2026
+
+- Added [EC²-Bench](https://arxiv.org/abs/2610.17816v2) to long-horizon evaluation. Its 128 executable workspace tasks compare edge–cloud routing, delegation, and advisory under OpenClaw. The paper reports task completion, resource usage, and exposure of sensitive information, with the last metric measured on a 100-task annotated subset.
+
 ## October 13, 2026
 
 - Added YYLO Benchmark, an MIT-licensed TypeScript CLI that runs coding-agent attempts on caller-defined task cases and Workflow Runner YAML in isolated per-attempt repository workspaces, with deterministic evaluators, optional LLM judges, and retained evidence. The inventory now contains **116 resources**, including **97 benchmark records** and **10 evaluation-infrastructure records**.

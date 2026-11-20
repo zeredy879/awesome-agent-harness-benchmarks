@@ -3,9 +3,9 @@
 > Machine-readable Markdown snapshot. Use `catalog.json` for structured ingestion and `research.md` for methodology.
 
 - Snapshot date: `2026-09-13`
-- Entries: `116`
+- Entries: `117`
 - Categories: `13`
-- GitHub source records: `99` (`98` accessible at audit time)
+- GitHub source records: `100` (`99` accessible at audit time)
 - Scope: public benchmarks, controlled studies, and evaluation infrastructure relevant to agent harnesses
 
 ## Category counts
@@ -16,8 +16,8 @@
 - `browser` - Browser and web: **11**
 - `direct` - Direct harness comparisons: **11**
 - `general` - General agents: **11**
+- `long-horizon` - Long horizon and always-on: **9**
 - `research` - Research engineering: **9**
-- `long-horizon` - Long horizon and always-on: **8**
 - `safety` - Safety and failure injection: **8**
 - `memory` - Memory and context: **7**
 - `computer` - Computer and mobile: **6**
@@ -789,6 +789,18 @@
 - Grading: Machine-graded simulation outcomes and paired experiments
 - Environment: Deterministic simulation; optional live provider
 - Limitation: Simulation evidence must not be reported as full real-agent deployment reliability.
+
+### EC²-Bench (EC2-Bench)
+
+- ID: `ec2-bench`
+- Category: `long-horizon`; kind: `benchmark`
+- Source: https://github.com/OpenBMB/EC2-Bench
+- Summary: Evaluates query and step routing, edge-controlled delegation, and cloud advisory across 128 executable workspace tasks, measuring task completion, resource usage, and privacy exposure.
+- Signals: `tools`, `state`, `verification`, `cost`, `privacy`
+- Grading: Weighted task-specific checks using rule-based or workspace-state verification and rubric-based LLM judging; separate sensitive-information exposure score
+- Environment: OpenClaw in isolated Docker workspaces with mock services; edge and cloud model endpoints
+- Limitation: Reported scores use a shared OpenClaw runtime and depend on the model pair and collaboration policy. Privacy exposure is measured on 100 annotated tasks.
+- Paper: https://arxiv.org/abs/2610.17816v2
 
 ### Gaia2 / Gaia2-CLI
 
