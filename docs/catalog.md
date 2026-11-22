@@ -2,7 +2,7 @@
 
 [Selection guide](../README.md) · [Search and filter online](https://zeredy879.github.io/awesome-agent-harness-benchmarks/) · [JSON](../data/catalog.json)
 
-116 resources across 13 areas. Source snapshot: 2026-09-13.
+117 resources across 13 areas. Source snapshot: 2026-09-13.
 
 Generated from the canonical inventory. Resource types describe what a project provides, not its quality or independent verification. Every record includes a limitation.
 
@@ -15,7 +15,7 @@ Generated from the canonical inventory. Resource types describe what a project p
 - [General agents](#general) (11)
 - [Memory and context](#memory) (7)
 - [Safety and failure injection](#safety) (8)
-- [Long horizon and always-on](#long-horizon) (8)
+- [Long horizon and always-on](#long-horizon) (9)
 - [Evaluation infrastructure](#infrastructure) (12)
 - [Computer and mobile](#computer) (6)
 - [Multi-agent](#multi-agent) (4)
@@ -1118,6 +1118,20 @@ Uses controlled simulations to ablate memory, checkpoints and recovery logic.
 - Grading: Machine-graded simulation outcomes and paired experiments
 - Environment: Deterministic simulation; optional live provider
 - Limitation: Simulation evidence must not be reported as full real-agent deployment reliability.
+
+<a id="ec2-bench"></a>
+
+### [EC²-Bench (EC2-Bench)](https://github.com/OpenBMB/EC2-Bench)
+
+**benchmark** · ID: `ec2-bench`
+
+Evaluates query and step routing, edge-controlled delegation, and cloud advisory across 128 executable workspace tasks, measuring task completion, resource usage, and privacy exposure.
+
+- Measures: tools, state, verification, cost, privacy.
+- Grading: Weighted task-specific checks using rule-based or workspace-state verification and rubric-based LLM judging; separate sensitive-information exposure score
+- Environment: OpenClaw in isolated Docker workspaces with mock services; edge and cloud model endpoints
+- Limitation: Reported scores use a shared OpenClaw runtime and depend on the model pair and collaboration policy. Privacy exposure is measured on 100 annotated tasks.
+- [Paper / technical report](https://arxiv.org/abs/2610.17816v2)
 
 <a id="gaia2"></a>
 

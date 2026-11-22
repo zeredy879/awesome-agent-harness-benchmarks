@@ -1782,6 +1782,25 @@
       "grading": "Deterministic evaluators plus configurable LLM judges",
       "environment": "Isolated local git workspaces; Node.js 20.10+",
       "limitation": "No published task set or leaderboard yet; results depend on caller-defined cases and judge rubrics."
+    },
+    {
+      "id": "ec2-bench",
+      "name": "EC²-Bench (EC2-Bench)",
+      "category": "long-horizon",
+      "kind": "benchmark",
+      "url": "https://github.com/OpenBMB/EC2-Bench",
+      "summary": "Evaluates query and step routing, edge-controlled delegation, and cloud advisory across 128 executable workspace tasks, measuring task completion, resource usage, and privacy exposure.",
+      "signals": [
+        "tools",
+        "state",
+        "verification",
+        "cost",
+        "privacy"
+      ],
+      "grading": "Weighted task-specific checks using rule-based or workspace-state verification and rubric-based LLM judging; separate sensitive-information exposure score",
+      "environment": "OpenClaw in isolated Docker workspaces with mock services; edge and cloud model endpoints",
+      "limitation": "Reported scores use a shared OpenClaw runtime and depend on the model pair and collaboration policy. Privacy exposure is measured on 100 annotated tasks.",
+      "paper": "https://arxiv.org/abs/2610.17816v2"
     }
   ]
 }
